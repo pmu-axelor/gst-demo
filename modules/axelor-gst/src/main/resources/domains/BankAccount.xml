@@ -12,7 +12,7 @@
         <string name="accountNo" title="Account no"/>
         <string name="ifsc" title="IFSC"/>
         <string name="type" title="Type" selection="select.bank.type" default="current"/>
-        
+        <string name="address" title="Address" large="true"/>
          
      </entity>
  </domain-models>       
