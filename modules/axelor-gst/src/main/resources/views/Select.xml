@@ -16,5 +16,10 @@
        <option value="secondary">Secondary</option>
        <option value="others">Others</option>
     </selection>   
+    
+    <selection name="select.bank.type">
+       <option value="saving">Saving</option>
+       <option value="current">Current</option>
+    </selection>
        
  </object-views>      
