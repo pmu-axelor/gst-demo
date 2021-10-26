@@ -22,4 +22,16 @@
        <option value="current">Current</option>
     </selection>
        
+    <selection name="select.party.type">
+        <option value="individual">Individual</option>
+        <option value="company">Company</option>
+    </selection>   
+       
+   <selection name="select.status.type">
+     <option value="draft">Draft</option>
+     <option value="validated">Validated</option>
+     <option value="paid">Paid</option>
+     <option value="Cancelled">Cancelled</option>
+   </selection>    
+       
  </object-views>      
