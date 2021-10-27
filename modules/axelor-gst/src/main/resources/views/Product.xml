@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+       http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+       
+ <grid model="com.axelor.gst.db.Product" title="Products" name="product-grid">
+                                                                                    
+  <toolbar>
+      <button onClick="createInvoice" name="CreateInvoiceBtn" title="Create Invoice" icon="fas fa-file-invoice-dollar" prompt=" Create Invoice!! ? "/>
+      <button name="btnPrint" icon="fa-print" title="Print" onClick="act1"/>
+  </toolbar>
+     <field name="name"/>
+     <field name="code"/>
+     <field name="hsbn"/>
+     <field name="category"/>
+     <field name="salePrice"/>
+     <field name="costPrice"/>
+     <field name="gstRate"/>
+ </grid>      
+       
+  <form model="com.axelor.gst.db.Product" title="Product" name="product-form">
+     <panel title="Products">
+      <field name="image" widget="image" colSpan="8"/>
+     <field name="name"/>
+     <field name="code"/>
+     <field name="hsbn"/>
+     <field name="category" onChange="action.category.change"/>
+     <field name="salePrice"/>
+     <field name="costPrice"/>
+     <field name="gstRate"/>
+     </panel>
+ </form>
+ 
+ 
+ <cards name="product-card" model="com.axelor.gst.db.Product" title="Product">
+      <field name="image" widget="image" colSpan="8"/>
+       <field name="name"/>
+       <field name="category"/>
+       <field name="salePrice"/>
+       <field name="costPrice"/>
+       <field name="gstRate"/>
+       <template>
+          <![CDATA[
+               <div class="span4 card-image">
+                 <img  ng-src="{{$image(null, 'image')}}">
+                  <strong>{{name}}</strong>
+               </div>
+             <div class="span8">
+                <h5>Category: {{category.name}}</h5>
+                <h5>Sale price: {{salePrice}}</h5>
+                <h5>Cost price: {{costPrice}}</h5>
+                <h5>GST rate: {{gstRate}}</h5>
+             </div>   
+         ]]>
+       </template>
+ </cards>
+ 
+       
+       <action-attrs name="action.category.change" model="com.axelor.gst.db.ProductCategory">
+          <attribute name="value" for="gstRate" expr="eval: __this__.category.gstRate"/>
+       </action-attrs>
+       
+ </object-views>     

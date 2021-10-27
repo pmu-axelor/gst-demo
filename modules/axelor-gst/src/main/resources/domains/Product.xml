@@ -11,11 +11,12 @@
          <string name="name" title="Name" required="true"/>
          <string name="code" title="Code" required="true"/>
          <string name="hsbn" title="HSBN" />
-         <many-to-one name="category" ref="ProductCategory"/>
+         <many-to-one name="category" ref="ProductCategory" title="Category"/>
          <decimal name="salePrice" title="Sale price"/>
          <decimal name="costPrice" title="Cost price"/>
-         <binary name="image" title="Image"/>
-         <decimal name="gstRate" title="GST rate" default="00.0"/>
+         <!-- <binary name="image" title="Image"/> -->
+         <many-to-one name="image" title="Image" ref="com.axelor.meta.db.MetaFile"/>
+         <decimal name="gstRate" title="GST rate"/>
          
        </entity>
      

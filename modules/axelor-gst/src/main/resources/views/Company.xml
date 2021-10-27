@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+       http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+       
+  <grid model="com.axelor.gst.db.Company" title="Companys" name="company-grid" >
+     
+    <field name="name"/> 
+    <field name="gstin"/>
+    <field name="address"/>
+    
+  </grid>
+  
+   <form model="com.axelor.gst.db.Company" title="Company" name="company-form">
+   
+      <panel >
+          <panel colSpan="4">
+             <field name="logo" widget="image"/>
+          </panel>
+         <panel colSpan="8">
+              <field name="name" colSpan="8"/>
+             <field name="contact">
+            <viewer>
+               <![CDATA[
+                 <span class="muted" ng-if="record.type">({{record.type}})</span>
+                 {{record.primaryEmail}}, {{record.secondaryEmail}}
+              ]]>
+            </viewer>
+           <editor layout="table" x-show-titles="false">
+              <field name="type" colSpan="4"/>
+               <field name="primaryEmail" colSpan="12"/>
+               <field name="secondaryEmail" colSpan="12"/>
+           </editor>
+         </field> 
+         </panel>
+         
+         <field name="gstin"/>
+         <field name="address"/>
+         <panel-related field="bankDetails" colSpan="12" grid-view="bankAccount-grid" form-view="bankAccount-form"/>
+         
+      </panel>
+   
+   </form>   
+       
+  </object-views>     

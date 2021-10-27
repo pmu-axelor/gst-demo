@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+       http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+ 
+  <grid model="com.axelor.gst.db.Address" title="Addresses" name="address-grid">
+     <field name="line1" />
+     <field name="line2"/>
+     <field name="city"/>
+     <field name="state"/>
+     <field name="country"/>
+     <field name="pinCode"/>
+  </grid>
+   
+   <form model="com.axelor.gst.db.Address" title="Address" name="address-form">
+     <panel title="Addresses">
+        <field name="type" colSpan="12"/>
+        <field name="line1"/>
+        <field name="line2"/>
+        <field name="city"/>
+        <field name="state"/>
+        <field name="country"/>
+        <field name="pinCode"/>
+    </panel>
+    </form>
+   
+   
+   
+    <grid model="com.axelor.gst.db.City" title="Citys" name="city-grid">
+       <field name="name"/>
+       <field name="state"/> 
+       <field name="country"/>  
+  </grid> 
+    
+    <form model="com.axelor.gst.db.City" title="City" name="city-form">
+       <panel title="City">
+        <field name="name"/>
+       <field name="state"/> 
+       <field name="country"/>
+       </panel>
+    </form>   
+     
+     
+     
+     <grid model="com.axelor.gst.db.State" title="States" name="state-grid">
+       <field name="name"/>
+       <field name="country"/>  
+  </grid>   
+       
+    <form model="com.axelor.gst.db.State" title="State" name="state-form">
+       <panel title="State">
+        <field name="name"/>
+       <field name="country"/> 
+       </panel>
+    </form>     
+       
+       
+       
+     <grid model="com.axelor.gst.db.Country" title="Countrys" name="country-grid">
+       <field name="name"/>
+  </grid>   
+       
+      <form model="com.axelor.gst.db.Country" title="Country" name="country-form">
+       <panel title="Country">
+        <field name="name"/>
+        </panel>
+    </form>  
+   
+   
+   
+  </object-views>      

@@ -8,7 +8,7 @@
      
      <entity name="BankAccount">
      
-        <string name="bank" title="Bank"/>
+        <string name="bank" title="Bank" namecolumn="true"/>
         <string name="accountNo" title="Account no"/>
         <string name="ifsc" title="IFSC"/>
         <string name="type" title="Type" selection="select.bank.type" default="current"/>

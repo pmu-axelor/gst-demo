@@ -9,7 +9,7 @@
       <entity name="Address">
       
          <string name="type" title="Type" selection="select.gst.address.type" required="true"/>
-          <string name="line1" title="Line1" required="true"/>
+          <string name="line1" title="Line1" required="true" namecolumn="true"/>
           <string name="line2" title="Line2"/>
           <many-to-one name="city" ref="City" title="City" required="true"/>
           <many-to-one name="state" ref="State" title="State"/>
