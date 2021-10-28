@@ -8,14 +8,14 @@
      
      <entity name="Party">
      
-     <string name="reference" title="Type" readonly="true" default="get from sequence on save"/>
+     <string name="reference" title="Reference" readonly="true" default="get from sequence on save"/>
      <string name="name" title="Name" required="true"/>
-     <string name="type" title="Type" selection="select.party.type" required="true" default="Company"/>
+     <string name="type" title="Type" selection="select.party.type" default="company" required="true"/>
      <boolean name="customer" title="Customer"/>
      <boolean name="supplier" title="Supplier"/>
      <string name="gstin" title="GSTIN" min="15" max="15"/>
      <one-to-many name="contact" ref="Contact" title="Contact"/> 
-      <one-to-one ref="Address" name="address" title="Address"/>
+      <one-to-many ref="Address" name="address" title="Address"/>
       
      </entity>
      

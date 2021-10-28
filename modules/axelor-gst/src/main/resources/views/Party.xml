@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+       http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+  
+  <grid model="com.axelor.gst.db.Party" title="Partys" name="party-grid">
+     <field name="reference"/>
+     <field name="name"/>
+     <field name="type"/>
+     <field name="customer"/>
+     <field name="supplier"/>
+     <field name="gstin"/>
+     
+  </grid> 
+       
+   <form model="com.axelor.gst.db.Party" title="Party" name="party-form" >
+      <panel title="Party">
+     <field name="reference" colSpan="12"/>
+     <field name="name"/>
+     <field name="type"/>
+     <field name="customer"/>
+     <field name="supplier"/>
+     <field name="gstin" colSpan="12"/>
+      <field name="contact">
+         <viewer>
+               <![CDATA[
+                 {{record.name}}<br>
+                 <span class="muted" ng-if="record.type">({{record.type}})</span>
+                 {{record.primaryEmail}} {{record.secondaryEmail}}
+              ]]>
+            </viewer>
+           <editor x-show-titles="false">
+               <field name="name" colSpan="12"/>
+              <field name="type" colSpan="4"/>
+               <field name="primaryEmail" colSpan="12"/>
+               <field name="secondaryEmail" colSpan="12"/>
+           </editor>
+      </field>
+        <field name="address">
+          <viewer>
+              <![CDATA[
+                   {{record.type}}<br>
+                   {{record.line1}}<br>
+                   {{record.city.name}}<br>
+                   {{record.state.name}}<br>
+                   {{record.country.name}}<br>
+                   {{record.pinCode}}
+                   
+              ]]>
+          </viewer>
+         <editor x-show-titles="false">
+        <field name="type" colSpan="12"/>
+        <field name="line1" colSpan="12"/>
+       <field name="city"/>
+        <field name="state"/>
+        <field name="country"/>
+        <field name="pinCode"/>
+          </editor>
+        </field>
+      </panel>
+   </form>
+        
+   </object-views>      

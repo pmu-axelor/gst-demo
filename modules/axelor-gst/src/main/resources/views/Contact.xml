@@ -18,9 +18,8 @@
           <field name="type" colSpan="2"/>
           <field name="primaryEmail" colSpan="5"/>
           <field name="secondaryEmail" colSpan="5"/>
-          <field name="type" colSpan="2"/>
-          <field name="primaryPhone" colSpan="5"/>
-          <field name="secondaryPhone" colSpan="5"/>
+          <field name="primaryPhone" colSpan="6"/>
+          <field name="secondaryPhone" colSpan="6"/>
       
       </panel>
     </form>    
