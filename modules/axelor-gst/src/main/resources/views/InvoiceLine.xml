@@ -25,7 +25,7 @@
      <field name="hsbn"/>
      <field name="item"/>
      <field name="qty" onChange="action-onGroup for-all-actions" />
-     <field name="price" onChange="action-onGroup for-all-actions"/>
+     <field name="price"/>
      <field name="netAmount"/>
      <field name="gstRate"/>
      <field name="igst"/>
@@ -43,10 +43,13 @@
         <action-attrs name="action-onChange-update-item" model="com.axelor.gst.db.Product">
           <attribute name="value" for="item" expr="eval:__this__.product.code+'-'+product.name"/>
           <attribute name="value" for="gstRate" expr="eval:__this__.product.gstRate"/>
+           <attribute name="value" for="hsbn" expr="eval:__this__.product.hsbn"/>
+          <attribute name="value" for="price" expr="eval:__this__.product.salePrice"/>
        </action-attrs>
        
        <action-attrs name="action-onChange-priceandQuantity-update-netAmout">
           <attribute name="value" for="netAmount" expr="eval: qty*price"/>
+          <!-- <attribute name="value" for="igst" expr="eval: netAmount"/> -->
        </action-attrs>
        
        

@@ -61,4 +61,22 @@
       </panel>
    </form>
         
+      <cards name="party-card" model="com.axelor.gst.db.Party" title="Party">
+           <field name="reference"/>
+           <field name="name"/>
+           <field name="type"/>
+             <field name="customer"/>
+              <field name="gstin"/>
+              <template>
+                 <![CDATA[
+                        <div class="span8">
+                        <h5>Reference:{{reference}}</h5>
+                        <h5>Name: {{name}}</h5>
+                        <h5>Party type: {{type}}</h5>
+                       <h5>GSTIN: {{gstin}}</h5>
+                        </div>
+                 ]]>
+              </template>
+        </cards>
+        
    </object-views>      

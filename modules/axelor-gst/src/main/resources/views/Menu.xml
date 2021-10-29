@@ -82,6 +82,7 @@
           <action-view name="action.menu.party" title="Party" model="com.axelor.gst.db.Party">
           <view type="grid" name="party-grid"/>
           <view type="form" name="party-form"/>
+          <view type="cards" name="party-card"/>
        </action-view>         
         
  </object-views>      

@@ -31,7 +31,7 @@
      <option value="draft">Draft</option>
      <option value="validated">Validated</option>
      <option value="paid">Paid</option>
-     <option value="Cancelled">Cancelled</option>
+     <option value="cancelled">Cancelled</option> 
    </selection>    
        
  </object-views>      
