@@ -26,11 +26,11 @@
         <field name="reference" colSpan="12"/>
         <field name="company"/>
         <field name="dates"/>
-        <field name="party" onChange="action-onChange-party-update-partyContact"/>
+        <field name="party" onChange="action-onChange-party-update-partyContact,action-onChange-update-shipping-field"/>
         <field name="partyContact"/>
         <field name="invoiceAddress"/>
-        <field name="shippingAddress"/>
-        <field name="useInvoiceAddressAsShipping"/>
+        <field name="shippingAddress" hideIf="useInvoiceAddressAsShipping == true"/>
+        <field name="useInvoiceAddressAsShipping" />
         <field name="netAmount"/>
         <field name="netIgst"/>
         <field name="netCsgt"/>
@@ -56,7 +56,7 @@
       
       <action-record name="action-onNew-get-company" model="com.axelor.gst.db.Invoice" >
            <field name="company" expr="eval: __repo__(Company).all().fetchOne()"/> 
-       </action-record>
+      </action-record>
    
       <action-attrs name="bttn-to-change-status">
           <attribute name="value" for="status" expr="draft" />
@@ -74,8 +74,13 @@
            <attribute name="title" for="clickMeBtn" expr="draft" if="status == 'cancelled'"/>
       </action-attrs>
       
-     <action-attrs name="action-onChange-party-update-partyContact">
-          <attribute name="value" for="partyContact" expr="eval:__repo__(Contact).all().fetchOne()"/>
-     </action-attrs>
+     <action-method name="action-onChange-party-update-partyContact" model="com.axelor.gst.db.Invoice">
+        <call class="com.axelor.gst.Controller.PartyController" method="primaryContact"/>
+     </action-method>
+     
+       <action-method name="action-onChange-update-shipping-field" model="com.axelor.gst.db.Invoice">
+           <call class="com.axelor.gst.Controller.PartyController" method="shippingAddress"/>
+       </action-method>
+     
        <!-- eval:__config__.app.getTodayDate(__repo__(Company).all().fetchOne())" if="__user__.activeCompany == null &amp;&amp; __repo__(Company).all().fetch().size == 1" -->
  </object-views>      
