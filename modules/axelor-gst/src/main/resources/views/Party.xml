@@ -25,9 +25,9 @@
       <field name="contact">
          <viewer>
                <![CDATA[
-                 {{record.name}}<br>
-                 <span class="muted" ng-if="record.type">({{record.type}})</span>
-                 {{record.primaryEmail}} {{record.secondaryEmail}}
+                 <strong>Name:</strong>{{record.name}}<br>
+                 <strong>Contact Type:</strong><span class="muted" ng-if="record.type">({{record.type}})</span><br>
+                 <strong>E:</strong>{{record.primaryEmail}} {{record.secondaryEmail}}
               ]]>
             </viewer>
            <editor x-show-titles="false">
