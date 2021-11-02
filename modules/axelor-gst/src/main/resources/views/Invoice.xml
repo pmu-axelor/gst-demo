@@ -20,7 +20,7 @@
         <field name="grossAmount"/>
     </grid>   
        
-    <form model="com.axelor.gst.db.Invoice" title="Invoices" name="invoice-form" onNew="action-onGroup-for-all" width="large" onSave="action-OnSave-update-defaults-fields">
+    <form model="com.axelor.gst.db.Invoice" title="Invoices" name="invoice-form" onNew="action-onGroup-for-all" width="large"  onSave="action-OnSave-update-defaults-fields"> <!--  -->
         <panel title="Invoices" name="invoices">
         <field name="status" showTitle="false" widget="NavSelect" colSpan="12"/>
         <field name="reference" colSpan="12"/>
@@ -85,8 +85,8 @@
        </action-method>
      
      
-     <action-attrs name="action-OnSave-update-defaults-fields" model="com.axelor.gst.db.InvoiceLine">
-         <attribute name="value" for="netAmount" expr="invoiceItems.netAmount"/>
-     </action-attrs>
+         <action-method name="action-OnSave-update-defaults-fields" model="com.axelor.gst.db.Invoice">
+           <call class="com.axelor.gst.Controller.PartyController" method="setInvoiceItems"/>
+         </action-method>
      
  </object-views>      

@@ -65,8 +65,10 @@ public class PartyController {
 		   InvoiceLine asType = request.getContext().asType(InvoiceLine.class);
 		       BigDecimal gstRate = asType.getGstRate();
 		       BigDecimal netAmount = asType.getNetAmount();
+		       
+		       BigDecimal gstDivisior = new BigDecimal("100");
 		   
-	       BigDecimal igst = gstRate.multiply(netAmount);
+	       BigDecimal igst = (gstRate.divide(gstDivisior)).multiply(netAmount);
 	       
 		   System.out.println(netAmount);
 		   System.out.println(gstRate);
@@ -90,9 +92,10 @@ public class PartyController {
 		 BigDecimal netAmount = asType2.getNetAmount();
 		 
 		 BigDecimal divisior = new BigDecimal("2");
+		 BigDecimal gstDivisior = new BigDecimal("100");
 		 
-	     BigDecimal sgst	=  (gstRate.multiply(netAmount)).divide(divisior); /*netAmount.multiply(gstRate.divide(divisior))*/
-	     BigDecimal cgst	= (gstRate.multiply(netAmount)).divide(divisior);
+	     BigDecimal sgst	=  ((gstRate.divide(gstDivisior)).multiply(netAmount)).divide(divisior); /*netAmount.multiply(gstRate.divide(divisior))*/
+	     BigDecimal cgst	= ((gstRate.divide(gstDivisior)).multiply(netAmount)).divide(divisior);
 	     
 	     System.out.println("This is from setSgstnGst method " + "\n" + gstRate);
 	     System.out.println(netAmount);
@@ -136,6 +139,25 @@ public class PartyController {
 			   BigDecimal grossAmount = netAmount.add(sgst.add(cgst));
 			   response.setValue("grossAmount", grossAmount);
 		}
+	}
+	
+	public void setInvoiceItems(ActionRequest request, ActionResponse response) {
+		
+		List<InvoiceLine> invoiceItems = request.getContext().asType(Invoice.class).getInvoiceItems();
+		
+		System.out.println(invoiceItems);
+		
+		 for(InvoiceLine in : invoiceItems) {
+			   response.setValue("netAmount", in.getNetAmount());
+			   response.setValue("gstRate", in.getGstRate());
+			   response.setValue("igst", in.getIgst());
+			   System.out.println(in.getIgst());
+			   response.setValue("sgst", in.getSgst());
+			   System.out.println(in.getSgst());
+			   response.setValue("cgst", in.getCgst());
+			   System.out.println(in.getCgst());
+			   response.setValue("grossAmount", in.getGrossAmount());
+		 }
 	}
 	
 }

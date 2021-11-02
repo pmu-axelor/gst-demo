@@ -70,5 +70,5 @@
         <action-method name="action-onChange-update-grossAmount">
             <call class="com.axelor.gst.Controller.PartyController" method="setGrossAmount"/>
         </action-method>
-       
+        
  </object-views>      
