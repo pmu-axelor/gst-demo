@@ -21,12 +21,12 @@
   
   <form model="com.axelor.gst.db.InvoiceLine" title="InvoiceLine" name="invoiceLine-form"> <!-- onSave="action-onSave-update-igst" -->
       <panel title="InvoiceLine">
-     <field name="product" onChange="action-onGroup for-all-actions"/>
+     <field name="product" onChange="action-onChange-update-item,action-onGroup-for-all-actions"/>
      <field name="hsbn"/>
      <field name="item"/>
      <field name="qty" onChange="action-onGroup-for-all-actions" />
-     <field name="price"/>
-     <field name="netAmount" />   <!-- onChange="action-onChange-update-igst" -->
+     <field name="price" onChange="action-onGroup-for-all-actions"/>
+     <field name="netAmount" />  
      <field name="gstRate"/>
      <field name="igst"/>
      <field name="sgst"/>
@@ -36,18 +36,15 @@
   </form>
        
         <action-group name="action-onGroup-for-all-actions" >
-               <action name="action-onChange-update-item"/>
+               <!-- <action name="action-onChange-update-item"/> -->
                <action name="action-onChange-priceandQuantity-update-netAmout"/>
                <action name="action-onChange-update-igst"/>
                <action name="action-onChange-update-cgst-n-sgst"/>
                <action name="action-onChange-update-grossAmount"/>
         </action-group>
+       
            
-       <!--   <action-group name="">
-             <action name=""/>
-         </action-group>   -->
-           
-        <action-attrs name="action-onChange-update-item" model="com.axelor.gst.db.Product">
+       <action-attrs name="action-onChange-update-item" model="com.axelor.gst.db.Product">
           <attribute name="value" for="item" expr="eval:__this__.product.code+'-'+product.name"/>
           <attribute name="value" for="gstRate" expr="eval:__this__.product.gstRate"/>
            <attribute name="value" for="hsbn" expr="eval:__this__.product.hsbn"/>

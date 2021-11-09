@@ -8,7 +8,7 @@
      
      <entity name="Party">
      
-     <string name="reference" title="Reference" readonly="true" default="get from sequence on save"/>
+     <string name="reference" title="Reference" readonly="true" /> <!-- sequence="Sequence" -->
      <string name="name" title="Name" required="true"/>
      <string name="type" title="Type" selection="select.party.type" default="company" required="true"/>
      <boolean name="customer" title="Customer"/>
