@@ -8,6 +8,8 @@ import com.axelor.gst.db.Contact;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.db.Party;
+import com.axelor.gst.db.Sequence;
+import com.axelor.gst.db.repo.SequenceRepository;
 import com.axelor.inject.Beans;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
@@ -56,15 +58,14 @@ public class PartyController {
          //  System.out.println(addresses); 
 		 
 		if (!isTrue) {
-			     for (Address address : addresses) {
-					            if (address.getType().equals("shipping")) {
-						            response.setValue("shippingAddress", address);
-					                } else if (address.getType().equals("default")) {
-						                  response.setValue("shippingAddress", address);
-					              }else {
-					            	             response.setValue("shippingAddress", null);
-					              } 
-				       }
+	    for (Address address : addresses) {
+		 if (address.getType().equals("shipping")) {
+			 response.setValue("shippingAddress", address);
+			} else if (address.getType().equals("default")) {
+			  response.setValue("shippingAddress", address);
+			} else {
+			  response.setValue("shippingAddress", null);
+				 } }
 
 		} else {
 			response.setValue("shippingAddress", invoiceAddres);
@@ -113,8 +114,7 @@ public class PartyController {
 		BigDecimal divisior = new BigDecimal("2");
 		BigDecimal gstDivisior = new BigDecimal("100");
 
-		BigDecimal sgst = ((gstRate.divide(gstDivisior)).multiply(netAmount))
-				.divide(divisior); /* netAmount.multiply(gstRate.divide(divisior)) */
+		BigDecimal sgst = ((gstRate.divide(gstDivisior)).multiply(netAmount)).divide(divisior); /* netAmount.multiply(gstRate.divide(divisior)) */
 		BigDecimal cgst = ((gstRate.divide(gstDivisior)).multiply(netAmount)).divide(divisior);
 
 		/*
@@ -131,7 +131,8 @@ public class PartyController {
 		}
 
 	}
-
+	
+	
 	public void setGrossAmount(ActionRequest request, ActionResponse response) {
 
 		Invoice asType = request.getContext().getParent().asType(Invoice.class);
@@ -163,31 +164,41 @@ public class PartyController {
 	}
 
 	public void setInvoiceItems(ActionRequest request, ActionResponse response) {
-
+		
+		
 		List<InvoiceLine> invoiceItems = request.getContext().asType(Invoice.class).getInvoiceItems();
-
-		/* System.out.println(invoiceItems); */
-
-		/* int decimalPlaces = 2; */
-
-		for (InvoiceLine in : invoiceItems) {
-
-			/*
-			 * BigDecimal igst = in.getIgst(); igst = igst.setScale(decimalPlaces,
-			 * BigDecimal.ROUND_UP);
-			 */
-
-			response.setValue("netAmount", in.getNetAmount());
-			response.setValue("netIgst", in.getIgst());
-			response.setValue("netSgst", in.getSgst());
-			response.setValue("netCsgt", in.getCgst());
-			response.setValue("grossAmount", in.getGrossAmount());
-
-			/*
-			 * System.out.println(in.getIgst()); System.out.println(in.getSgst());
-			 * System.out.println(in.getCgst()); System.out.println(in.getGrossAmount());
-			 */
+		
+		BigDecimal netAmount = new BigDecimal("0");
+		BigDecimal netIgst = new BigDecimal("0");
+		BigDecimal netSgst = new BigDecimal("0");
+		BigDecimal netCsgt = new BigDecimal("0");
+		BigDecimal grossAmount = new BigDecimal("0");
+		   for (InvoiceLine in : invoiceItems) {
+                     netAmount = netAmount.add(in.getNetAmount());
+			         netIgst = netIgst.add(in.getIgst());
+			         netSgst = netSgst.add(in.getSgst());
+                     netCsgt = netCsgt.add(in.getCgst());
+                     grossAmount = grossAmount.add(in.getGrossAmount());
+			
 		}
+		   response.setValue("netAmount", netAmount);
+			response.setValue("netIgst", netIgst);
+			response.setValue("netSgst", netSgst);
+			response.setValue("netCsgt", netCsgt);
+			response.setValue("grossAmount", grossAmount);
 	}
-
+	
+	public void getSequence(ActionRequest request, ActionResponse response) {
+		    
+	/*	Sequence sequence = request.getContext().asType(Sequence.class);
+		System.out.println(sequence);
+		 if(sequence.getId()!= null) {
+		sequence = Beans.get(SequenceRepository.class).find(sequence.getId());
+			          System.out.println(sequence);
+	         }*/
+		//model fetch code
+//		SequenceRepository seqRepo = Beans.get(SequenceRepository.class);
+//		                   seqRepo.all().filter("sef.model = ?",model).fetchOne();
+	}
+	
 }

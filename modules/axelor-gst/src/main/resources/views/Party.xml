@@ -14,7 +14,7 @@
      
   </grid> 
        
-   <form model="com.axelor.gst.db.Party" title="Party" name="party-form" >
+   <form model="com.axelor.gst.db.Party" title="Party" name="party-form" onSave="action-onSave-get-sequence">
       <panel title="Party">
      <field name="reference" colSpan="12"/>
      <field name="name"/>
@@ -78,5 +78,9 @@
                  ]]>
               </template>
         </cards>
+        
+        <action-method name="action-onSave-get-sequence">
+            <call class="com.axelor.gst.Controller.PartyController" method="getSequence"/>
+        </action-method>
         
    </object-views>      

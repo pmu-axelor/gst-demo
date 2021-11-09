@@ -20,7 +20,7 @@
         <field name="grossAmount"/>
     </grid>   
        
-    <form model="com.axelor.gst.db.Invoice" title="Invoices" name="invoice-form" onNew="action-onGroup-for-all" width="large"  onSave="action-OnSave-update-defaults-fields"> <!--  -->
+    <form model="com.axelor.gst.db.Invoice" title="Invoices" name="invoice-form" onNew="action-onGroup-for-all" width="large" > <!--  onSave="action-OnSave-update-defaults-fields" -->
         <panel title="Invoices" name="invoices">
         <field name="status" showTitle="false" widget="NavSelect" colSpan="12"/>
         <field name="reference" colSpan="12"/>
@@ -36,16 +36,15 @@
         <field name="netCsgt"/>
         <field name="netSgst"/>
         <field name="grossAmount"/>
-          <panel-related field="invoiceItems" form-view="invoiceLine-form" grid-view="invoiceLine-grid" colSpan="12"/>
+          <panel-related field="invoiceItems" form-view="invoiceLine-form" grid-view="invoiceLine-grid" colSpan="12" onChange="action-OnSave-update-defaults-fields"/>
         </panel>
         <panel sidebar="true">
-          <button onClick="bttn-to-change-status,bttn-to-change-title,save" name="clickMeBtn" title="validate" />
+          <button onClick="bttn-to-change-status,bttn-to-change-title,save" name="clickMeBtn" title="validate" hideIf="status == 'paid'" />
           <button onClick="bttn-to-update-status-for-cancelled" name="BtnCancelled" title="cancelled" css="btn-danger" hideIf="status == 'paid'" />  
         </panel>
    </form>
        
-       
-       <kanban columnBy="status" model="com.axelor.gst.db.Invoice" sequenceBy="priority" title="Invoices" name="kanban-invoice" draggable="true" limit="2">
+     <kanban columnBy="status" model="com.axelor.gst.db.Invoice" sequenceBy="priority" title="Invoices" name="kanban-invoice" draggable="true" limit="2">
              <field name="reference"/>
              <field name="company"/>
              <field name="dates"/>
