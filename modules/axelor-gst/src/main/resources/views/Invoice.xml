@@ -30,7 +30,7 @@
         <field name="partyContact"/>
         <field name="invoiceAddress"/>
         <field name="shippingAddress" /> <!-- hideIf="useInvoiceAddressAsShipping == true" -->
-        <field name="useInvoiceAddressAsShipping" />  <!-- onChange="action-onChange-update-shipping-field" -->
+        <field name="useInvoiceAddressAsShipping" widget="boolean-switch" />  <!-- onChange="action-onChange-update-shipping-field" -->
         <field name="netAmount"/>
         <field name="netIgst"/>
         <field name="netCsgt"/>
@@ -38,9 +38,9 @@
         <field name="grossAmount"/>
           <panel-related field="invoiceItems" form-view="invoiceLine-form" grid-view="invoiceLine-grid" colSpan="12" onChange="action-OnSave-update-defaults-fields"/>
         </panel>
-        <panel sidebar="true">
-          <button onClick="bttn-to-change-status,bttn-to-change-title,save" name="clickMeBtn" title="validate" hideIf="status == 'paid'" />
-          <button onClick="bttn-to-update-status-for-cancelled" name="BtnCancelled" title="cancelled" css="btn-danger" hideIf="status == 'paid'" />  
+        <panel sidebar="true" hideIf="(status == 'paid') || (status == 'cancelled')">
+          <button onClick="bttn-to-change-status,bttn-to-change-title,save" name="clickMeBtn" title="validate" hideIf="status == 'cancelled'" />
+          <button onClick="bttn-to-update-status-for-cancelled" name="BtnCancelled" title="cancelled" css="btn-danger" hideIf="status == 'cancelled'" />  
         </panel>
    </form>
        
@@ -83,6 +83,7 @@
        </action-group>
        
        <action-record name="action-onNew-fill-invoice" model="com.axelor.gst.db.Invoice">
+            <!-- <field name="status" expr="eval:_status"/> -->
            <field name="dates" expr="eval: __datetime__"/> 
             <field name="status" expr="draft"/>
        </action-record>

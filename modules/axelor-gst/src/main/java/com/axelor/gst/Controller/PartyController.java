@@ -2,7 +2,9 @@ package com.axelor.gst.Controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 
+import com.axelor.gst.PartyService.PartyServiceInter;
 import com.axelor.gst.db.Address;
 import com.axelor.gst.db.Contact;
 import com.axelor.gst.db.Invoice;
@@ -11,8 +13,11 @@ import com.axelor.gst.db.Party;
 import com.axelor.gst.db.Sequence;
 import com.axelor.gst.db.repo.SequenceRepository;
 import com.axelor.inject.Beans;
+import com.axelor.meta.db.MetaModel;
+import com.axelor.meta.db.repo.MetaModelRepository;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
+import com.google.inject.persist.Transactional;
 
 public class PartyController {
 
@@ -186,19 +191,19 @@ public class PartyController {
 			response.setValue("netSgst", netSgst);
 			response.setValue("netCsgt", netCsgt);
 			response.setValue("grossAmount", grossAmount);
+		
 	}
+	
 	
 	public void getSequence(ActionRequest request, ActionResponse response) {
 		    
-	/*	Sequence sequence = request.getContext().asType(Sequence.class);
-		System.out.println(sequence);
-		 if(sequence.getId()!= null) {
-		sequence = Beans.get(SequenceRepository.class).find(sequence.getId());
-			          System.out.println(sequence);
-	         }*/
-		//model fetch code
-//		SequenceRepository seqRepo = Beans.get(SequenceRepository.class);
-//		                   seqRepo.all().filter("sef.model = ?",model).fetchOne();
+		String sequence = Beans.get(PartyServiceInter.class).setSequence();
+		 
+		 response.setValue("reference", sequence);
+		 System.out.println(sequence);
+		
+	       	
+	
 	}
 	
 }
