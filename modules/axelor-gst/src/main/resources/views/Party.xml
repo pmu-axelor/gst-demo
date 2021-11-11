@@ -19,8 +19,8 @@
      <field name="reference" colSpan="12"/>
      <field name="name"/>
      <field name="type"/>
-     <field name="customer"/>
-     <field name="supplier"/>
+     <field name="customer" widget="boolean-switch"/>
+     <field name="supplier" widget="boolean-switch"/>
      <field name="gstin" colSpan="12"/>
       <field name="contact">
          <viewer>
@@ -79,8 +79,8 @@
               </template>
         </cards>
         
-        <action-method name="action-onSave-get-sequence">
-            <call class="com.axelor.gst.Controller.PartyController" method="getSequence"/>
+        <action-method name="action-onSave-get-sequence" model="com.axelor.gst.db.Party">
+            <call class="com.axelor.gst.Controller.PartyController" method="getSequenceSet" />
         </action-method>
         
    </object-views>      

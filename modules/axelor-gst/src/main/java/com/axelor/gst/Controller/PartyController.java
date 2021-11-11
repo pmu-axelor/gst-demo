@@ -137,7 +137,6 @@ public class PartyController {
 
 	}
 	
-	
 	public void setGrossAmount(ActionRequest request, ActionResponse response) {
 
 		Invoice asType = request.getContext().getParent().asType(Invoice.class);
@@ -186,7 +185,7 @@ public class PartyController {
                      grossAmount = grossAmount.add(in.getGrossAmount());
 			
 		}
-		   response.setValue("netAmount", netAmount);
+		    response.setValue("netAmount", netAmount);
 			response.setValue("netIgst", netIgst);
 			response.setValue("netSgst", netSgst);
 			response.setValue("netCsgt", netCsgt);
@@ -195,15 +194,24 @@ public class PartyController {
 	}
 	
 	
-	public void getSequence(ActionRequest request, ActionResponse response) {
-		    
-		String sequence = Beans.get(PartyServiceInter.class).setSequence();
-		 
-		 response.setValue("reference", sequence);
-		 System.out.println(sequence);
+	public void getSequenceSet(ActionRequest request, ActionResponse response) {
 		
-	       	
-	
+		
+		Party party = request.getContext().asType(Party.class);
+		 
+		  if(party.getReference() == null) {
+	    	 String sequence = Beans.get(PartyServiceInter.class).setSequence();
+		    response.setValue("reference", sequence);
+		    System.out.println(sequence);
+	   
+	     }
+	 
 	}
 	
 }
+
+
+
+
+
+

@@ -22,7 +22,7 @@
        
     <form model="com.axelor.gst.db.Invoice" title="Invoices" name="invoice-form" onNew="action-onGroup-for-all" width="large" > <!--  onSave="action-OnSave-update-defaults-fields" -->
         <panel title="Invoices" name="invoices">
-        <field name="status" showTitle="false" widget="NavSelect" colSpan="12"/>
+        <field name="status" showTitle="false" widget="NavSelect" colSpan="12" onChange="action-onSave-get-sequence"/>
         <field name="reference" colSpan="12"/>
         <field name="company"/>
         <field name="dates"/>
@@ -98,9 +98,9 @@
            <!-- <attribute name="value" for="status" expr="draft" if="status == 'paid'"/> -->
         </action-attrs>
       
-       <action-attrs name="bttn-to-change-title">  
+       <action-attrs name="bttn-to-change-title">   <!-- " -->
           <attribute name="title" for="clickMeBtn" expr="paid" if="status == 'validated'"/>
-        <!--   <attribute name="title" for="clickMeBtn" expr="draft" if="status == 'paid'"/>
+        <!--   <attribute name="title" for="clickMeBtn" expr="draft" if="status == 'paid'"/>  
           <attribute name="title" for="clickMeBtn" expr="validate" if="status == 'draft'"/> -->
        </action-attrs>
       
@@ -121,6 +121,10 @@
      
          <action-method name="action-OnSave-update-defaults-fields" model="com.axelor.gst.db.Invoice">
            <call class="com.axelor.gst.Controller.PartyController" method="setInvoiceItems"/>
+         </action-method>
+         
+         <action-method name="action-onSave-get-sequence" model="com.axelor.gst.db.Invoice">
+             <call class="com.axelor.gst.Controller.InvoiceController" method="generateSequence"/>
          </action-method>
      
  </object-views>      
