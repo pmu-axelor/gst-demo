@@ -22,7 +22,7 @@
        
     <form model="com.axelor.gst.db.Invoice" title="Invoices" name="invoice-form" onNew="action-onGroup-for-all" width="large" > <!--  onSave="action-OnSave-update-defaults-fields" -->
         <panel title="Invoices" name="invoices">
-        <field name="status" showTitle="false" widget="NavSelect" colSpan="12" onChange="action-onSave-get-sequence"/>
+        <field name="status" showTitle="false" widget="NavSelect" colSpan="12" />
         <field name="reference" colSpan="12"/>
         <field name="company"/>
         <field name="dates"/>
@@ -39,7 +39,7 @@
           <panel-related field="invoiceItems" form-view="invoiceLine-form" grid-view="invoiceLine-grid" colSpan="12" onChange="action-OnSave-update-defaults-fields"/>
         </panel>
         <panel sidebar="true" hideIf="(status == 'paid') || (status == 'cancelled')">
-          <button onClick="bttn-to-change-status,bttn-to-change-title,save" name="clickMeBtn" title="validate" hideIf="status == 'cancelled'" />
+          <button onClick="bttn-to-change-status,bttn-to-change-title,action-onSave-get-sequence-invoice,save" name="clickMeBtn" title="validate" hideIf="status == 'cancelled'" />
           <button onClick="bttn-to-update-status-for-cancelled" name="BtnCancelled" title="cancelled" css="btn-danger" hideIf="status == 'cancelled'" />  
         </panel>
    </form>
@@ -123,7 +123,7 @@
            <call class="com.axelor.gst.Controller.PartyController" method="setInvoiceItems"/>
          </action-method>
          
-         <action-method name="action-onSave-get-sequence" model="com.axelor.gst.db.Invoice">
+         <action-method name="action-onSave-get-sequence-invoice" model="com.axelor.gst.db.Invoice">
              <call class="com.axelor.gst.Controller.InvoiceController" method="generateSequence"/>
          </action-method>
      

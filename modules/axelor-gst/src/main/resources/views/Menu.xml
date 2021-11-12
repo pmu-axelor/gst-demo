@@ -4,8 +4,20 @@
         xsi:schemaLocation="http://axelor.com/xml/ns/object-views
        http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
      
+     
+    <!--  <menuitem title="DashBoard" name="menu-dashboard"  icon="fa-dashboard" icon-background="yellow"/>
+   
+      <menuitem title="Welcomes" name="welcome-menu-dashboard" parent="menu-dashboard" />
+       <action-view name="action.welcome.menu.dashboard" title="Welcome">
+       <view type="dashboard" name="welcome-dashboards"/>
+      </action-view> -->
+     
      <menuitem title="Menus" name="menu-main" /> 
       
+      <menuitem title="Welcome" name="welcome-menu" parent="menu-main" action="action.welcome-menu"/>
+        <action-view name="action.welcome-menu" title="Welcome">
+           <view type="dashboard" name="welcome-dashboards"/>
+        </action-view>
       
       <menuitem title="Company" name="menu-company" parent="menu-main"/>
       

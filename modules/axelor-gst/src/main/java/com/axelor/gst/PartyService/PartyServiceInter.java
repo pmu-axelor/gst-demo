@@ -2,6 +2,6 @@ package com.axelor.gst.PartyService;
 
 public interface PartyServiceInter {
 	  
-	public String setSequence();
+	public String setSequence() throws Exception;
 
 }

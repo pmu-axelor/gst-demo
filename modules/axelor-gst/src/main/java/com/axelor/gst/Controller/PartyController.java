@@ -198,13 +198,16 @@ public class PartyController {
 		
 		
 		Party party = request.getContext().asType(Party.class);
-		 
+		 try {
 		  if(party.getReference() == null) {
 	    	 String sequence = Beans.get(PartyServiceInter.class).setSequence();
 		    response.setValue("reference", sequence);
 		    System.out.println(sequence);
 	   
-	     }
+	    }
+		 }catch (Exception e) {
+			response.setError("Set sequence for party");
+		}
 	 
 	}
 	

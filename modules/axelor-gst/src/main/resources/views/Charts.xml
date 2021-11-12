@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <object-views xmlns="http://axelor.com/xml/ns/object-views"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+       http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+       
+  <chart name="chart-for-unPaid-customer" title="Invoices of UnPaid Customers">
+    <!--   <search-fields>
+          <field name="fromDate" title="From Date" type="date"/>
+          <field name="toDate" title="To Date" type="date"/>
+       </search-fields> -->
+     <dataset type="jpql">
+         <![CDATA[
+             SELECT 
+               i.status AS status,
+               MONTH(i.dates) AS month,
+               _party.customer AS customer
+               FROM 
+                 gst_invoice i
+               LEFT JOIN 
+                  i.party AS _party
+                WHERE   
+                   YEAR(i.dates) = YEAR(current_date)
+           
+                   
+                 
+                      
+         ]]>
+     </dataset>
+     <category key="month" type="month"/>
+     <series key="status" groupBy="customer" type="bar"/>
+  </chart>     
+       
+ </object-views>      

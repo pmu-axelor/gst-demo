@@ -12,12 +12,18 @@ public class InvoiceController {
       public void generateSequence(ActionRequest request, ActionResponse response) {
     	 
     	  Invoice invoice = request.getContext().asType(Invoice.class);
-    	
+    	  
+    	  try {
+    	    if(invoice.getStatus().equals("validated")) {
     	      if(invoice.getReference() == null) {
     	         String sequence = Beans.get(InvoiceServiceInter.class).setSequence();
     	           response.setValue("reference", sequence);
-    	           System.out.println(sequence);
+    	           
+    	           System.out.println(" From invoice controller " + sequence);
     }
-    	
+    	    }
+    	  }catch (Exception e) {
+			response.setError("Set sequence of invoice");
+		}
     	 }
    }
