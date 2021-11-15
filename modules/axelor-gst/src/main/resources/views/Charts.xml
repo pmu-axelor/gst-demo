@@ -4,31 +4,92 @@
         xsi:schemaLocation="http://axelor.com/xml/ns/object-views
        http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
        
-  <chart name="chart-for-unPaid-customer" title="Invoices of UnPaid Customers">
-    <!--   <search-fields>
+  <chart name="chart-for-unPaid-invoice" title="Invoices of UnPaid Customers">
+      <search-fields>
           <field name="fromDate" title="From Date" type="date"/>
           <field name="toDate" title="To Date" type="date"/>
-       </search-fields> -->
+       </search-fields> 
      <dataset type="jpql">
          <![CDATA[
-             SELECT 
-               i.status AS status,
-               MONTH(i.dates) AS month,
-               _party.customer AS customer
-               FROM 
-                 gst_invoice i
-               LEFT JOIN 
-                  i.party AS _party
-                WHERE   
-                   YEAR(i.dates) = YEAR(current_date)
-           
-                   
-                 
-                      
-         ]]>
+            SELECT COUNT(self.reference) AS reference,
+                   MONTH(self.dates) AS month,
+                  _party.name AS customer
+            FROM 
+               Invoice self
+             LEFT JOIN 
+                 self.party AS _party 
+              WHERE
+                 self.status = 'validated' AND _party.customer = 't' 
+                AND self.dates>= :fromDate
+                 AND self.dates<= :toDate
+                 GROUP BY 
+                      self.dates,
+                      _party.name  
+                    ORDER BY
+                      month   
+             ]]>
      </dataset>
-     <category key="month" type="month"/>
-     <series key="status" groupBy="customer" type="bar"/>
-  </chart>     
-       
+     <category key="month" type="month"/>  
+     <series key="reference" groupBy="customer" type="bar"/>
+  </chart> 
+   
+   <chart name="chart-for-paid-invoices" title="Paid Invoices">
+     <search-fields>
+          <field name="fromDte" title="From Date" type="date"/>
+          <field name="toDte" title="To Date" type="date"/>
+       </search-fields> 
+       <dataset type="jpql">
+          <![CDATA[
+                SELECT
+                 COUNT(_invoice.reference) AS reference,
+                  MONTH(_invoice.dates) AS month,
+                   _product.name AS pName,
+                    _category.name AS category
+                    FROM 
+                       InvoiceLine self
+                    LEFT JOIN 
+                       self.invoice AS _invoice 
+                    LEFT JOIN
+                        self.product AS _product
+                     LEFT JOIN 
+                        _product.category AS _category
+                     WHERE 
+                      _invoice.status = 'paid' AND 
+                      _invoice.dates>= :fromDte AND
+                      _invoice.dates<= :toDte
+                     GROUP BY
+                           _invoice.dates,
+                            _product.name,
+                            _category.name  
+                       
+          ]]>
+       </dataset>
+        <category key="category" type="text"/>
+        <series key="reference" type="bar" groupBy="pName"/>
+   </chart>
+   
+   <chart name="chart-for-customer-per-state" title="Customer per State">
+       <dataset type="jpql">
+          <![CDATA[
+                SELECT Count(self.customer) AS customer,
+                  _address.state AS state,
+                  _state.name AS sName
+                FROM
+                     Party self
+                LEFT JOIN 
+                     self.address AS _address
+                LEFT JOIN 
+                      _address.state as _state   
+                WHERE 
+                     self.customer = 't'
+                GROUP BY
+                       _address.state,
+                       _state.id,     
+                       _state.name   
+          ]]>
+       </dataset>
+       <category key="sName" />
+       <series key="customer" groupBy="state" type="pie"/>
+   </chart>
+        
  </object-views>      
