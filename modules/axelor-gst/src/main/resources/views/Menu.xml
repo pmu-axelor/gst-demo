@@ -77,6 +77,11 @@
                <view type="form" name="invoice-form"/>
                <domain>self.status = 'validated'</domain>  
            </action-view> 
+           
+           <action-view name="action.validated.invoices-for-dashboard" title="Invoice older than one month,Validated And not Paid" model="com.axelor.gst.db.Invoice">
+               <view type="grid" name="invoice-grid"/>
+               <domain>self.status != 'paid' AND month(self.dates) = month(now())-1</domain>
+           </action-view> 
           
          <menuitem title="Paid Invoice" name="paid-invoice" parent="menu-invoice" action="action.paid.invoices"/>  
               <action-view name="action.paid.invoices" title="Paid Invoice" model="com.axelor.gst.db.Invoice">

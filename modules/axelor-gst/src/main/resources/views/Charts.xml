@@ -11,7 +11,8 @@
        </search-fields> 
      <dataset type="jpql">
          <![CDATA[
-            SELECT COUNT(self.reference) AS reference,
+            SELECT
+                  COUNT(self.reference) AS reference,
                    MONTH(self.dates) AS month,
                   _party.name AS customer
             FROM 
@@ -20,8 +21,8 @@
                  self.party AS _party 
               WHERE
                  self.status = 'validated' AND _party.customer = 't' 
-                AND self.dates>= :fromDate
-                 AND self.dates<= :toDate
+                AND self.dates BETWEEN :fromDate
+                 AND :toDate
                  GROUP BY 
                       self.dates,
                       _party.name  
@@ -30,8 +31,9 @@
              ]]>
      </dataset>
      <category key="month" type="month"/>  
-     <series key="reference" groupBy="customer" type="bar"/>
-  </chart> 
+     <series key="reference " groupBy="customer" type="bar"/>
+    <!--  <config name="colors" value="red,green" /> -->
+  </chart>  
    
    <chart name="chart-for-paid-invoices" title="Paid Invoices">
      <search-fields>
@@ -41,10 +43,10 @@
        <dataset type="jpql">
           <![CDATA[
                 SELECT
-                 COUNT(_invoice.reference) AS reference,
-                  MONTH(_invoice.dates) AS month,
-                   _product.name AS pName,
-                    _category.name AS category
+                      COUNT(_invoice.reference) AS reference,
+                      MONTH(_invoice.dates) AS month,
+                     _product.name AS pName,
+                     _category.name AS category
                     FROM 
                        InvoiceLine self
                     LEFT JOIN 
@@ -71,9 +73,10 @@
    <chart name="chart-for-customer-per-state" title="Customer per State">
        <dataset type="jpql">
           <![CDATA[
-                SELECT Count(self.customer) AS customer,
-                  _address.state AS state,
-                  _state.name AS sName
+                SELECT 
+                     Count(self.customer) AS customer,
+                    _address.state AS state,
+                    _state.name AS sName
                 FROM
                      Party self
                 LEFT JOIN 
@@ -90,6 +93,46 @@
        </dataset>
        <category key="sName" />
        <series key="customer" groupBy="state" type="pie"/>
+   </chart>
+   
+   <chart name="chart-for-invoices-per-status" title="invoices per status">
+       <dataset type="jpql">
+            <![CDATA[
+                  SELECT  
+                       COUNT(self.reference) as reference,
+                        SUM(self.grossAmount) as amount,
+                          self.status as status
+                   FROM 
+                        Invoice self
+                   WHERE
+                        self.status = 'validated' OR self.status = 'paid'
+                   GROUP BY
+                        self.status, 
+                        self.grossAmount          
+               ]]>
+       </dataset>
+       <category key="reference" type="text" />
+       <series key="amount" groupBy="status" type="bar" title="Amount"/>
+   </chart>
+   
+   <chart name="chart-for-invoices-per-status-number-of-invoices" title="invoices per status">
+       <dataset type="jpql">
+            <![CDATA[
+                  SELECT 
+                        COUNT(self.id) as total,
+                        COUNT(self.reference) as reference,
+                         self.status as status
+                   FROM 
+                        Invoice self
+                   WHERE
+                        self.status = 'validated' OR self.status = 'paid'
+                   GROUP BY
+                        self.status, 
+                        self.grossAmount          
+               ]]>
+       </dataset>
+       <category key="reference" type="text"/>
+       <series key="total" groupBy="status" type="line"/>
    </chart>
         
  </object-views>      

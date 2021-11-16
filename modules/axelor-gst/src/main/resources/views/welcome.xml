@@ -8,6 +8,9 @@
           <dashlet action="chart:chart-for-unPaid-invoice"/>
            <dashlet action="chart:chart-for-paid-invoices"/> 
            <dashlet action="chart:chart-for-customer-per-state"/>
+           <dashlet action="action.validated.invoices-for-dashboard"/>
+           <dashlet action="chart:chart-for-invoices-per-status"/>
+           <dashlet action="chart:chart-for-invoices-per-status-number-of-invoices"/>
        </dashboard>
        
   </object-views>     

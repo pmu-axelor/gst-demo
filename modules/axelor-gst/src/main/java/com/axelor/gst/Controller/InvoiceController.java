@@ -4,6 +4,8 @@ import com.axelor.gst.InvoiceService.InvoiceServiceInter;
 import com.axelor.gst.PartyService.PartyServiceInter;
 import com.axelor.gst.db.Invoice;
 import com.axelor.inject.Beans;
+import com.axelor.meta.schema.actions.ActionView;
+import com.axelor.meta.schema.actions.ActionView.ActionViewBuilder;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
 
@@ -26,4 +28,5 @@ public class InvoiceController {
 			response.setError("Set sequence of invoice");
 		}
     	 }
+   
    }
