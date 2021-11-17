@@ -20,13 +20,13 @@
         <field name="grossAmount"/>
     </grid>   
        
-    <form model="com.axelor.gst.db.Invoice" title="Invoices" name="invoice-form" onNew="action-onGroup-for-all" width="large" > <!--  onSave="action-OnSave-update-defaults-fields" -->
+    <form model="com.axelor.gst.db.Invoice" title="Invoices" name="invoice-form" onNew="action-onNew-fill-invoice" width="large" > <!--  onSave="action-OnSave-update-defaults-fields" -->
         <panel title="Invoices" name="invoices">
         <field name="status" showTitle="false" widget="NavSelect" colSpan="12" />
         <field name="reference" colSpan="12"/>
         <field name="company"/>
         <field name="dates"/>
-        <field name="party" onChange="action-onChange-party-update-partyContact,action-onChange-update-shipping-field"/>
+        <field name="party" onChange="action-onChange-party-update-partyContactAndAddresses"/>  
         <field name="partyContact"/>
         <field name="invoiceAddress"/>
         <field name="shippingAddress" /> <!-- hideIf="useInvoiceAddressAsShipping == true" -->
@@ -77,20 +77,20 @@
         </template>
        </kanban>
        
-       <action-group name="action-onGroup-for-all">
+   <!--     <action-group name="action-onGroup-for-all">
           <action name="action-onNew-fill-invoice"/>
           <action name="action-onNew-get-company"/>
-       </action-group>
+       </action-group> -->
        
        <action-record name="action-onNew-fill-invoice" model="com.axelor.gst.db.Invoice">
-            <!-- <field name="status" expr="eval:_status"/> -->
            <field name="dates" expr="eval: __datetime__"/> 
             <field name="status" expr="draft"/>
+            <field name="company" expr="eval: __repo__(Company).all().fetchOne()"/>
        </action-record>
       
-      <action-record name="action-onNew-get-company" model="com.axelor.gst.db.Invoice" >
+      <!-- <action-record name="action-onNew-get-company" model="com.axelor.gst.db.Invoice" >
            <field name="company" expr="eval: __repo__(Company).all().fetchOne()"/> 
-      </action-record>
+      </action-record> -->
    
       <action-attrs name="bttn-to-change-status">
            <attribute name="value" for="status" expr="validated" if="status == 'draft'"/>
@@ -110,13 +110,13 @@
          <!-- <attribute name="hidden" for="BtnCancelled" expr="eval: status == 'paid'"/> -->
       </action-attrs>
       
-     <action-method name="action-onChange-party-update-partyContact" model="com.axelor.gst.db.Invoice">
-        <call class="com.axelor.gst.Controller.PartyController" method="primaryContact"/>
+     <action-method name="action-onChange-party-update-partyContactAndAddresses" model="com.axelor.gst.db.Invoice">
+        <call class="com.axelor.gst.Controller.AddressController" method="setPrimaryContactAndAddresses"/>
      </action-method>
      
-       <action-method name="action-onChange-update-shipping-field" model="com.axelor.gst.db.Invoice">
+       <!-- <action-method name="action-onChange-update-shipping-field" model="com.axelor.gst.db.Invoice">
            <call class="com.axelor.gst.Controller.PartyController" method="shippingAddress"/>
-       </action-method>
+       </action-method> -->
      
      
          <action-method name="action-OnSave-update-defaults-fields" model="com.axelor.gst.db.Invoice">
