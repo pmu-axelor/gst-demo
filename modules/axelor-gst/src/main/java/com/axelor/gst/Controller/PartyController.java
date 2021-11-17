@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Locale;
 
-import com.axelor.gst.PartyService.PartyServiceInter;
+import com.axelor.gst.Services.PartyService;
 import com.axelor.gst.db.Address;
 import com.axelor.gst.db.Contact;
 import com.axelor.gst.db.Invoice;
@@ -23,18 +23,10 @@ public class PartyController {
 
 	public void primaryContact(ActionRequest request, ActionResponse response) {
 
-		List<Contact> contact = request.getContext().asType(Invoice.class).getParty().getContact();
+		Invoice invoice = request.getContext().asType(Invoice.class);
+		response.setValue("partyContact",  getPrimaryContact(invoice));
 
-		for (Contact c : contact) {
-
-			if (c.getType().equals("primary")) {
-
-				response.setValue("partyContact", c);
-			}
-			
-		}
-
-		List<Address> addresses = request.getContext().asType(Invoice.class).getParty().getAddress();
+		List<Address> addresses = invoice.getParty().getAddress();
 
 		for (Address address : addresses) {
 			if (address.getType().equals("invoice")) {
@@ -50,16 +42,26 @@ public class PartyController {
 
 	}
 
+	    protected Contact getPrimaryContact(Invoice invoice) {
+		List<Contact> contacts = invoice.getParty().getContact();
+		for (Contact c : contacts) {
+        	if (c.getType().equals("primary")) {
+				return c;
+			}
+		}
+		return null;
+	}
+
 	public void shippingAddress(ActionRequest request, ActionResponse response) {
 
-		Invoice asType = request.getContext().asType(Invoice.class);
-		Boolean isTrue = asType.getUseInvoiceAddressAsShipping();
+		Invoice invoice = request.getContext().asType(Invoice.class);
+		Boolean isTrue = invoice.getUseInvoiceAddressAsShipping();
 
-		Address invoiceAddres = asType.getInvoiceAddress();
+		Address invoiceAddres = invoice.getInvoiceAddress();
 		// System.out.println(invoiceAddres);
 		
 	
-		List<Address> addresses = asType.getParty().getAddress();
+		List<Address> addresses = invoice.getParty().getAddress();
          //  System.out.println(addresses); 
 		 
 		if (!isTrue) {
@@ -79,7 +81,6 @@ public class PartyController {
 		}
 
 	}
-
 	public void setIGST(ActionRequest request, ActionResponse response) {
 
 		Invoice invoice = request.getContext().getParent().asType(Invoice.class);
@@ -108,13 +109,13 @@ public class PartyController {
 
 	public void setSGSTnCGST(ActionRequest request, ActionResponse response) {
 
-		Invoice asType = request.getContext().getParent().asType(Invoice.class);
-		Address invoiceAddress = asType.getInvoiceAddress();
-		Address companyAddress = asType.getCompany().getAddress();
+		Invoice invoice = request.getContext().getParent().asType(Invoice.class);
+		Address invoiceAddress = invoice.getInvoiceAddress();
+		Address companyAddress = invoice.getCompany().getAddress();
 
-		InvoiceLine asType2 = request.getContext().asType(InvoiceLine.class);
-		BigDecimal gstRate = asType2.getGstRate();
-		BigDecimal netAmount = asType2.getNetAmount();
+		InvoiceLine invoiceLine = request.getContext().asType(InvoiceLine.class);
+		BigDecimal gstRate = invoiceLine.getGstRate();
+		BigDecimal netAmount = invoiceLine.getNetAmount();
 
 		BigDecimal divisior = new BigDecimal("2");
 		BigDecimal gstDivisior = new BigDecimal("100");
@@ -172,11 +173,12 @@ public class PartyController {
 		
 		List<InvoiceLine> invoiceItems = request.getContext().asType(Invoice.class).getInvoiceItems();
 		
-		BigDecimal netAmount = new BigDecimal("0");
-		BigDecimal netIgst = new BigDecimal("0");
-		BigDecimal netSgst = new BigDecimal("0");
-		BigDecimal netCsgt = new BigDecimal("0");
-		BigDecimal grossAmount = new BigDecimal("0");
+		BigDecimal bigDecimal = new BigDecimal("0");
+		BigDecimal netAmount = bigDecimal;
+		BigDecimal netIgst = bigDecimal;
+		BigDecimal netSgst = bigDecimal;
+		BigDecimal netCsgt = bigDecimal;
+		BigDecimal grossAmount = bigDecimal;
 		   for (InvoiceLine in : invoiceItems) {
                      netAmount = netAmount.add(in.getNetAmount());
 			         netIgst = netIgst.add(in.getIgst());
@@ -200,7 +202,7 @@ public class PartyController {
 		Party party = request.getContext().asType(Party.class);
 		 try {
 		  if(party.getReference() == null) {
-	    	 String sequence = Beans.get(PartyServiceInter.class).setSequence();
+	    	 String sequence = Beans.get(PartyService.class).setSequence();
 		    response.setValue("reference", sequence);
 		    System.out.println(sequence);
 	   

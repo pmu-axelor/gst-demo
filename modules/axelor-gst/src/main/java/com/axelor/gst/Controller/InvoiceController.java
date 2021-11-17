@@ -1,7 +1,7 @@
 package com.axelor.gst.Controller;
 
-import com.axelor.gst.InvoiceService.InvoiceServiceInter;
-import com.axelor.gst.PartyService.PartyServiceInter;
+
+import com.axelor.gst.Services.SequenceService;
 import com.axelor.gst.db.Invoice;
 import com.axelor.inject.Beans;
 import com.axelor.meta.schema.actions.ActionView;
@@ -18,7 +18,7 @@ public class InvoiceController {
     	  try {
     	    if(invoice.getStatus().equals("validated")) {
     	      if(invoice.getReference() == null) {
-    	         String sequence = Beans.get(InvoiceServiceInter.class).setSequence();
+    	         String sequence = Beans.get(SequenceService.class).setSequence();
     	           response.setValue("reference", sequence);
     	           
     	           System.out.println(" From invoice controller " + sequence);

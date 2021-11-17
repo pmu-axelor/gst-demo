@@ -1,16 +1,19 @@
 package com.axelor.gst.modules;
 
 import com.axelor.app.AxelorModule;
-import com.axelor.gst.InvoiceService.InvoiceServiceInter;
-import com.axelor.gst.InvoiceService.InvoiceServiceInterImpl;
-import com.axelor.gst.PartyService.PartyServiceInter;
-import com.axelor.gst.PartyService.PartyServiceInterImpl;
+import com.axelor.gst.Services.PartyService;
+import com.axelor.gst.Services.PartyServiceImpl;
+import com.axelor.gst.Services.ProductService;
+import com.axelor.gst.Services.ProductServiceImpl;
+import com.axelor.gst.Services.SequenceService;
+import com.axelor.gst.Services.SequenceServiceImpl;
 
 public class Modules extends AxelorModule{
  
 	@Override
 	protected void configure() {
-		bind(PartyServiceInter.class).to(PartyServiceInterImpl.class);
-		bind(InvoiceServiceInter.class).to(InvoiceServiceInterImpl.class);
+		bind(PartyService.class).to(PartyServiceImpl.class);
+		bind(SequenceService.class).to(SequenceServiceImpl.class);
+		bind(ProductService.class).to(ProductServiceImpl.class);
 	}
 }
