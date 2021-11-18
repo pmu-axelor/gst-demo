@@ -9,15 +9,14 @@ import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
 
 public class AddressController {
+	
 	public void setPrimaryContactAndAddresses(ActionRequest request, ActionResponse response) {
 
 		Invoice invoice = request.getContext().asType(Invoice.class);
-		System.out.println(invoice);
 		response.setValue("partyContact",  getPrimaryContact(invoice));
 
 		List<Address> addresses = invoice.getParty().getAddress();
-           System.out.println(addresses);
-		
+         
 		for (Address address : addresses) {
 			 if (address.getType().equals("invoice")) {
 				response.setValue("invoiceAddress", address);
@@ -30,15 +29,10 @@ public class AddressController {
 
 		}
 		
-	//	Invoice invoice = request.getContext().asType(Invoice.class);
+	
 		Boolean isTrue = invoice.getUseInvoiceAddressAsShipping();
 
 		Address invoiceAddres = invoice.getInvoiceAddress();
-		// System.out.println(invoiceAddres);
-		
-	
-	//	List<Address> addresses = invoice.getParty().getAddress();
-         //  System.out.println(addresses); 
 		 
 		if (!isTrue) {
 	    for (Address address : addresses) {

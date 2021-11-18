@@ -9,22 +9,25 @@ import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.db.Party;
 import com.axelor.gst.db.Product;
 import com.axelor.gst.db.repo.CompanyRepository;
+import com.axelor.gst.db.repo.InvoiceRepository;
 import com.axelor.gst.db.repo.PartyRepository;
 import com.axelor.gst.db.repo.ProductRepository;
 import com.axelor.inject.Beans;
+import com.google.inject.persist.Transactional;
 
 public class ProductServiceImpl implements ProductService {
 
-	@Override
-	  public void createInvoice(List<Integer> ids) {
+	     @Override
+	     @Transactional
+	     public void createInvoice(List<Integer> ids) {
 		
 		 ProductRepository pRepo = Beans.get(ProductRepository.class);
 		 CompanyRepository cmpRepo = Beans.get(CompanyRepository.class);
 	     PartyRepository prtyRepo = Beans.get(PartyRepository.class);
-	     Company cmpany = cmpRepo.all().fetchOne();
+	     Company company = cmpRepo.all().fetchOne();
 	     Party party = prtyRepo.all().fetchOne();
 	    
-	 
+	     InvoiceRepository invRepo = Beans.get(InvoiceRepository.class);
 	     
 	     Invoice invoice = new Invoice();    
 	     List<InvoiceLine> lines = new ArrayList<>();
@@ -43,10 +46,13 @@ public class ProductServiceImpl implements ProductService {
 	    	    }
 	     
 	         invoice.setInvoiceItems(lines);
-	         invoice.setCompany(cmpany);
+	         invoice.setCompany(company);
 	         invoice.setParty(party);
+	         
+	         invRepo.save(invoice);
+	    
 	     }
 
-	
+	      
 
 }

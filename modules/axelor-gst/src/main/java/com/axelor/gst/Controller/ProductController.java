@@ -1,7 +1,5 @@
 package com.axelor.gst.Controller;
 
-
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,20 +25,22 @@ import com.google.inject.persist.Transactional;
 
 public class ProductController {
 	  
+	   @SuppressWarnings("unchecked")
 	   @Transactional
-	   public void getInvoiceForm(ActionRequest request, ActionResponse response) {
+	    public void getInvoiceForm(ActionRequest request, ActionResponse response) {
 		
 		    //  System.out.println(request.getContext().entrySet());
 		   
-		    List<Integer> ids = (List<Integer>) request.getContext().get("_ids");
+		    
+			List<Integer> ids = (List<Integer>) request.getContext().get("_ids");
 		    System.out.println(ids);
 		    
-		           Beans.get(ProductService.class).createInvoice(ids);       
+		   // Beans.get(ProductService.class).createInvoice(ids);       
 		   
-		/*    ProductRepository pRepo = Beans.get(ProductRepository.class);
-		   
-		    InvoiceRepository invRepo = Beans.get(InvoiceRepository.class);
-		         System.out.println(invRepo.all().fetch());             
+		   ProductRepository pRepo = Beans.get(ProductRepository.class);
+	
+		   InvoiceRepository invRepo = Beans.get(InvoiceRepository.class);
+		         //System.out.println(invRepo.all().fetch());           
 		     
 		     CompanyRepository cmpRepo = Beans.get(CompanyRepository.class);
 		     PartyRepository prtyRepo = Beans.get(PartyRepository.class);
@@ -49,11 +49,13 @@ public class ProductController {
 		    
 		 
 		     
-		     Invoice invoice = new Invoice();    
-		     List<InvoiceLine> lines = new ArrayList<>();
-		     Product product = new Product();
-		
-		     for(Integer l : ids){
+		      Invoice invoice = new Invoice();    
+		      Product product = new Product();
+		      invoice.setInvoiceAddress(party.getAddress().get(0));
+		      invoice.setCompany(cmpany);
+		      invoice.setParty(party);
+		      if(ids != null) {
+		      for(Integer l : ids){
 		    	      product = pRepo.find(Long.valueOf(l));
 		    	      System.out.println(product);
 		    	      InvoiceLine invcLine = new InvoiceLine();
@@ -62,21 +64,23 @@ public class ProductController {
 		    	      invcLine.setItem(product.getCode()+"-"+product.getName());
 		    	      invcLine.setGstRate(product.getGstRate());
 		    	      invcLine.setPrice(product.getSalePrice());
-		    	       lines.add(invcLine);
+		    	       //lines.add(invcLine);
+		    	      invoice.addInvoiceItem(invcLine);
 		    	    }
 		     
-		         invoice.setInvoiceItems(lines);
-		         invoice.setCompany(cmpany);
-		         invoice.setParty(party);
+		         //invoice.setInvoiceItems(lines);
+		        
 		         
-		        //  pRepo.save(invoice);
-*/		               
-		  ActionViewBuilder actionViewBuilder = ActionView.define("Invoices")
+		         invRepo.save(invoice); 
+		      } 
+		      System.out.println(product.getId());
+		      System.out.println(invoice);
+               
+		      ActionViewBuilder actionViewBuilder = ActionView.define("Invoices")
 			                                   .model(Invoice.class.getName())
 			                                   .add("form","invoice-form")
-			                                    .context("_showRecord",131);
-	         
-		   response.setView(actionViewBuilder.map());
+			                                    .context("_showRecord",invoice.getId());
+	       response.setView(actionViewBuilder.map());
 		    // response.setValue("invoiceItems", invcLine);
 	  }
 }

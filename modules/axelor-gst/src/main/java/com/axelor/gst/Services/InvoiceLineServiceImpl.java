@@ -8,26 +8,51 @@ import java.math.BigDecimal;
 public class InvoiceLineServiceImpl implements InvoiceLineService {
 
 	@Override
-	public BigDecimal getIGST(Invoice invoice, InvoiceLine invoiceLine) {
+	public void getIgstSgstCgstAndGrossAmount(Invoice invoice, InvoiceLine invoiceLine) {
 		
 		Address invoiceAddress = invoice.getInvoiceAddress();
 		Address companyAddress = invoice.getCompany().getAddress();
 		
 		BigDecimal gstRate = invoiceLine.getGstRate();
 		BigDecimal netAmount = invoiceLine.getNetAmount();
-		
+	
 		BigDecimal gstDivisior = new BigDecimal("100");
+		BigDecimal divisior = new BigDecimal("2");
 
-		BigDecimal igst = (gstRate.divide(gstDivisior)).multiply(netAmount);
 		
-		if (!(invoiceAddress.getState().getName()).equals((companyAddress.getState().getName()))) {
-			      return igst;
+		if (!(invoiceAddress.getState()).equals((companyAddress.getState()))) {
+			    BigDecimal igstCal = (gstRate.divide(gstDivisior)).multiply(netAmount);
+			    invoiceLine.setIgst(igstCal);
+			    invoiceLine.setGrossAmount(netAmount.add(igstCal));
 		}
 		
-		return null;
+		else if((invoiceAddress.getState()).equals((companyAddress.getState()))) {
+			  BigDecimal sgstAndcgst = ((gstRate.divide(gstDivisior)).multiply(netAmount)).divide(divisior);
+		         invoiceLine.setCgst(sgstAndcgst);
+		         invoiceLine.setSgst(sgstAndcgst);
+		         invoiceLine.setGrossAmount(netAmount.add(sgstAndcgst.add(sgstAndcgst)));
+    	}
+		
+      /*if (!(invoiceAddress.getState().getName()).equals((companyAddress.getState().getName()))) {
+			
+			 grossAmount = netAmount.add(igstCal);
+			  invoiceLine.setGrossAmount(grossAmount);
+			
+		}*//*else if((invoiceAddress.getState().getName()).equals((companyAddress.getState().getName()))) {
+			 grossAmount = netAmount.add(sgstAndcgst.add(sgstAndcgst));
+			 invoiceLine.setGrossAmount(grossAmount);
+		}*/
+		
+		//invoiceLine.setIgst(igstCal);
+		/*invoiceLine.setSgst(sgstAndcgst);
+		invoiceLine.setCgst(sgstAndcgst);
+		invoiceLine.setGrossAmount(grossAmount);*/
+		
+		
+		
 	}
 
-	@Override
+	/*@Override
 	public BigDecimal[] getSGSTnCGST(Invoice invoice, InvoiceLine invoiceLine) {
 		
 		Address invoiceAddress = invoice.getInvoiceAddress();
@@ -36,11 +61,12 @@ public class InvoiceLineServiceImpl implements InvoiceLineService {
 		BigDecimal gstRate = invoiceLine.getGstRate();
 		BigDecimal netAmount = invoiceLine.getNetAmount();
 		
+		
 		BigDecimal divisior = new BigDecimal("2");
 		BigDecimal gstDivisior = new BigDecimal("100");
 		
 		BigDecimal sgst = ((gstRate.divide(gstDivisior)).multiply(netAmount)).divide(divisior);
-		                                                    /* netAmount.multiply(gstRate.divide(divisior)) */
+		                                                     netAmount.multiply(gstRate.divide(divisior)) 
 		BigDecimal cgst = ((gstRate.divide(gstDivisior)).multiply(netAmount)).divide(divisior);
 		
 		BigDecimal[] arry = new BigDecimal[2];
@@ -79,6 +105,6 @@ public class InvoiceLineServiceImpl implements InvoiceLineService {
 		}
 		
 		return null;
-	}
+	}*/
 
 }

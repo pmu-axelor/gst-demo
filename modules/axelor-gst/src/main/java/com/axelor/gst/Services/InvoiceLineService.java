@@ -6,8 +6,6 @@ import java.math.BigDecimal;
 
 public interface InvoiceLineService {
 
-	public BigDecimal getIGST(Invoice invoice,InvoiceLine invoiceLine);
-	public BigDecimal[] getSGSTnCGST(Invoice invoice,InvoiceLine invoiceLine);
-	public BigDecimal getGrossAmount(Invoice invoice,InvoiceLine invoiceLine);
+	public void getIgstSgstCgstAndGrossAmount(Invoice invoice,InvoiceLine invoiceLine);
 	
 }

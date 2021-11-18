@@ -50,14 +50,15 @@
           <view type="form" name="productCategory-form"/>
         </action-view> 
         
-       <menuitem title="Invoice" name="menu-invoice" parent="menu-main"/>  
+       <menuitem title="Invoices" name="menu-invoice" parent="menu-main"/>  
         
-      <menuitem title="Create" name="create-invoice" parent="menu-invoice" action="action.create.invoice"/>  
-          <action-view name="action.create.invoice" title="Create Invoice" model="com.axelor.gst.db.Invoice">
+         <menuitem title="Create" name="create-invoice" parent="menu-invoice" action="action.create.invoices"/>  
+          <action-view name="action.create.invoices" title="Create-Invoice" model="com.axelor.gst.db.Invoice">
            <view type="form" name="invoice-form"/>
-          </action-view> 
+           <!-- <domain>self.status = 'draft'</domain> -->
+          </action-view>
          
-       <menuitem title="All Invoices" name="all-invoices" parent="menu-invoice" action="action.all.invoices"/>   
+           <menuitem title="All Invoices" name="all-invoices" parent="menu-invoice" action="action.all.invoices"/>   
            <action-view name="action.all.invoices" title="All Invoice" model="com.axelor.gst.db.Invoice">
                <view type="grid" name="invoice-grid"/>
                <view type="form" name="invoice-form"/>

@@ -83,8 +83,8 @@
        </action-group> -->
        
        <action-record name="action-onNew-fill-invoice" model="com.axelor.gst.db.Invoice">
-           <field name="dates" expr="eval: __datetime__"/> 
-            <field name="status" expr="draft"/>
+            <field name="dates" expr="eval: __datetime__"/> 
+            <field name="status" expr="draft"/> 
             <field name="company" expr="eval: __repo__(Company).all().fetchOne()"/>
        </action-record>
       
@@ -120,7 +120,7 @@
      
      
          <action-method name="action-OnSave-update-defaults-fields" model="com.axelor.gst.db.Invoice">
-           <call class="com.axelor.gst.Controller.PartyController" method="setInvoiceItems"/>
+           <call class="com.axelor.gst.Controller.InvoiceController" method="setInvoiceItems"/>
          </action-method>
          
          <action-method name="action-onSave-get-sequence-invoice" model="com.axelor.gst.db.Invoice">
