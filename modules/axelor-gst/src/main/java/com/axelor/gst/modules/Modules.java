@@ -1,6 +1,8 @@
 package com.axelor.gst.modules;
 
 import com.axelor.app.AxelorModule;
+import com.axelor.gst.Services.AddressService;
+import com.axelor.gst.Services.AddressServiceImpl;
 import com.axelor.gst.Services.InvoiceLineService;
 import com.axelor.gst.Services.InvoiceLineServiceImpl;
 import com.axelor.gst.Services.InvoiceService;
@@ -20,5 +22,6 @@ public class Modules extends AxelorModule{
 	    bind(ProductService.class).to(ProductServiceImpl.class);
 		bind(InvoiceLineService.class).to(InvoiceLineServiceImpl.class);
 		bind(InvoiceService.class).to(InvoiceServiceImpl.class);
+		bind(AddressService.class).to(AddressServiceImpl.class);
 	}
 }

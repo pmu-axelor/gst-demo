@@ -26,11 +26,11 @@
         <field name="reference" colSpan="12"/>
         <field name="company"/>
         <field name="dates"/>
-        <field name="party" onChange="action-onChange-party-update-partyContactAndAddresses"/>  
+        <field name="party" onChange="action-onChange-party-update-InvoiceAddresses,action-onChange-update-shippingAddress"/>  
         <field name="partyContact"/>
         <field name="invoiceAddress"/>
-        <field name="shippingAddress" /> <!-- hideIf="useInvoiceAddressAsShipping == true" -->
-        <field name="useInvoiceAddressAsShipping" widget="boolean-switch" />  <!-- onChange="action-onChange-update-shipping-field" -->
+        <field name="shippingAddress" /> <!-- hideIf="useInvoiceAddressAsShipping == true" --> 
+        <field name="useInvoiceAddressAsShipping" widget="boolean-switch" onChange="action-onChange-update-shippingAddress"/>  <!-- onChange="action-onChange-update-shipping-field" -->
         <field name="netAmount"/>
         <field name="netIgst"/>
         <field name="netCsgt"/>
@@ -85,8 +85,8 @@
        <action-record name="action-onNew-fill-invoice" model="com.axelor.gst.db.Invoice">
             <field name="dates" expr="eval: __datetime__"/> 
             <field name="status" expr="draft"/> 
-            <field name="company" expr="eval: __repo__(Company).all().fetchOne()"/>
-       </action-record>
+            <field name="company" expr="eval: __repo__(Company).all().fetchOne()" if="company == null"/>
+       </action-record>  
       
       <!-- <action-record name="action-onNew-get-company" model="com.axelor.gst.db.Invoice" >
            <field name="company" expr="eval: __repo__(Company).all().fetchOne()"/> 
@@ -110,13 +110,13 @@
          <!-- <attribute name="hidden" for="BtnCancelled" expr="eval: status == 'paid'"/> -->
       </action-attrs>
       
-     <action-method name="action-onChange-party-update-partyContactAndAddresses" model="com.axelor.gst.db.Invoice">
-        <call class="com.axelor.gst.Controller.AddressController" method="setPrimaryContactAndAddresses"/>
+     <action-method name="action-onChange-party-update-InvoiceAddresses" model="com.axelor.gst.db.Invoice">
+        <call class="com.axelor.gst.Controller.AddressController" method="setInvoiceAddresses"/>
      </action-method>
      
-       <!-- <action-method name="action-onChange-update-shipping-field" model="com.axelor.gst.db.Invoice">
-           <call class="com.axelor.gst.Controller.PartyController" method="shippingAddress"/>
-       </action-method> -->
+      <action-method name="action-onChange-update-shippingAddress" model="com.axelor.gst.db.Invoice">
+           <call class="com.axelor.gst.Controller.AddressController" method="setShippingAddress"/>
+       </action-method> 
      
      
          <action-method name="action-OnSave-update-defaults-fields" model="com.axelor.gst.db.Invoice">

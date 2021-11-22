@@ -24,6 +24,7 @@ public class InvoiceLineController {
 		  invoiceLineService.getIgstSgstCgstAndGrossAmount(invoice, invoiceLine);
 		 
 		  response.setValue("igst", invoiceLine.getIgst());
+		 // System.out.println(invoiceLine.getIgst());
 		  response.setValue("sgst", invoiceLine.getSgst());
 		  response.setValue("cgst", invoiceLine.getCgst());
 		  response.setValue("grossAmount", invoiceLine.getGrossAmount());

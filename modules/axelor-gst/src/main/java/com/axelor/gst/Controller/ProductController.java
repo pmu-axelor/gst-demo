@@ -30,56 +30,53 @@ public class ProductController {
 	    public void getInvoiceForm(ActionRequest request, ActionResponse response) {
 		
 		    //  System.out.println(request.getContext().entrySet());
-		   
-		    
-			List<Integer> ids = (List<Integer>) request.getContext().get("_ids");
-		    System.out.println(ids);
-		    
-		   // Beans.get(ProductService.class).createInvoice(ids);       
-		   
-		   ProductRepository pRepo = Beans.get(ProductRepository.class);
-	
-		   InvoiceRepository invRepo = Beans.get(InvoiceRepository.class);
-		         //System.out.println(invRepo.all().fetch());           
 		     
-		     CompanyRepository cmpRepo = Beans.get(CompanyRepository.class);
-		     PartyRepository prtyRepo = Beans.get(PartyRepository.class);
-		     Company cmpany = cmpRepo.all().fetchOne();
-		     Party party = prtyRepo.all().fetchOne();
+		  
 		    
-		 
+			 List<Integer> ids = (List<Integer>) request.getContext().get("_ids");
+		     System.out.println(ids);
 		     
-		      Invoice invoice = new Invoice();    
-		      Product product = new Product();
-		      invoice.setInvoiceAddress(party.getAddress().get(0));
-		      invoice.setCompany(cmpany);
-		      invoice.setParty(party);
-		      if(ids != null) {
-		      for(Integer l : ids){
-		    	      product = pRepo.find(Long.valueOf(l));
-		    	      System.out.println(product);
-		    	      InvoiceLine invcLine = new InvoiceLine();
-		    	      invcLine.setProduct(product);
-		    	      invcLine.setHsbn(product.getHsbn());
-		    	      invcLine.setItem(product.getCode()+"-"+product.getName());
-		    	      invcLine.setGstRate(product.getGstRate());
-		    	      invcLine.setPrice(product.getSalePrice());
-		    	       //lines.add(invcLine);
-		    	      invoice.addInvoiceItem(invcLine);
-		    	    }
+		     Invoice invoice = new Invoice();
 		     
-		         //invoice.setInvoiceItems(lines);
-		        
-		         
-		         invRepo.save(invoice); 
-		      } 
-		      System.out.println(product.getId());
+		     Beans.get(ProductService.class).createInvoice(ids,invoice);
+				/*
+				 * ProductRepository pRepo = Beans.get(ProductRepository.class);
+				 * 
+				 * InvoiceRepository invRepo = Beans.get(InvoiceRepository.class);
+				 * //System.out.println(invRepo.all().fetch());
+				 * 
+				 * CompanyRepository cmpRepo = Beans.get(CompanyRepository.class);
+				 * PartyRepository prtyRepo = Beans.get(PartyRepository.class); Company cmpany =
+				 * cmpRepo.all().fetchOne(); Party party = prtyRepo.all().fetchOne();
+				 * 
+				 * 
+				 * 
+				 * Invoice invoice = new Invoice(); Product product = new Product();
+				 * invoice.setInvoiceAddress(party.getAddress().get(0));
+				 * 
+				 * invoice.setStatus("draft"); invoice.setCompany(cmpany);
+				 * invoice.setParty(party); invoice.setPartyContact(party.getContact().get(0));
+				 * // invoice.setDates(); if(ids != null) { for(Integer l : ids){ product =
+				 * pRepo.find(Long.valueOf(l)); System.out.println(product); InvoiceLine
+				 * invcLine = new InvoiceLine(); invcLine.setProduct(product);
+				 * invcLine.setHsbn(product.getHsbn());
+				 * invcLine.setItem(product.getCode()+"-"+product.getName());
+				 * invcLine.setGstRate(product.getGstRate());
+				 * invcLine.setPrice(product.getSalePrice());
+				 * 
+				 * invoice.addInvoiceItem(invcLine); }
+				 * 
+				 * //invoice.setInvoiceItems(lines);
+				 * 
+				 * invRepo.save(invoice); }
+				 */
+		    //  System.out.println(product.getId());
 		      System.out.println(invoice);
                
 		      ActionViewBuilder actionViewBuilder = ActionView.define("Invoices")
-			                                   .model(Invoice.class.getName())
-			                                   .add("form","invoice-form")
-			                                    .context("_showRecord",invoice.getId());
+			                                        .model(Invoice.class.getName())
+			                                        .add("form","invoice-form")
+			                                        .context("_showRecord",invoice.getId());
 	       response.setView(actionViewBuilder.map());
 		    // response.setValue("invoiceItems", invcLine);
 	  }

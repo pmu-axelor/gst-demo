@@ -12,6 +12,7 @@ import com.axelor.meta.schema.actions.ActionView;
 import com.axelor.meta.schema.actions.ActionView.ActionViewBuilder;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
+import com.axelor.rpc.Context;
 
 public class InvoiceController {
 	
@@ -34,8 +35,20 @@ public class InvoiceController {
     }
       
       public void setInvoiceItems(ActionRequest request, ActionResponse response) {
+    	     
+    	  Context context = request.getContext();
+ 		  Invoice invoice = context.asType(Invoice.class);
+ 	  // InvoiceLine invoiceLine = context.getParent().asType(InvoiceLine.class);
+ 		  
+ 		     Beans.get(InvoiceService.class).getInvoiceItems(invoice);
+ 		    
+ 		     response.setValue("netAmount", invoice.getNetAmount());
+			 response.setValue("netIgst", invoice.getNetIgst());
+			 response.setValue("netSgst", invoice.getNetSgst());
+			 response.setValue("netCsgt", invoice.getNetCsgt());
+			 response.setValue("grossAmount",invoice.getGrossAmount());
     	  
-    	  List<InvoiceLine> invoiceItems = request.getContext().asType(Invoice.class).getInvoiceItems();
+    	 /* List<InvoiceLine> invoiceItems = request.getContext().asType(Invoice.class).getInvoiceItems();
     	  
     	      Beans.get(InvoiceService.class).getInvoiceItems(invoiceItems);
     	     
@@ -45,7 +58,7 @@ public class InvoiceController {
   				 response.setValue("netSgst", in.getSgst());
   				 response.setValue("netCsgt", in.getCgst());
   				 response.setValue("grossAmount",in.getGrossAmount());
-    	      }
+    	      }*/
     	  
     		   
     			    /*response.setValue("netAmount", netValues[0]);

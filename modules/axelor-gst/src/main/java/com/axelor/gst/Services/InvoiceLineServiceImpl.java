@@ -19,19 +19,18 @@ public class InvoiceLineServiceImpl implements InvoiceLineService {
 		BigDecimal gstDivisior = new BigDecimal("100");
 		BigDecimal divisior = new BigDecimal("2");
 
-		
-		if (!(invoiceAddress.getState()).equals((companyAddress.getState()))) {
-			    BigDecimal igstCal = (gstRate.divide(gstDivisior)).multiply(netAmount);
-			    invoiceLine.setIgst(igstCal);
-			    invoiceLine.setGrossAmount(netAmount.add(igstCal));
-		}
-		
-		else if((invoiceAddress.getState()).equals((companyAddress.getState()))) {
+		 if((invoiceAddress.getState()).equals((companyAddress.getState()))) {
 			  BigDecimal sgstAndcgst = ((gstRate.divide(gstDivisior)).multiply(netAmount)).divide(divisior);
 		         invoiceLine.setCgst(sgstAndcgst);
 		         invoiceLine.setSgst(sgstAndcgst);
 		         invoiceLine.setGrossAmount(netAmount.add(sgstAndcgst.add(sgstAndcgst)));
     	}
+
+		 else if(!(invoiceAddress.getState()).equals((companyAddress.getState()))) {
+		           BigDecimal igstCal = (gstRate.divide(gstDivisior)).multiply(netAmount);
+				    invoiceLine.setIgst(igstCal);
+				    invoiceLine.setGrossAmount(netAmount.add(igstCal));
+			}
 		
       /*if (!(invoiceAddress.getState().getName()).equals((companyAddress.getState().getName()))) {
 			

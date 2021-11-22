@@ -1,6 +1,6 @@
 package com.axelor.gst.Services;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.axelor.gst.db.Company;
@@ -19,7 +19,7 @@ public class ProductServiceImpl implements ProductService {
 
 	     @Override
 	     @Transactional
-	     public void createInvoice(List<Integer> ids) {
+	     public void createInvoice(List<Integer> ids,Invoice invoice) {
 		
 		 ProductRepository pRepo = Beans.get(ProductRepository.class);
 		 CompanyRepository cmpRepo = Beans.get(CompanyRepository.class);
@@ -28,10 +28,18 @@ public class ProductServiceImpl implements ProductService {
 	     Party party = prtyRepo.all().fetchOne();
 	    
 	     InvoiceRepository invRepo = Beans.get(InvoiceRepository.class);
-	     
-	     Invoice invoice = new Invoice();    
-	     List<InvoiceLine> lines = new ArrayList<>();
-	     Product product = new Product();
+	      
+		
+	     // Invoice invoice = new Invoice();    
+	      Product product = new Product();
+	      invoice.setInvoiceAddress(party.getAddress().get(0));
+	      invoice.setShippingAddress(party.getAddress().get(0));
+	      
+	      invoice.setStatus("draft"); 
+	      invoice.setDates(LocalDateTime.now());
+	      invoice.setCompany(company);
+	      invoice.setParty(party);
+	      invoice.setPartyContact(party.getContact().get(0));
 	
 	     for(Integer l : ids){
 	    	      product = pRepo.find(Long.valueOf(l));
@@ -42,10 +50,10 @@ public class ProductServiceImpl implements ProductService {
 	    	      invcLine.setItem(product.getCode()+"-"+product.getName());
 	    	      invcLine.setGstRate(product.getGstRate());
 	    	      invcLine.setPrice(product.getSalePrice());
-	    	       lines.add(invcLine);
+	    	      invoice.addInvoiceItem(invcLine);
 	    	    }
 	     
-	         invoice.setInvoiceItems(lines);
+	        // invoice.setInvoiceItems(lines);
 	         invoice.setCompany(company);
 	         invoice.setParty(party);
 	         

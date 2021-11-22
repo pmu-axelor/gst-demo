@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.axelor.common.StringUtils;
+import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.db.Sequence;
 import com.axelor.gst.db.repo.SequenceRepository;
@@ -12,10 +13,11 @@ import com.axelor.meta.db.MetaModel;
 import com.axelor.meta.db.repo.MetaModelRepository;
 import com.google.inject.persist.Transactional;
 
+
 public class InvoiceServiceImpl implements InvoiceService {
 
 	@Override
-	public void getInvoiceItems(List<InvoiceLine> invoiceItems) {
+	public void getInvoiceItems(Invoice invoice) {
 		
 		BigDecimal bigDecimal = new BigDecimal("0");
 		BigDecimal netAmount = bigDecimal;
@@ -24,19 +26,36 @@ public class InvoiceServiceImpl implements InvoiceService {
 		BigDecimal netCsgt = bigDecimal;
 		BigDecimal grossAmount = bigDecimal;
 		
-		for (InvoiceLine in : invoiceItems) {
+		 List<InvoiceLine> invoiceLine = invoice.getInvoiceItems();
+		
+		 for(InvoiceLine invcLine : invoiceLine ) {
+			netAmount = netAmount.add(invcLine.getNetAmount());
+			netIgst = netIgst.add(invcLine.getIgst());	
+			netSgst = netSgst.add(invcLine.getSgst());
+			netCsgt = netCsgt.add(invcLine.getCgst());	
+			grossAmount = grossAmount.add(invcLine.getGrossAmount());
+		 }
+		  
+		  invoice.setNetAmount(netAmount);
+		  invoice.setNetIgst(netIgst);
+		  invoice.setNetSgst(netSgst);
+		  invoice.setNetCsgt(netCsgt);
+		  invoice.setGrossAmount(grossAmount);
+		
+		
+     	/*for (Invoice in : invoiceItems) {
 			netAmount = netAmount.add(in.getNetAmount());
 			in.setNetAmount(netAmount);
-			netIgst = netIgst.add(in.getIgst());
-			in.setIgst(netIgst);
-			netSgst = netSgst.add(in.getSgst());
-			in.setSgst(netSgst);
-			netCsgt = netCsgt.add(in.getCgst());
-			in.setCgst(netCsgt);
+			netIgst = netIgst.add(invcLine.getIgst());
+			in.setNetIgst(netIgst);
+			netSgst = netSgst.add(invcLine.getSgst());
+			in.setNetSgst(netSgst);
+			netCsgt = netCsgt.add(invcLine.getCgst());
+			in.setNetCsgt(netCsgt);
 			grossAmount = grossAmount.add(in.getGrossAmount());
 			in.setGrossAmount(grossAmount);
 
-		}
+		}*/
 		
 		
 		
@@ -49,8 +68,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 		  
 	//	return totalValues;
 		
-
-	}
+   }
 
 	@Override
 	@Transactional
@@ -78,8 +96,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 				}else {
 					    sequence = prefix+num;
 				 }
-			  System.out.println(seq.getNextNumber());
-			  nextNumber = nextNumber+1;
+			    nextNumber = nextNumber+1;
 				seq.setNextNumber(nextNumber.toString());
 				seqRepo.save(seq);
 		}
@@ -102,5 +119,6 @@ public class InvoiceServiceImpl implements InvoiceService {
 		
 		return sequence;
 	}
+
 
 }

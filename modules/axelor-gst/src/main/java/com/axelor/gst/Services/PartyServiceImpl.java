@@ -41,8 +41,8 @@ public class PartyServiceImpl implements PartyService {
 				}else {
 					    sequence = prefix+num;
 				 }
-			  System.out.println(seq.getNextNumber());
-			  nextNumber = nextNumber+1;
+			
+			    nextNumber = nextNumber+1;
 				seq.setNextNumber(nextNumber.toString());
 				seqRepo.save(seq);
 		}
