@@ -7,7 +7,7 @@
  <grid model="com.axelor.gst.db.Product" title="Products" name="product-grid">
                                                                                     
   <toolbar>
-      <button onClick="com.axelor.gst.Controller.ProductController:getInvoiceForm" name="CreateInvoiceBtn" title="Create Invoice" icon="fas fa-file-invoice-dollar" />
+      <button onClick="com.axelor.gst.controller.ProductController:getInvoiceForm" name="CreateInvoiceBtn" title="Create Invoice" icon="fas fa-file-invoice-dollar" />
       <button name="btnPrint" icon="fa-print" title="Print" onClick="act1"/>
   </toolbar>
      <field name="name"/>

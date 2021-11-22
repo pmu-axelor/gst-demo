@@ -1,4 +1,4 @@
-package com.axelor.gst.Services;
+package com.axelor.gst.services;
 
 public interface PartyService {
 	  

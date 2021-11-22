@@ -1,10 +1,9 @@
-package com.axelor.gst.Controller;
+package com.axelor.gst.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Locale;
 
-import com.axelor.gst.Services.PartyService;
 import com.axelor.gst.db.Address;
 import com.axelor.gst.db.Contact;
 import com.axelor.gst.db.Invoice;
@@ -12,6 +11,7 @@ import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.db.Party;
 import com.axelor.gst.db.Sequence;
 import com.axelor.gst.db.repo.SequenceRepository;
+import com.axelor.gst.services.PartyService;
 import com.axelor.inject.Beans;
 import com.axelor.meta.db.MetaModel;
 import com.axelor.meta.db.repo.MetaModelRepository;

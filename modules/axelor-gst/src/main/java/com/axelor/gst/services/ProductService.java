@@ -1,4 +1,4 @@
-package com.axelor.gst.Services;
+package com.axelor.gst.services;
 
 import java.util.List;
 
@@ -8,6 +8,6 @@ import com.google.inject.persist.Transactional;
 public interface ProductService {
 	
    @Transactional	
-   public void createInvoice(List<Integer> ids,Invoice invoice);
+   public Invoice createInvoice(List<Integer> ids);
    
 }

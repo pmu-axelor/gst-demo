@@ -80,7 +80,7 @@
         </cards>
         
         <action-method name="action-onSave-get-sequence" model="com.axelor.gst.db.Party">
-            <call class="com.axelor.gst.Controller.PartyController" method="getSequenceSet" />
+            <call class="com.axelor.gst.controller.PartyController" method="getSequenceSet" />
         </action-method>
         
    </object-views>      

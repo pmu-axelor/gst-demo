@@ -1,4 +1,4 @@
-package com.axelor.gst.Services;
+package com.axelor.gst.services;
 
 import com.axelor.common.StringUtils;
 import com.axelor.gst.db.Sequence;

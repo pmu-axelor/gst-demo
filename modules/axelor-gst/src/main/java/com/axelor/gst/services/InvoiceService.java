@@ -1,4 +1,4 @@
-package com.axelor.gst.Services;
+package com.axelor.gst.services;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -9,7 +9,7 @@ import com.google.inject.persist.Transactional;
 
 public interface InvoiceService {
 	
-    public void getInvoiceItems(Invoice invoice);
+    public void computeInvoices(Invoice invoice);
     @Transactional
     public String setSequence() throws Exception;
     

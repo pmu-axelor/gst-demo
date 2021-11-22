@@ -1,4 +1,4 @@
-package com.axelor.gst.Services;
+package com.axelor.gst.services;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,7 +17,7 @@ import com.google.inject.persist.Transactional;
 public class InvoiceServiceImpl implements InvoiceService {
 
 	@Override
-	public void getInvoiceItems(Invoice invoice) {
+	public void computeInvoices(Invoice invoice) {
 		
 		BigDecimal bigDecimal = new BigDecimal("0");
 		BigDecimal netAmount = bigDecimal;
@@ -42,31 +42,6 @@ public class InvoiceServiceImpl implements InvoiceService {
 		  invoice.setNetCsgt(netCsgt);
 		  invoice.setGrossAmount(grossAmount);
 		
-		
-     	/*for (Invoice in : invoiceItems) {
-			netAmount = netAmount.add(in.getNetAmount());
-			in.setNetAmount(netAmount);
-			netIgst = netIgst.add(invcLine.getIgst());
-			in.setNetIgst(netIgst);
-			netSgst = netSgst.add(invcLine.getSgst());
-			in.setNetSgst(netSgst);
-			netCsgt = netCsgt.add(invcLine.getCgst());
-			in.setNetCsgt(netCsgt);
-			grossAmount = grossAmount.add(in.getGrossAmount());
-			in.setGrossAmount(grossAmount);
-
-		}*/
-		
-		
-		
-		/*BigDecimal[] totalValues = new BigDecimal[5];
-		totalValues[0] = netAmount;
-		totalValues[1] = netIgst;
-		totalValues[2] = netSgst;
-		totalValues[3] = netCsgt;
-		totalValues[4] = grossAmount;*/
-		  
-	//	return totalValues;
 		
    }
 

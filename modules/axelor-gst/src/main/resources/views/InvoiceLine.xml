@@ -21,11 +21,11 @@
   
   <form model="com.axelor.gst.db.InvoiceLine" title="InvoiceLine" name="invoiceLine-form"> <!-- onSave="action-onSave-update-igst" -->
       <panel title="InvoiceLine">
-     <field name="product" onChange="action-onChange-update-item,action-onGroup-for-all-actions"/>
+     <field name="product" onChange="action-onChange-update-item,action-onGroup-to-compute"/>
      <field name="hsbn"/>
      <field name="item"/>
-     <field name="qty" onChange="action-onGroup-for-all-actions" />
-     <field name="price" onChange="action-onGroup-for-all-actions"/>
+     <field name="qty" onChange="action-onGroup-to-compute" />
+     <field name="price" onChange="action-onGroup-to-compute"/>
      <field name="netAmount" />  
      <field name="gstRate"/>
      <field name="igst"/>
@@ -35,9 +35,9 @@
       </panel>
   </form>
        
-        <action-group name="action-onGroup-for-all-actions" >
+        <action-group name="action-onGroup-to-compute" >
                <action name="action-onChange-priceandQuantity-update-netAmout"/>
-               <action name="action-onChange-update-igst-sgastAndcgst-grossAmount"/>
+               <action name="action-onChange-compute-invoiceLines"/>
         </action-group>
        
            
@@ -50,19 +50,10 @@
        
        <action-attrs name="action-onChange-priceandQuantity-update-netAmout">
           <attribute name="value" for="netAmount" expr="eval: qty*price"/>
-          <!-- <attribute name="value" for="igst" expr="eval: netAmount"/> -->
+        
        </action-attrs>
        
-       <action-method name="action-onChange-update-igst-sgastAndcgst-grossAmount" model="com.axelor.gst.db.InvoiceLine">
-           <call class="com.axelor.gst.Controller.InvoiceLineController" method="computeIgstSgstCgstAndGrossAmount"/>
+       <action-method name="action-onChange-compute-invoiceLines" model="com.axelor.gst.db.InvoiceLine">
+           <call class="com.axelor.gst.controller.InvoiceLineController" method="computeInvoiceLine"/>
        </action-method> 
-        
-       <!--  <action-method name="action-onChange-update-cgst-n-sgst">
-            <call class="com.axelor.gst.Controller.InvoiceLineController" method="setSGSTnCGST"/>
-        </action-method>
-        
-        <action-method name="action-onChange-update-grossAmount">
-            <call class="com.axelor.gst.Controller.InvoiceLineController" method="setGrossAmount"/>
-        </action-method>  -->
-        
  </object-views>      
