@@ -11,10 +11,22 @@ import com.axelor.gst.db.repo.SequenceRepository;
 import com.axelor.inject.Beans;
 import com.axelor.meta.db.MetaModel;
 import com.axelor.meta.db.repo.MetaModelRepository;
+import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
 
 public class InvoiceServiceImpl implements InvoiceService {
+	
+	protected MetaModelRepository metaModel;
+	protected SequenceRepository sequenceRepository;
+	
+	@Inject
+	public InvoiceServiceImpl(MetaModelRepository metaModel,SequenceRepository sequenceRepository) {
+		
+		this.metaModel = metaModel;
+		this.sequenceRepository = sequenceRepository;
+		
+	}
 
 	@Override
 	public void computeInvoices(Invoice invoice) {
@@ -50,11 +62,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 	public String setSequence() throws Exception {
 		String sequence = "";
 		
-		MetaModelRepository metaModel = Beans.get(MetaModelRepository.class);
 		MetaModel m = metaModel.findByName("Invoice");
-		SequenceRepository seqRepo = Beans.get(SequenceRepository.class);
-		
-		Sequence seq = seqRepo.all().filter("self.model = ? ",m).fetchOne();
+		Sequence seq = sequenceRepository.all().filter("self.model = ? ",m).fetchOne();
 		
 		String prefix = seq.getPrefix();
 		String suffix = seq.getSuffix();
@@ -73,12 +82,10 @@ public class InvoiceServiceImpl implements InvoiceService {
 				 }
 			    nextNumber = nextNumber+1;
 				seq.setNextNumber(nextNumber.toString());
-				seqRepo.save(seq);
+				sequenceRepository.save(seq);
 		}
 	
-		
-		
-     else if(seq.getNextNumber() != null) {
+	  else if(seq.getNextNumber() != null) {
 		      Integer nextNumber = Integer.parseInt(seq.getNextNumber());
 		      String  num = String.format("%0" + padding + "d", nextNumber);
 		if(!StringUtils.isBlank(suffix)) {
@@ -89,7 +96,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 		
 		  nextNumber = nextNumber+1;
 		  seq.setNextNumber(nextNumber.toString());
-		  seqRepo.save(seq);
+		  sequenceRepository.save(seq);
 	}
 		
 		return sequence;

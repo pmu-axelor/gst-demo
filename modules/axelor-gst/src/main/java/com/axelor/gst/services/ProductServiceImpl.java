@@ -22,15 +22,22 @@ public class ProductServiceImpl implements ProductService {
 	    protected CompanyRepository companyRepository;
 	    protected PartyRepository partyRepository; 
 	    protected InvoiceRepository invoiceRepository;
+	    protected AddressServiceImpl addressService;
+	    protected InvoiceLineService invoiceLineService;
+	    protected InvoiceService invoiceService;
 	   
 	    @Inject
 	    public ProductServiceImpl(ProductRepository productRepository,CompanyRepository companyRepository,
-	    		PartyRepository partyRepository,InvoiceRepository invoiceRepository) {
+	    		PartyRepository partyRepository,InvoiceRepository invoiceRepository,AddressServiceImpl addressService
+	    		,InvoiceLineService invoiceLineService,InvoiceService invoiceService) {
 	    	
 	    	 this.productRepository = productRepository;
 	    	 this.companyRepository = companyRepository;
 	    	 this.partyRepository = partyRepository;
 	    	 this.invoiceRepository = invoiceRepository;
+	    	 this.addressService = addressService;
+	    	 this.invoiceLineService = invoiceLineService;
+	    	 this.invoiceService = invoiceService;
 	    	 
 	     }  
 
@@ -38,39 +45,21 @@ public class ProductServiceImpl implements ProductService {
 	     @Transactional
 	     public Invoice createInvoice(List<Integer> ids) {
 		
-				/*
-				 * ProductRepository pRepo = Beans.get(ProductRepository.class);
-				 * CompanyRepository cmpRepo = Beans.get(CompanyRepository.class);
-				 * PartyRepository prtyRepo = Beans.get(PartyRepository.class);
-				 */
-	    
-	    
-	    // InvoiceRepository invRepo = Beans.get(InvoiceRepository.class);
 	      
-	    	 Company company = companyRepository.all().fetchOne();
-		     Party party = partyRepository.all().fetchOne();
-	         Invoice invoice = new Invoice();    
-	         Product product = new Product();
-			/*
-			 * invoice.setInvoiceAddress(party.getAddress().get(0));
-			 * invoice.setShippingAddress(party.getAddress().get(0));
-			 */
-	      
+	      Company company = companyRepository.all().fetchOne();
+		  Party party = partyRepository.all().fetchOne();
+	      Invoice invoice = new Invoice();    
+	      Product product = new Product();
+		 
 	      invoice.setStatus("draft"); 
 	      invoice.setDates(LocalDateTime.now());
 	      invoice.setCompany(company);
 	      invoice.setParty(party);
-	      //invoice.setPartyContact(party.getContact().get(0));
-	      AddressServiceImpl addressService = Beans.get(AddressServiceImpl.class);
 	      addressService.getInvoiceAddresses(invoice);
 	      addressService.getShippingAddresses(invoice);
-	      InvoiceLineService invoiceLineService = Beans.get(InvoiceLineService.class);
-	      InvoiceService invoiceService = Beans.get(InvoiceService.class);
-	      System.out.println(invoiceService);
-	
-	     for(Integer l : ids){
+	    
+	      for(Integer l: ids){
 	    	      product = productRepository.find(Long.valueOf(l));
-	    	      System.out.println(product);
 	    	      InvoiceLine invcLine = new InvoiceLine();
 	    	      invcLine.setProduct(product);
 	    	      invcLine.setHsbn(product.getHsbn());
@@ -79,16 +68,14 @@ public class ProductServiceImpl implements ProductService {
 	    	      invcLine.setPrice(product.getSalePrice());
 	    	      invcLine.setQty(1);
 	    	      invoiceLineService.computeInvoiceLinesItems(invoice, invcLine);
-	    	   //   invoiceService.computeInvoices(invoice);
 	    	      invoice.addInvoiceItem(invcLine);
 	    	      invoiceService.computeInvoices(invoice);
 	    	      
 	    	    }
 	     
-	         invoiceRepository.save(invoice);
+	           invoiceRepository.save(invoice);
 	         
-	         
-	         return invoice;	
+	           return invoice;	
 	    
 	     }
 

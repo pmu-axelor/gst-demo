@@ -22,12 +22,13 @@ public class InvoiceLineController {
 		
 		  InvoiceLineService invoiceLineService = Beans.get(InvoiceLineService.class);
 		  invoiceLineService.computeInvoiceLinesItems(invoice, invoiceLine);
-		 
+			 
 		  response.setValue("igst", invoiceLine.getIgst());
 		  response.setValue("sgst", invoiceLine.getSgst());
 		  response.setValue("cgst", invoiceLine.getCgst());
 		  response.setValue("grossAmount", invoiceLine.getGrossAmount());
-			
+		  
+		
 		  
 	}
 
