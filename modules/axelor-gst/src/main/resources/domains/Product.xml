@@ -2,7 +2,7 @@
 <domain-models xmlns="http://axelor.com/xml/ns/domain-models"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
-          http://axelor.com/xml/ns/domain-models/domain-models_5.0.xsd">
+          http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
      
      <module package="com.axelor.gst.db" name="gst"/>
      
@@ -11,12 +11,11 @@
          <string name="name" title="Name" required="true"/>
          <string name="code" title="Code" required="true"/>
          <string name="hsbn" title="HSBN" />
-         <many-to-one name="category" ref="ProductCategory" title="Category"/>
-         <decimal name="salePrice" title="Sale price"/>
-         <decimal name="costPrice" title="Cost price"/>
-         <!-- <binary name="image" title="Image"/> -->
+         <many-to-one name="category" ref="com.axelor.gst.db.ProductCategory" title="Category"/>
+         <decimal name="saleprice" title="Sale price"/>
+         <decimal name="costprice" title="Cost price"/>
          <many-to-one name="image" title="Image" ref="com.axelor.meta.db.MetaFile"/>
-         <decimal name="gstRate" title="GST rate"/>
+         <decimal name="gstrate" title="GST rate"/>
          
        </entity>
      

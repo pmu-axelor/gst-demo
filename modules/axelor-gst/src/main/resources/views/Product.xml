@@ -7,28 +7,28 @@
  <grid model="com.axelor.gst.db.Product" title="Products" name="product-grid">
                                                                                     
   <toolbar>
-      <button onClick="com.axelor.gst.controller.ProductController:getInvoiceForm" name="CreateInvoiceBtn" title="Create Invoice" icon="fas fa-file-invoice-dollar" />
-      <button name="btnPrint" icon="fa-print" title="Print" onClick="act1"/>
+      <button onClick="com.axelor.gst.web.ProductController:getInvoiceForm" name="createInvoiceBtn" title="Create Invoice" icon="fas fa-file-invoice-dollar" />
+     <!--  <button name="printBtn" icon="fa-print" title="Print" onClick="act1"/> -->  <!-- not in use right now but needed -->
   </toolbar>
      <field name="name"/>
      <field name="code"/>
      <field name="hsbn"/>
-     <field name="category"/>
-     <field name="salePrice"/>
-     <field name="costPrice"/>
-     <field name="gstRate"/>
+     <field name="category" form-view="product-category-form" grid-view="product-category-grid"/>
+     <field name="saleprice"/>
+     <field name="costprice"/>
+     <field name="gstrate"/>
  </grid>      
        
   <form model="com.axelor.gst.db.Product" title="Product" name="product-form">
-     <panel title="Products">
+     <panel name="productPanel">
       <field name="image" widget="image" colSpan="8"/>
      <field name="name"/>
      <field name="code"/>
      <field name="hsbn"/>
-     <field name="category" onChange="action.category.change"/>
-     <field name="salePrice"/>
-     <field name="costPrice"/>
-     <field name="gstRate"/>
+     <field name="category" onChange="action-product-update-category-on-change"/>
+     <field name="saleprice"/>
+     <field name="costprice"/>
+     <field name="gstrate"/>
      </panel>
  </form>
  
@@ -37,9 +37,9 @@
       <field name="image" widget="image" colSpan="8"/>
        <field name="name"/>
        <field name="category"/>
-       <field name="salePrice"/>
-       <field name="costPrice"/>
-       <field name="gstRate"/>
+       <field name="saleprice"/>
+       <field name="costprice"/>
+       <field name="gstrate"/>
        <template>
           <![CDATA[
                <div class="span4 card-image">
@@ -48,19 +48,15 @@
                </div>
              <div class="span8">
                 <h5>Category: {{category.name}}</h5>
-                <h5>Sale price: {{salePrice}}</h5>
-                <h5>Cost price: {{costPrice}}</h5>
-                <h5>GST rate: {{gstRate}}</h5>
+                <h5>Sale price: {{saleprice}}</h5>
+                <h5>Cost price: {{costprice}}</h5>
+                <h5>GST rate: {{gstrate}}</h5>
              </div>   
          ]]>
        </template>
  </cards>
-      <action-attrs name="action.category.change" model="com.axelor.gst.db.ProductCategory">
-          <attribute name="value" for="gstRate" expr="eval: __this__.category.gstRate"/>
+      <action-attrs name="action-product-update-category-on-change" model="com.axelor.gst.db.ProductCategory">
+          <attribute name="value" for="gstrate" expr="eval: category.gstrate"/> 
        </action-attrs>
-     
-    <!--  <action-method name="action-createInvoiceForm">
-          <call class="com.axelor.gst.Controller.ProductController" method="getInvoiceForm"/>
-     </action-method> -->
        
  </object-views>     

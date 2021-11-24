@@ -2,7 +2,7 @@
 <domain-models xmlns="http://axelor.com/xml/ns/domain-models"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
-          http://axelor.com/xml/ns/domain-models/domain-models_5.0.xsd">
+          http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
      
      <module package="com.axelor.gst.db" name="gst"/> 
       
@@ -19,7 +19,7 @@
         <decimal name="cgst" title="CGST" readonly="true"/>
         <decimal name="grossAmount" title="Gross Amount" readonly="true"/> 
         
-        <many-to-one name="invoice" ref="Invoice" title="Invoice"/>
+        <many-to-one name="invoice" ref="com.axelor.gst.db.Invoice" title="Invoice"/>
          
       </entity>
    </domain-models>  

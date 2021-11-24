@@ -2,7 +2,7 @@
 <domain-models xmlns="http://axelor.com/xml/ns/domain-models"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
-          http://axelor.com/xml/ns/domain-models/domain-models_5.0.xsd">
+          http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
      
      <module package="com.axelor.gst.db" name="gst"/>
      
@@ -10,7 +10,7 @@
          
          <string name="name" title="Name" required="true"/>
          <string name="code" title="Code" required="true"/>
-         <decimal name="gstRate" title="GST rate"/>
+         <decimal name="gstrate" title="GST Rate"/>
          
       </entity>
      

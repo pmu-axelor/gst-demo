@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://axelor.com/xml/ns/object-views
        http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
        
-  <grid model="com.axelor.gst.db.Company" title="Companys" name="company-grid" >
+  <grid model="com.axelor.gst.db.Company" title="Companies" name="company-grid" >
      
     <field name="name"/> 
     <field name="gstin"/>
@@ -14,32 +14,32 @@
   
    <form model="com.axelor.gst.db.Company" title="Company" name="company-form">
    
-      <panel >
+      <panel name="mainPanel">
           <panel colSpan="4">
              <field name="logo" widget="image"/>
           </panel>
          <panel colSpan="8">
               <field name="name" colSpan="8"/>
-             <field name="contact">
+             <field name="contactList">
             <viewer>
                <![CDATA[
                  Name:{{record.name}}<br>
                  Contact Type:<span class="muted" ng-if="record.type">({{record.type}})</span>
-                 Email:{{record.primaryEmail}} {{record.secondaryEmail}}
+                 Email:{{record.primaryemail}} {{record.secondaryemail}}
               ]]>
             </viewer>
            <editor layout="table" x-show-titles="false">
                <field name="name" colSpan="12"/>
               <field name="type" colSpan="4"/>
-               <field name="primaryEmail" colSpan="12"/>
-               <field name="secondaryEmail" colSpan="12"/>
+               <field name="primaryemail" colSpan="12"/>
+               <field name="secondaryemail" colSpan="12"/>
            </editor>
          </field> 
          </panel>
          
          <field name="gstin"/>
          <field name="address"/>
-         <panel-related field="bankDetails" colSpan="12" grid-view="bankAccount-grid" form-view="bankAccount-form"/>
+         <panel-related field="bankdetailList" colSpan="12" grid-view="bank-account-grid" form-view="bank-account-form"/>
          
       </panel>
    

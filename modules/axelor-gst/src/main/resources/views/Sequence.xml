@@ -12,11 +12,13 @@
        </grid>  
        
        <form model="com.axelor.gst.db.Sequence" title="Sequence" name="sequence-form">
+           <panel name="sequencePanel">
            <field name="prefix"/>
            <field name="suffix"/>
            <field name="padding"/>
            <field name="nextNumber"/>
            <field name="model"/>
+           </panel>
       </form>
        
  </object-views>      

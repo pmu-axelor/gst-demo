@@ -2,21 +2,21 @@
 <domain-models xmlns="http://axelor.com/xml/ns/domain-models"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
-          http://axelor.com/xml/ns/domain-models/domain-models_5.0.xsd">
+          http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
      
      <module package="com.axelor.gst.db" name="gst"/> 
      
       <entity name="Invoice">
          
-         <string name="status" title="Status" selection="select.status.type" readonly="true"/>
-         <many-to-one name="company" ref="Company" required="true" title="Company"/>
+         <string name="status" title="Status" selection="gst.invoice.gst.status.select" readonly="true"/>
+         <many-to-one name="company" ref="com.axelor.gst.db.Company" required="true" title="Company"/>
          <string name="reference" title="Reference" readonly="true"/> 
-         <datetime name="dates" title="Date"/>
+         <datetime name="date" column="date_val" title="Date"/> 
          <integer name="priority" title="Priority"/>
-         <many-to-one name="party" ref="Party" required="true" title="Party"/>
-         <many-to-one name="partyContact" ref="Contact" title="Party contact"/>
-         <many-to-one name="invoiceAddress" ref="Address" required="true" title="Invoice address"/>
-         <many-to-one name="shippingAddress" ref="Address" title="Shipping address"/>
+         <many-to-one name="party" ref="com.axelor.gst.db.Party" required="true" title="Party"/>
+         <many-to-one name="partyContact" ref="com.axelor.gst.db.Contact" title="Party contact"/>
+         <many-to-one name="invoiceAddress" ref="com.axelor.gst.db.Address" required="true" title="Invoice address"/>
+         <many-to-one name="shippingAddress" ref="com.axelor.gst.db.Address" title="Shipping address"/>
          <boolean name="useInvoiceAddressAsShipping" title="Use invoice address as shipping" default="true"/>
          <decimal name="netAmount" title="Net Amount" readonly="true"/>
           <decimal name="netIgst" title="Net IGST" readonly="true"/>
@@ -24,7 +24,7 @@
          <decimal name="netSgst" title="Net SGST" readonly="true"/>
          <decimal name="grossAmount" title="Gross Amount" readonly="true"/>
          
-         <one-to-many name="invoiceItems" ref="InvoiceLine" mappedBy="invoice" title="Invoice items"/>
+         <one-to-many name="invoiceitemList" ref="com.axelor.gst.db.InvoiceLine" mappedBy="invoice" title="Invoice items"/>
          
        </entity>
      

@@ -4,17 +4,17 @@
         xsi:schemaLocation="http://axelor.com/xml/ns/object-views
        http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
   
-  <grid model="com.axelor.gst.db.ProductCategory" title="ProductCategories" name="productCategory-grid">
+  <grid model="com.axelor.gst.db.ProductCategory" title="ProductCategories" name="product-category-grid">
      <field name="name"/>
      <field name="code"/>
-     <field name="gstRate"/>
+     <field name="gstrate"/>
   </grid> 
    
-   <form model="com.axelor.gst.db.ProductCategory" title="ProductCategorie" name="productCategory-form">
-      <panel title="Product Category">
+   <form model="com.axelor.gst.db.ProductCategory" title="ProductCategorie" name="product-category-form">
+      <panel name="productcategoryPanel">
            <field name="name"/>
            <field name="code"/>
-           <field name="gstRate"/>
+           <field name="gstrate"/>
       </panel>
    </form>
    

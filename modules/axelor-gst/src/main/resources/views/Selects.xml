@@ -2,32 +2,32 @@
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://axelor.com/xml/ns/object-views
-       http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+       http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
       
-   <selection name="select.gst.address.type">
+   <selection name="gst.address.gst.type.select">
      <option value="default">Default</option>
      <option value="invoice">Invoice</option>
      <option value="shipping">Shipping</option>
      <option value="other">Others</option>
     </selection>
        
-    <selection name="select.contact.type">
+    <selection name="gst.contact.gst.type.select">
        <option value="primary">Primary</option>
        <option value="secondary">Secondary</option>
        <option value="others">Others</option>
     </selection>   
     
-    <selection name="select.bank.type">
+    <selection name="gst.bank-account.gst.type.select">
        <option value="saving">Saving</option>
        <option value="current">Current</option>
     </selection>
        
-    <selection name="select.party.type">
+    <selection name="gst.party.gst.type.select">
         <option value="individual">Individual</option>
         <option value="company">Company</option>
     </selection>   
        
-   <selection name="select.status.type">
+   <selection name="gst.invoice.gst.status.select">
      <option value="draft">Draft</option>
      <option value="validated">Validated</option>
      <option value="paid">Paid</option>

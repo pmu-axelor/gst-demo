@@ -2,16 +2,16 @@
 <domain-models xmlns="http://axelor.com/xml/ns/domain-models"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
-          http://axelor.com/xml/ns/domain-models/domain-models_5.0.xsd">
+          http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
      
      <module package="com.axelor.gst.db" name="gst"/> 
      
      <entity name="BankAccount">
      
         <string name="bank" title="Bank" namecolumn="true"/>
-        <string name="accountNo" title="Account no"/>
+        <string name="accountno" title="Account no"/>
         <string name="ifsc" title="IFSC"/>
-        <string name="type" title="Type" selection="select.bank.type" default="current"/>
+        <string name="type" title="Type" selection="gst.bank-account.gst.type.select" default="current"/>
         <string name="address" title="Address" large="true"/>
          
      </entity>

@@ -10,63 +10,19 @@
      <field name="city"/>
      <field name="state"/>
      <field name="country"/>
-     <field name="pinCode"/>
+     <field name="pincode"/>
   </grid>
    
    <form model="com.axelor.gst.db.Address" title="Address" name="address-form">
-     <panel title="Addresses">
+     <panel name="addressPanel">
         <field name="type" colSpan="12"/>
         <field name="line1"/>
         <field name="line2"/>
         <field name="city"/>
         <field name="state"/>
         <field name="country"/>
-        <field name="pinCode"/>
+        <field name="pincode"/>
     </panel>
     </form>
    
-   
-   
-    <grid model="com.axelor.gst.db.City" title="Citys" name="city-grid">
-       <field name="name"/>
-       <field name="state"/> 
-       <field name="country"/>  
-  </grid> 
-    
-    <form model="com.axelor.gst.db.City" title="City" name="city-form">
-       <panel title="City">
-        <field name="name"/>
-       <field name="state"/> 
-       <field name="country"/>
-       </panel>
-    </form>   
-     
-     
-     
-     <grid model="com.axelor.gst.db.State" title="States" name="state-grid">
-       <field name="name"/>
-       <field name="country"/>  
-  </grid>   
-       
-    <form model="com.axelor.gst.db.State" title="State" name="state-form">
-       <panel title="State">
-        <field name="name"/>
-       <field name="country"/> 
-       </panel>
-    </form>     
-       
-       
-       
-     <grid model="com.axelor.gst.db.Country" title="Countrys" name="country-grid">
-       <field name="name"/>
-  </grid>   
-       
-      <form model="com.axelor.gst.db.Country" title="Country" name="country-form">
-       <panel title="Country">
-        <field name="name"/>
-        </panel>
-    </form>  
-   
-   
-   
-  </object-views>      
+ </object-views>      

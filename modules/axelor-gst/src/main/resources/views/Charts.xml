@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://axelor.com/xml/ns/object-views
        http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
        
-  <chart name="chart-for-unPaid-invoice" title="Invoices of UnPaid Customers">
+  <chart name="chart-for-unpaid-invoice" title="Unpaid invoices per customer">
       <search-fields>
           <field name="fromDate" title="From Date" type="date"/>
           <field name="toDate" title="To Date" type="date"/>
@@ -13,7 +13,7 @@
          <![CDATA[
             SELECT
                   COUNT(self.reference) AS reference,
-                   MONTH(self.dates) AS month,
+                   MONTH(self.date) AS month,
                   _party.name AS customer
             FROM 
                Invoice self
@@ -21,10 +21,10 @@
                  self.party AS _party 
               WHERE
                  self.status = 'validated' AND _party.customer = 't' 
-                AND self.dates BETWEEN :fromDate
+                AND self.date BETWEEN :fromDate
                  AND :toDate
                  GROUP BY 
-                      self.dates,
+                      self.date,
                       _party.name  
                     ORDER BY
                       month   
@@ -35,7 +35,7 @@
     <!--  <config name="colors" value="red,green" /> -->
   </chart>  
    
-   <chart name="chart-for-paid-invoices" title="Paid Invoices">
+   <chart name="chart-for-paid-invoices" title="Paid invoices per category per product">
      <search-fields>
           <field name="fromDte" title="From Date" type="date"/>
           <field name="toDte" title="To Date" type="date"/>
@@ -44,7 +44,7 @@
           <![CDATA[
                 SELECT
                       COUNT(_invoice.reference) AS reference,
-                      MONTH(_invoice.dates) AS month,
+                      MONTH(_invoice.date) AS month,
                      _product.name AS pName,
                      _category.name AS category
                     FROM 
@@ -57,10 +57,10 @@
                         _product.category AS _category
                      WHERE 
                       _invoice.status = 'paid' AND 
-                      _invoice.dates>= :fromDte AND
-                      _invoice.dates<= :toDte
+                      _invoice.date>= :fromDte AND
+                      _invoice.date<= :toDte
                      GROUP BY
-                           _invoice.dates,
+                           _invoice.date,
                             _product.name,
                             _category.name  
                        
@@ -74,17 +74,17 @@
        <dataset type="jpql">
           <![CDATA[
                 SELECT 
-                     Count(self.customer) AS customer,
+                     Count(self.isCustomer) AS customer,
                     _address.state AS state,
                     _state.name AS sName
                 FROM
                      Party self
                 LEFT JOIN 
-                     self.address AS _address
+                     self.addressList AS _address
                 LEFT JOIN 
-                      _address.state as _state   
+                      _address.state as _state    
                 WHERE 
-                     self.customer = 't'
+                     self.isCustomer = 't'
                 GROUP BY
                        _address.state,
                        _state.id,     
@@ -95,7 +95,7 @@
        <series key="customer" groupBy="state" type="pie"/>
    </chart>
    
-   <chart name="chart-for-invoices-per-status" title="invoices per status">
+   <chart name="chart-for-invoices-per-status" title="Invoices per status">
        <dataset type="jpql">
             <![CDATA[
                   SELECT  
@@ -115,7 +115,7 @@
        <series key="amount" groupBy="status" type="bar" title="Amount"/>
    </chart>
    
-   <chart name="chart-for-invoices-per-status-number-of-invoices" title="invoices per status">
+   <chart name="chart-for-invoices-per-status-number-of-invoices" title="Invoices per status">
        <dataset type="jpql">
             <![CDATA[
                   SELECT 

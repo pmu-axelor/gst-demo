@@ -4,17 +4,17 @@
         xsi:schemaLocation="http://axelor.com/xml/ns/object-views
        http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
   
-  <grid model="com.axelor.gst.db.BankAccount" title="BankAccounts" name="bankAccount-grid">
+  <grid model="com.axelor.gst.db.BankAccount" title="Bank Accounts" name="bank-account-grid">
      <field name="bank"/>
-     <field name="accountNo"/>
+     <field name="accountno"/>
      <field name="type"/>
      <field name="address"/>
   </grid> 
        
-   <form model="com.axelor.gst.db.BankAccount" title="BankAccount" name="bankAccount-form">
-     <panel title="Bank Details">
+   <form model="com.axelor.gst.db.BankAccount" title="Bank Account" name="bank-account-form">
+     <panel name="bankdetailPanel">
       <field name="bank"/>
-      <field name="accountNo"/>
+      <field name="accountno"/>
       <field name="ifsc"/>
       <field name="type"/>
       <field name="address"/>

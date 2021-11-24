@@ -2,20 +2,20 @@
 <domain-models xmlns="http://axelor.com/xml/ns/domain-models"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
-          http://axelor.com/xml/ns/domain-models/domain-models_5.0.xsd">
+          http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
      
      <module package="com.axelor.gst.db" name="gst"/> 
      
      <entity name="Party">
      
-     <string name="reference" title="Reference" readonly="true" /> <!-- sequence="Sequence" -->
+     <string name="reference" title="Reference" readonly="true" /> 
      <string name="name" title="Name" required="true"/>
-     <string name="type" title="Type" selection="select.party.type" default="company" required="true"/>
-     <boolean name="customer" title="Customer"/>
-     <boolean name="supplier" title="Supplier"/>
+     <string name="type" title="Type" selection="gst.party.gst.type.select" default="company" required="true"/>
+     <boolean name="isCustomer" title="Customer"/>
+     <boolean name="isSupplier" title="Supplier"/>
      <string name="gstin" title="GSTIN" min="15" max="15"/>
-     <one-to-many name="contact" ref="Contact" title="Contact"/> 
-      <one-to-many ref="Address" name="address" title="Address"/>
+     <one-to-many name="contactList" ref="com.axelor.gst.db.Contact" title="Contact"/> 
+      <one-to-many ref="com.axelor.gst.db.Address" name="addressList" title="Address"/>
       
      </entity>
      
