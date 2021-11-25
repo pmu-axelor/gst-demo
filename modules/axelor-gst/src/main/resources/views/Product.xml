@@ -7,7 +7,7 @@
  <grid model="com.axelor.gst.db.Product" title="Products" name="product-grid">
                                                                                     
   <toolbar>
-      <button onClick="com.axelor.gst.web.ProductController:getInvoiceForm" name="createInvoiceBtn" title="Create Invoice" icon="fas fa-file-invoice-dollar" />
+      <button onClick="action-product-method-to-generate-invoice" name="createInvoiceBtn" title="Create Invoice" icon="fas fa-file-invoice-dollar" />
      <!--  <button name="printBtn" icon="fa-print" title="Print" onClick="act1"/> -->  <!-- not in use right now but needed -->
   </toolbar>
      <field name="name"/>
@@ -58,5 +58,9 @@
       <action-attrs name="action-product-update-category-on-change" model="com.axelor.gst.db.ProductCategory">
           <attribute name="value" for="gstrate" expr="eval: category.gstrate"/> 
        </action-attrs>
+       
+       <action-method name="action-product-method-to-generate-invoice">
+          <call class="com.axelor.gst.web.ProductController" method="getInvoiceForm"/>
+       </action-method>
        
  </object-views>     

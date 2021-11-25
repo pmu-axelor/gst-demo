@@ -14,12 +14,10 @@ public class InvoiceController {
 		Invoice invoice = request.getContext().asType(Invoice.class);
 
 		try {
-			if (invoice.getStatus().equals("validated")) {
-				if (invoice.getReference() == null) {
-					String sequence = Beans.get(InvoiceService.class).setSequence();
-					response.setValue("reference", sequence);
+			if ((invoice.getStatus().equals("validated")) && (invoice.getReference() == null)) {
 
-				}
+				String sequence = Beans.get(InvoiceService.class).setSequence();
+				response.setValue("reference", sequence);
 			}
 		} catch (Exception e) {
 			response.setError("Set sequence of invoice");

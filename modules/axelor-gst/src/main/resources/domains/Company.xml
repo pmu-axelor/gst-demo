@@ -11,7 +11,7 @@
         <many-to-one ref="com.axelor.meta.db.MetaFile" name="logo" title="Logo"/>
         <one-to-many ref="com.axelor.gst.db.Contact" name="contactList" title="Contact"/>
         <string name="gstin" title="GSTIN" min="15" max="15"/>
-        <one-to-many ref="com.axelor.gst.db.BankAccount" name="bankdetailList" title="Bank Details"/>
+        <one-to-many ref="com.axelor.gst.db.BankAccount" name="bankDetailsList" title="Bank details"/>
         <many-to-one ref="com.axelor.gst.db.Address" name="address" title="Address"/>
      </entity>
           

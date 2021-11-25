@@ -25,7 +25,14 @@
          <decimal name="grossAmount" title="Gross Amount" readonly="true"/>
          
          <one-to-many name="invoiceitemList" ref="com.axelor.gst.db.InvoiceLine" mappedBy="invoice" title="Invoice items"/>
+
+		<extra-code><![CDATA[
+		    public static final String STATUS_DRAFT = "draft";
+		]]></extra-code>
          
+       
        </entity>
+       
+       
      
   </domain-models>   

@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://axelor.com/xml/ns/object-views
        http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
      
-  <grid model="com.axelor.gst.db.InvoiceLine" title="InvoiceLines" name="invoice-line-grid">
+  <grid model="com.axelor.gst.db.InvoiceLine" title="Invoice Lines" name="invoice-line-grid">
      <field name="product"/>
      <field name="hsbn"/>
      <field name="item"/>
@@ -19,7 +19,7 @@
      
   </grid>   
   
-  <form model="com.axelor.gst.db.InvoiceLine" title="InvoiceLine" name="invoice-line-form">
+  <form model="com.axelor.gst.db.InvoiceLine" title="Invoice Line" name="invoice-line-form">
       <panel name="invoicelinePanel">
      <field name="product" onChange="action-invoiceline-on-change-product-update-item,action-invoiceline-compute-methods"/>
      <field name="hsbn"/>

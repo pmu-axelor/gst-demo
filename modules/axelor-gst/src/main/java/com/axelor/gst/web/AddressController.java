@@ -33,5 +33,6 @@ public class AddressController {
 			response.setValue("shippingAddress", invoice.getShippingAddress());
 		}
 
-	} 
+	}
+
 }

@@ -8,7 +8,6 @@ import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.db.Sequence;
 import com.axelor.gst.db.repo.SequenceRepository;
-import com.axelor.meta.db.MetaModel;
 import com.axelor.meta.db.repo.MetaModelRepository;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -19,9 +18,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 	protected SequenceRepository sequenceRepository;
 
 	@Inject
-	public InvoiceServiceImpl(MetaModelRepository metaModelRepository, SequenceRepository sequenceRepository) {
+	public InvoiceServiceImpl(SequenceRepository sequenceRepository) {
 
-		this.metaModelRepository = metaModelRepository;
 		this.sequenceRepository = sequenceRepository;
 
 	}
@@ -58,8 +56,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 	public String setSequence() throws Exception {
 		String sequence = "";
 
-		MetaModel metaModel = metaModelRepository.findByName("Invoice");
-		Sequence seq = sequenceRepository.all().filter("self.model = ? ", metaModel).fetchOne();
+		Sequence seq = sequenceRepository.all().filter("self.model.name = ? ", Invoice.class.getSimpleName())
+				.fetchOne();
 
 		String prefix = seq.getPrefix();
 		String suffix = seq.getSuffix();

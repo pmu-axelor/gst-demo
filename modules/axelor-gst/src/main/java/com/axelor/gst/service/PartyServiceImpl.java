@@ -1,9 +1,10 @@
 package com.axelor.gst.service;
 
 import com.axelor.common.StringUtils;
+import com.axelor.gst.db.Party;
 import com.axelor.gst.db.Sequence;
 import com.axelor.gst.db.repo.SequenceRepository;
-import com.axelor.meta.db.MetaModel;
+
 import com.axelor.meta.db.repo.MetaModelRepository;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -14,9 +15,8 @@ public class PartyServiceImpl implements PartyService {
 	protected SequenceRepository sequenceRepository;
 
 	@Inject
-	public PartyServiceImpl(MetaModelRepository metaModelRepository, SequenceRepository sequenceRepository) {
+	public PartyServiceImpl(SequenceRepository sequenceRepository) {
 
-		this.metaModelRepository = metaModelRepository;
 		this.sequenceRepository = sequenceRepository;
 
 	}
@@ -25,17 +25,17 @@ public class PartyServiceImpl implements PartyService {
 	@Transactional
 	public String setSequence() throws Exception {
 
-		MetaModel metaModel = metaModelRepository.findByName("Party");
-		Sequence seq = sequenceRepository.all().filter("self.model = ?", metaModel).fetchOne();
+		Sequence seq = sequenceRepository.all().filter("self.model.name = ?", Party.class.getSimpleName()).fetchOne();
 
 		String sequence = "";
 		String prefix = seq.getPrefix();
 		String suffix = seq.getSuffix();
 		Integer padding = seq.getPadding();
+		String next = seq.getNextNumber();
 
-		if (seq.getNextNumber() == null) {
+		if (next == null) {
 			seq.setNextNumber("1");
-			Integer nextNumber = Integer.parseInt(seq.getNextNumber());
+			Integer nextNumber = Integer.parseInt(next);
 			String num = String.format("%0" + padding + "d", nextNumber);
 
 			if (!StringUtils.isBlank(suffix)) {
@@ -49,8 +49,8 @@ public class PartyServiceImpl implements PartyService {
 			sequenceRepository.save(seq);
 		}
 
-		else if (seq.getNextNumber() != null) {
-			Integer nextNumber = Integer.parseInt(seq.getNextNumber());
+		else if (next != null) {
+			Integer nextNumber = Integer.parseInt(next);
 			String num = String.format("%0" + padding + "d", nextNumber);
 			if (!StringUtils.isBlank(suffix)) {
 				sequence = prefix + num + suffix;

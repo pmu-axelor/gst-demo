@@ -88,15 +88,8 @@
                  <domain>self.status = 'cancelled'</domain>  
            </action-view> 
            
-           
-           <action-view name="action.validated.invoices-for-dashboard" title="Invoice older than one month,Validated And not Paid" model="com.axelor.gst.db.Invoice">
-               <view type="grid" name="invoice-grid"/>
-               <domain>self.status != 'paid' AND month(self.date) = month(now())-1</domain>
-           </action-view> 
           
-        
-     
-     <menuitem title="Party" name="gst-root-party" parent="gst-rootgst-root"/>    
+      <menuitem title="Party" name="gst-root-party" parent="gst-rootgst-root"/>    
           
      <menuitem title="Party" name="gst-party-root-party" parent="gst-root-party" action="action.gst.party"/>  
           <action-view name="action.gst.party" title="Party" model="com.axelor.gst.db.Party">

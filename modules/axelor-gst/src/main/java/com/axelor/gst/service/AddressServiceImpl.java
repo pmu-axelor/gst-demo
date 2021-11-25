@@ -11,47 +11,72 @@ public class AddressServiceImpl implements AddressService {
 	@Override
 	public void getInvoiceAddresses(Invoice invoice) {
 
-		List<Address> addresses = invoice.getParty().getAddressList();
-		invoice.setPartyContact(getPrimaryContact(invoice));
-
-		for (Address address : addresses) {
-			if (address.getType().equals("default")) {
-				invoice.setInvoiceAddress(address);
-			} else if (address.getType().equals("invoice")) {
-				invoice.setInvoiceAddress(address);
-			} else {
-				invoice.setInvoiceAddress(null);
-			}
-
+		if (invoice.getParty() != null) {
+			invoice.setPartyContact(getPrimaryContact(invoice));
+			invoice.setInvoiceAddress(getInvoiceAddress(invoice));
 		}
 	}
 
-	protected Contact getPrimaryContact(Invoice invoice) {
-		List<Contact> contacts = invoice.getParty().getContactList();
-		for (Contact c : contacts) {
-			if (c.getType().equals("primary")) {
-				return c;
+	@Override
+	public void getShippingAddresses(Invoice invoice) {
+
+		invoice.setShippingAddress(getShippingAddress(invoice));
+
+	}
+
+	protected Address getInvoiceAddress(Invoice invoice) {
+		List<Address> addresses = invoice.getParty().getAddressList();
+
+		for (Address address : addresses) {
+			String add = address.getType();
+
+			switch (add) {
+			case "default":
+				return address;
+
+			case "invoice":
+				return address;
+			default:
+				return null;
+
 			}
 		}
 		return null;
 
 	}
 
-	@Override
-	public void getShippingAddresses(Invoice invoice) {
+	protected Contact getPrimaryContact(Invoice invoice) {
+		List<Contact> contacts = invoice.getParty().getContactList();
 
-		List<Address> addresses = invoice.getParty().getAddressList();
-		if (addresses != null) {
-			for (Address address : addresses) {
-				if (address.getType().equals("default")) {
-					invoice.setShippingAddress(address);  
-				} else if (address.getType().equals("shipping")) {
-					invoice.setShippingAddress(address);
-				} else {
-					invoice.setShippingAddress(null);
-				}
+		for (Contact c : contacts) {
+			if ("primary".equals(c.getType())) {
+				return c;
 			}
+
 		}
+		return null;
 
 	}
+
+	protected Address getShippingAddress(Invoice invoice) {
+		List<Address> addresses = invoice.getParty().getAddressList();
+
+		for (Address address : addresses) {
+			String add = address.getType();
+
+			switch (add) {
+			case "default":
+				return address;
+
+			case "shipping":
+				return address;
+			default:
+				return null;
+
+			}
+		}
+		return null;
+
+	}
+
 }

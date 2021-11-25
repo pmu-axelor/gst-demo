@@ -1,6 +1,7 @@
 package com.axelor.gst.service;
 
 import java.time.LocalDateTime;
+
 import java.util.List;
 
 import com.axelor.gst.db.Company;
@@ -47,26 +48,24 @@ public class ProductServiceImpl implements ProductService {
 		Company company = companyRepository.all().fetchOne();
 		Party party = partyRepository.all().fetchOne();
 		Invoice invoice = new Invoice();
-		Product product = new Product();
 
-		invoice.setStatus("draft");
+		invoice.setStatus(InvoiceRepository.STATUS_DRAFT);
 		invoice.setDate(LocalDateTime.now());
 		invoice.setCompany(company);
 		invoice.setParty(party);
 		addressService.getInvoiceAddresses(invoice);
 		addressService.getShippingAddresses(invoice);
-
-		for (Integer l : ids) {
-			product = productRepository.find(Long.valueOf(l));
-			InvoiceLine invcLine = new InvoiceLine();
-			invcLine.setProduct(product);
-			invcLine.setHsbn(product.getHsbn());
-			invcLine.setItem(product.getCode() + "-" + product.getName());
-			invcLine.setGstRate(product.getGstrate());
-			invcLine.setPrice(product.getSaleprice());
-			invcLine.setQty(1);
-			invoiceLineService.computeInvoiceLinesItems(invoice, invcLine);
-			invoice.addInvoiceitemListItem(invcLine);;
+		List<Product> productList = productRepository.all().filter("self.id in ?", ids).fetch();
+		for (Product product : productList) {
+			InvoiceLine invoiceLine = new InvoiceLine();
+			invoiceLine.setProduct(product);
+			invoiceLine.setHsbn(product.getHsbn());
+			invoiceLine.setItem(product.getCode() + "-" + product.getName());
+			invoiceLine.setGstRate(product.getGstrate());
+			invoiceLine.setPrice(product.getSaleprice());
+			invoiceLine.setQty(1);
+			invoiceLineService.computeInvoiceLinesItems(invoice, invoiceLine);
+			invoice.addInvoiceitemListItem(invoiceLine);
 			invoiceService.computeInvoices(invoice);
 
 		}

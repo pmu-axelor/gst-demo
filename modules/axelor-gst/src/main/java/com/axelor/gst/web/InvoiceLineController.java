@@ -21,7 +21,7 @@ public class InvoiceLineController {
 
 		response.setValue("igst", invoiceLine.getIgst());
 		response.setValue("sgst", invoiceLine.getSgst());
-		response.setValue("cgst", invoiceLine.getCgst()); 
+		response.setValue("cgst", invoiceLine.getCgst());
 		response.setValue("grossAmount", invoiceLine.getGrossAmount());
 
 	}

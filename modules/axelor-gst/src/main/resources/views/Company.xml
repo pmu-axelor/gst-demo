@@ -39,7 +39,7 @@
          
          <field name="gstin"/>
          <field name="address"/>
-         <panel-related field="bankdetailList" colSpan="12" grid-view="bank-account-grid" form-view="bank-account-form"/>
+         <panel-related field="bankDetailsList" colSpan="12" grid-view="bank-account-grid" form-view="bank-account-form"/>
          
       </panel>
    

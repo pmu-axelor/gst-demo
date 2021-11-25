@@ -15,7 +15,6 @@ public class ProductController {
 	public void getInvoiceForm(ActionRequest request, ActionResponse response) {
 
 		List<Integer> ids = (List<Integer>) request.getContext().get("_ids");
-
 		Invoice invoice = Beans.get(ProductService.class).createInvoice(ids);
 
 		ActionViewBuilder actionViewBuilder = ActionView.define("Invoices").model(Invoice.class.getName())

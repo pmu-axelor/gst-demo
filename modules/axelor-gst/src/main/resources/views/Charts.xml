@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://axelor.com/xml/ns/object-views
        http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
        
-  <chart name="chart-for-unpaid-invoice" title="Unpaid invoices per customer">
+  <chart name="chart-for-unpaid-invoice" title="Unpaid invoices per customer" onInit="action-chart-set-date">
       <search-fields>
           <field name="fromDate" title="From Date" type="date"/>
           <field name="toDate" title="To Date" type="date"/>
@@ -14,13 +14,13 @@
             SELECT
                   COUNT(self.reference) AS reference,
                    MONTH(self.date) AS month,
-                  _party.name AS customer
+                  _party.name AS name
             FROM 
                Invoice self
              LEFT JOIN 
                  self.party AS _party 
               WHERE
-                 self.status = 'validated' AND _party.customer = 't' 
+                 self.status <> 'paid' AND _party.isCustomer = 't' 
                 AND self.date BETWEEN :fromDate
                  AND :toDate
                  GROUP BY 
@@ -31,14 +31,14 @@
              ]]>
      </dataset>
      <category key="month" type="month"/>  
-     <series key="reference " groupBy="customer" type="bar"/>
-    <!--  <config name="colors" value="red,green" /> -->
+     <series key="reference " groupBy="name" type="bar"/>
+ 
   </chart>  
    
-   <chart name="chart-for-paid-invoices" title="Paid invoices per category per product">
+   <chart name="chart-for-paid-invoices" title="Paid invoices per category per product" onInit="action-chart-set-date">
      <search-fields>
-          <field name="fromDte" title="From Date" type="date"/>
-          <field name="toDte" title="To Date" type="date"/>
+          <field name="fromDate" title="From Date" type="date"/>
+          <field name="toDate" title="To Date" type="date"/>
        </search-fields> 
        <dataset type="jpql">
           <![CDATA[
@@ -57,8 +57,8 @@
                         _product.category AS _category
                      WHERE 
                       _invoice.status = 'paid' AND 
-                      _invoice.date>= :fromDte AND
-                      _invoice.date<= :toDte
+                      _invoice.date BETWEEN :fromDate
+                         AND :toDate
                      GROUP BY
                            _invoice.date,
                             _product.name,
@@ -95,44 +95,59 @@
        <series key="customer" groupBy="state" type="pie"/>
    </chart>
    
-   <chart name="chart-for-invoices-per-status" title="Invoices per status">
+   <chart name="chart-for-invoices-per-status" title="Invoice amount per status">
        <dataset type="jpql">
-            <![CDATA[
+            <![CDATA[ 
                   SELECT  
                        COUNT(self.reference) as reference,
                         SUM(self.grossAmount) as amount,
                           self.status as status
                    FROM 
                         Invoice self
-                   WHERE
-                        self.status = 'validated' OR self.status = 'paid'
+                     
+                     WHERE 
+                         self.status in ('daft','validated','cancelled')   
+                        
                    GROUP BY
                         self.status, 
                         self.grossAmount          
                ]]>
        </dataset>
-       <category key="reference" type="text" />
-       <series key="amount" groupBy="status" type="bar" title="Amount"/>
+       <category key="amount" type="text" />
+       <series key="reference" groupBy="status" type="bar" />
    </chart>
    
-   <chart name="chart-for-invoices-per-status-number-of-invoices" title="Invoices per status">
+   <chart name="chart-number-of-invoices-status" title="Number of invoices per status">
        <dataset type="jpql">
             <![CDATA[
                   SELECT 
-                        COUNT(self.id) as total,
-                        COUNT(self.reference) as reference,
+                        COUNT(self.id) as id,
                          self.status as status
                    FROM 
                         Invoice self
-                   WHERE
-                        self.status = 'validated' OR self.status = 'paid'
+                      
+                    WHERE 
+                         self.status in ('daft','validated','cancelled')
+                      
                    GROUP BY
                         self.status, 
                         self.grossAmount          
                ]]>
        </dataset>
-       <category key="reference" type="text"/>
-       <series key="total" groupBy="status" type="line"/>
+       <category key="status" type="text"/>
+       <series key="id" groupBy="status" type="line"/>
    </chart>
+          
+          <action-record name="action-chart-set-date" model="com.axelor.gst.db.Invoice">
+              <field name="toDate" expr="eval: __date__"/>
+              <field name="fromDate" expr="eval: __date__.withDayOfMonth(1)"/>
+              
+          </action-record>
+       
+           <action-view name="action.invoices-validated-notpaid-dashboard" title="Invoice older than one month,Validated And not Paid" model="com.axelor.gst.db.Invoice">
+               <view type="grid" name="invoice-grid"/>
+               <domain> month(self.date) &lt; month(now())-1 AND self.status = 'validated'</domain> 
+            </action-view>   
+        
         
  </object-views>      

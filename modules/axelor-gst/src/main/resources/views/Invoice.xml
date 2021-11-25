@@ -21,7 +21,7 @@
     </grid>    
        
     <form model="com.axelor.gst.db.Invoice" title="Invoice" name="invoice-form" onNew="action-invoice-on-new-save" width="large" > 
-        <panel  name="maininvoicePanel">
+        <panel  name="mainInvoicePanel">
         <field name="status" showTitle="false" widget="NavSelect" colSpan="12" />
         <field name="reference" colSpan="12"/>
         <field name="company"/>
@@ -29,7 +29,7 @@
         <field name="party" onChange="action-party-method-generate-invoice-address,action-party-method-generate-shipping-address"/>  
         <field name="partyContact"/>
         <field name="invoiceAddress"/>
-        <field name="shippingAddress" /> <!-- hideIf="useInvoiceAddressAsShipping == true" --> 
+        <field name="shippingAddress" />
         <field name="useInvoiceAddressAsShipping" widget="boolean-switch" onChange="action-party-method-generate-shipping-address"/>  
         <field name="netAmount"/>
         <field name="netIgst"/>
@@ -46,32 +46,20 @@
    </form>
        
      <kanban columnBy="status" model="com.axelor.gst.db.Invoice" sequenceBy="priority" title="Invoices" name="kanban-invoice" draggable="true" limit="2">
-             <field name="reference"/>
              <field name="company"/>
              <field name="date"/>
              <field name="netAmount"/>
-             <field name="netIgst"/>
-             <field name="netCsgt"/>
-             <field name="netSgst"/>
              <field name="grossAmount"/>
         <template>
               <![CDATA[
                  <div>
-                       <h3>Reference:</h3>
-                       <h4>{{record.reference}}</h4>
                        <h3>Company:</h3>
                        <h4>{{record.company.name}}</h4>
                        <h3>Date:</h3>
                        <h4>{{record.date}}</h4>
-                        <h3>Net Amount:</h3>
+                       <h3>Net Amount:</h3>
                        <h4>{{record.netAmount}}</h4>
-                        <h3>Net Igst:</h3>
-                       <h4>{{record.netIgst}}</h4>
-                        <h3>Net Csgt:</h3>
-                       <h4>{{record.netCsgt}}</h4>
-                        <h3>Net Sgst:</h3>
-                       <h4>{{record.netSgst}}</h4>
-                        <h3>Gross Amount:</h3>
+                       <h3>Gross Amount:</h3>
                        <h4>{{record.grossAmount}}</h4>
                  </div>
               ]]>
@@ -82,7 +70,7 @@
         <action-record name="action-invoice-on-new-save" model="com.axelor.gst.db.Invoice">
             <field name="date" expr="eval: __datetime__"/> 
             <field name="status" expr="draft"/> 
-            <field name="company" expr="eval: __repo__(Company).all().fetchOne()" if="company == null"/>
+            <field name="company" expr="eval: __repo__(Company).all().fetchOne()"/>  
        </action-record>  
    
         <action-record name="action-invoice-cancelled-bttn" model="com.axelor.gst.db.Invoice">
@@ -90,13 +78,13 @@
         </action-record>
         
        <action-attrs name="action-invoice-validate-bttn">
-          <attribute name="value" for="status" expr="validated" if="status == 'draft'"/>
+          <attribute name="value" for="status" expr="validated" />
         </action-attrs>
         
-        <action-attrs name="action-invoice-paid-bttn">
-          <attribute name="value" for="status" expr="paid" if="status == 'validated'"/>
+        <action-attrs name="action-invoice-paid-bttn"> 
+          <attribute name="value" for="status" expr="paid" /> 
         </action-attrs>
-
+        
        <action-method name="action-party-method-generate-invoice-address" model="com.axelor.gst.db.Invoice">
         <call class="com.axelor.gst.web.AddressController" method="setInvoiceAddresses"/>
        </action-method>
