@@ -13,7 +13,7 @@
      <string name="type" title="Type" selection="gst.party.gst.type.select" default="company" required="true"/>
      <boolean name="isCustomer" title="Customer"/>
      <boolean name="isSupplier" title="Supplier"/>
-     <string name="gstin" title="GSTIN" min="15" max="15"/>
+     <string name="gstIn" title="GSTIN" min="15" max="15"/>
      <one-to-many name="contactList" ref="com.axelor.gst.db.Contact" title="Contact"/> 
       <one-to-many ref="com.axelor.gst.db.Address" name="addressList" title="Address"/>
       

@@ -27,15 +27,19 @@ public class PartyServiceImpl implements PartyService {
 
 		Sequence seq = sequenceRepository.all().filter("self.model.name = ?", Party.class.getSimpleName()).fetchOne();
 
+		if (seq == null) {
+			throw new Exception("set sequence for party!!!!");
+		}
+
 		String sequence = "";
 		String prefix = seq.getPrefix();
 		String suffix = seq.getSuffix();
 		Integer padding = seq.getPadding();
-		String next = seq.getNextNumber();
+		// String next = seq.getNextNumber();
 
-		if (next == null) {
+		if (seq.getNextNumber() == null) {
 			seq.setNextNumber("1");
-			Integer nextNumber = Integer.parseInt(next);
+			Integer nextNumber = Integer.parseInt(seq.getNextNumber());
 			String num = String.format("%0" + padding + "d", nextNumber);
 
 			if (!StringUtils.isBlank(suffix)) {
@@ -49,8 +53,8 @@ public class PartyServiceImpl implements PartyService {
 			sequenceRepository.save(seq);
 		}
 
-		else if (next != null) {
-			Integer nextNumber = Integer.parseInt(next);
+		else if (seq.getNextNumber() != null) {
+			Integer nextNumber = Integer.parseInt(seq.getNextNumber());
 			String num = String.format("%0" + padding + "d", nextNumber);
 			if (!StringUtils.isBlank(suffix)) {
 				sequence = prefix + num + suffix;

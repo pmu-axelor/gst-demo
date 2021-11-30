@@ -5,6 +5,6 @@ import com.axelor.gst.db.InvoiceLine;
 
 public interface InvoiceLineService {
 
-	public void computeInvoiceLinesItems(Invoice invoice, InvoiceLine invoiceLine);
+	public void computeInvoiceLinesItems(Invoice invoice, InvoiceLine invoiceLine) throws Exception;
 
 }

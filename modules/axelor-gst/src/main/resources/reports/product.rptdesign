@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.9.0.v202111220844</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="productId" id="4">
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="attachmentPath" id="267">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="6">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5433/axelor-gst-demo-app</property>
+            <property name="odaUser">axelor</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhlbG9y</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="product" id="7">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">code</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">code</text-property>
+                    <text-property name="heading">code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">hsbn</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">hsbn</text-property>
+                    <text-property name="heading">hsbn</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sale_price</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">sale_price</text-property>
+                    <text-property name="heading">sale_price</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">cost_price</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">cost_price</text-property>
+                    <text-property name="heading">cost_price</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">file_path</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">file_path</text-property>
+                    <text-property name="heading">file_path</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">productId</property>
+                    <property name="paramName">productId</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">hsbn</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">sale_price</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">cost_price</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">file_path</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">code</property>
+                    <property name="nativeName">code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">hsbn</property>
+                    <property name="nativeName">hsbn</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">sale_price</property>
+                    <property name="nativeName">sale_price</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">cost_price</property>
+                    <property name="nativeName">cost_price</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">file_path</property>
+                    <property name="nativeName">file_path</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select p.id, 
+p.code,
+p.name,
+p.hsbn,
+p.sale_price,
+p.cost_price,
+metaFile.file_path
+from gst_product as p
+left join meta_file as metaFile on (p.image = metaFile.id)
+where p.id = any(string_to_array(?, ',')::int[]);]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>id</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>archived</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>archived</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>archived</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>version</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>version</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>version</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>created_on</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>29</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>created_on</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>created_on</design:label>
+            <design:formattingHints>
+              <design:displaySize>29</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>updated_on</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>29</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>updated_on</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>updated_on</design:label>
+            <design:formattingHints>
+              <design:displaySize>29</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>attrs</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>1111</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>attrs</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>attrs</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>code</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>code</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>code</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>cost_price</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>cost_price</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>cost_price</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>gst_rate</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>gst_rate</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>gst_rate</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>hsbn</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>hsbn</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>hsbn</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>name</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sale_price</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>sale_price</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sale_price</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>created_by</design:name>
+              <design:position>13</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>created_by</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>created_by</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>updated_by</design:name>
+              <design:position>14</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>updated_by</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>updated_by</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>category</design:name>
+              <design:position>15</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>category</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>category</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>image</design:name>
+              <design:position>16</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>image</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>image</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <cubes>
+        <tabular-cube name="Data Cube - product" id="240">
+            <property name="dimensions">
+                <tabular-dimension name="Group" id="241">
+                    <property name="defaultHierarchy">NewTabularHierarchy</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy" id="242">
+                            <property name="levels">
+                                <tabular-level name="sale_price" id="243">
+                                    <property name="dataType">decimal</property>
+                                    <property name="columnName">sale_price</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="dataSet">product</property>
+        </tabular-cube>
+    </cubes>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-header>
+                <image id="110">
+                    <property name="height">0.7395833333333334in</property>
+                    <property name="width">2.46875in</property>
+                    <property name="source">embed</property>
+                    <property name="imageName">axelorlogo.jpg</property>
+                </image>
+            </page-header>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <label id="111"/>
+        <label id="112"/>
+        <label id="113"/>
+        <table id="459">
+            <property name="width">7.947916666666667in</property>
+            <property name="dataSet">product</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">code</property>
+                    <text-property name="displayName">code</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["code"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">name</property>
+                    <text-property name="displayName">name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">hsbn</property>
+                    <text-property name="displayName">hsbn</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["hsbn"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sale_price</property>
+                    <text-property name="displayName">sale_price</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["sale_price"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">cost_price</property>
+                    <text-property name="displayName">cost_price</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["cost_price"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">file_path</property>
+                    <text-property name="displayName">file_path</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["file_path"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="493">
+                <property name="width">2.1041666666666665in</property>
+            </column>
+            <column id="494">
+                <property name="width">1.3541666666666667in</property>
+            </column>
+            <column id="495">
+                <property name="width">1.0416666666666667in</property>
+            </column>
+            <column id="496">
+                <property name="width">0.8020833333333334in</property>
+            </column>
+            <column id="497">
+                <property name="width">1.3229166666666667in</property>
+            </column>
+            <column id="498">
+                <property name="width">1.3229166666666667in</property>
+            </column>
+            <header>
+                <row id="460">
+                    <property name="height">0.6666666666666666in</property>
+                    <cell id="461"/>
+                    <cell id="463"/>
+                    <cell id="465"/>
+                    <cell id="467"/>
+                    <cell id="469"/>
+                    <cell id="471"/>
+                </row>
+            </header>
+            <detail>
+                <row id="473">
+                    <property name="height">2.09375in</property>
+                    <cell id="474">
+                        <image id="499">
+                            <property name="height">2.2754166666666666cm</property>
+                            <property name="width">5.161cm</property>
+                            <property name="source">file</property>
+                            <expression name="uri" type="javascript">params["attachmentPath"].value+'/'+row["file_path"]</expression>
+                        </image>
+                        <label id="518"/>
+                        <label id="516">
+                            <property name="fontSize">12pt</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Sale price</text-property>
+                        </label>
+                        <data id="517">
+                            <property name="resultSetColumn">sale_price</property>
+                        </data>
+                    </cell>
+                    <cell id="476">
+                        <data id="475">
+                            <property name="resultSetColumn">code</property>
+                        </data>
+                        <data id="477">
+                            <property name="resultSetColumn">name</property>
+                        </data>
+                        <data id="479">
+                            <property name="resultSetColumn">hsbn</property>
+                        </data>
+                        <label id="519"/>
+                        <label id="522"/>
+                        <label id="470">
+                            <property name="fontSize">12pt</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Cost price</text-property>
+                        </label>
+                        <data id="510">
+                            <property name="resultSetColumn">cost_price</property>
+                        </data>
+                    </cell>
+                    <cell id="478"/>
+                    <cell id="480"/>
+                    <cell id="482"/>
+                    <cell id="484"/>
+                </row>
+            </detail>
+            <footer>
+                <row id="486">
+                    <property name="height">0.4166666666666667in</property>
+                    <cell id="487"/>
+                    <cell id="488"/>
+                    <cell id="489"/>
+                    <cell id="490"/>
+                    <cell id="491"/>
+                    <cell id="492"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+    <list-property name="images">
+        <structure>
+            <property name="name">axelorlogo.jpg</property>
+            <property name="data">
+                /9j/4AAQSkZJRgABAQAAAQABAAD//gAgQ29tcHJlc3NlZCBieSBqcGVnLXJlY29tcHJlc3MA/9sAhAAJ
+                CQkJCQkKCwsKDg8NDw4UEhEREhQeFhcWFxYeLh0hHR0hHS4pMSglKDEpSTkzMzlJVEdDR1RmW1tmgXqB
+                qKjiAQkJCQkJCQoLCwoODw0PDhQSERESFB4WFxYXFh4uHSEdHSEdLikxKCUoMSlJOTMzOUlUR0NHVGZb
+                W2aBeoGoqOL/wgARCADbASwDASIAAhEBAxEB/8QAHAABAAEFAQEAAAAAAAAAAAAAAAYBAgMFBwQI/9oA
+                CAEBAAAAAO4gFKqVAAAAAAAAAAAAFFaVUqUqAClQAAAAAAAAAAAAAAAAAAAAClQUqpWlQUqpUAAAAAAA
+                ACioAAAAANDusgjEY6cAAAALYhuNxUclk00AKVAYueaW6a+zPuGKDyD3QDWeromz+e+9YoBrPR0LbwbF
+                q5BJfaByvN0HV8U7zAZ57IJJd1wLrW3gnh6fwj6A+f8AqW4h+g7N829elNnqygaSPV9XP+46eGXyeQQm
+                A9LQ7Y7HRSqBdpQaOdB5J3YAR3j3TLuXdD6HigGLoOfi/v25MeVz6DyuauNzLUX9GAHG5fNK8H7FsoHu
+                cGqn/wA9959+LkHY/nb6F4J2fc4Pnj6I4f17cADlsG3meNfRMF32/QfFH4xtPH0OSci7lySMbPwdKmPz
+                99CVADDbnshW/wA1q7D6PLnvZPLes8/urS7YAALYlvsuozY8Nb119MuHHktxWU97eAALMeaoAAAAAAAA
+                AAAAAAAAAAAAAAKVAAAAAAAAAAAAAAAAAFKlKhSoAAAAAAAAAAAAf//EABoBAQACAwEAAAAAAAAAAAAA
+                AAACAwEEBQb/2gAIAQIQAAAAAAAAAAAAAAAAAArsAAVZlz9+YACHm5964AAx5uv1GQADl71WdoABTOYA
+                AAAAAAAAAAAAAP/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/2gAIAQMQAAAAAAAAAAAAAAAAAAlAAReX
+                SgAGLaAAMtAADl0jQADNoAAAAAAAAAAAAAAP/8QAKhAAAQUAAgAEBQUBAAAAAAAABQECAwQGAAcRExQw
+                EBIgIWAVFhdAQXD/2gAIAQEAAQUA/GP9/wCUL+SePLRj5bLPm+X6NeTlFhMFfLEp/wCv4/Sqo1CZmWzK
+                JFxj4vp7KveMmDpekA/0pZoq8ZDsajA93ZRFeRdmX2KA19E4tw4ylMPMV77vhJIyJhMvORkECGD475Kk
+                Lgudk1WOXsu/yv2a9HCS1MzUXmosuLaWlXbUpkCVMXBc7Lrtd/Jl9Fr9myooU6POV+HttEDvkN5SoQiN
+                0XKlSJK62yOsPs1fr7GKPTmOydJ1Fg6gxC2fD3KOVWRNGSHRkIXMsUbAwiy9DYsw1YyBGwSkDiW0mSys
+                hiv272vOjMgEHRfpIrw2+eFwCus5HpKQstpD8jVcS0blRjTpO1qDQzFBKMH6AF8NlmREAjrWRzS6qiIX
+                nlLHQmLF0IIh1CB9gfWnkhiZDH9XjwoUCDuP7Bz0XIuwwD3FdGNsZ7r2l55teFBjL0UMk9Gxct2L8ogS
+                lVvN4R9EEw5ESKufvbM8/euZ5tdMMJjetqisob+76YH1rS+20IqPBddDknI/DsGykAHrSsqy6G76ALga
+                PqzvtacygQUCB3NVfj6+z0aSdfZ1zdQCdnbvXNFIRXJZWQsIXG3LNSylSxBPHYi52NcWUoDwdEiK/jcN
+                xetw3P43DcEjIA9Hsi75hPH0vQgOyrnzWsDT9KA+HZF9Jb2Go+jAdj3fKH9cUvKHe12Rbc+/ga0cOe4v
+                N0RYRNg6iUBEkjYmEyb78ooKkfDQr5eDCbqEscjJWbCR0mjFtjYM5NKyCKhsTxIwq+CEXvOaaKNsUe4k
+                WTR59jYwnLNiKpA7z9MfghZXg31xbR4BT9AG9re569bnF6I0BanYh/kdzZaJoMZJcOuc2NpMnKTmFB2U
+                04qIqGhK13BiklOTZ5e7PdH6bQBGL2Efck5DW6RMlk1CIcsupiMKOlnPc3WZvSX6Gp0IaJew9CvJ7ur0
+                3MnlWgo5HpHHSq2TOlRPBPbfXry8ZUqs54IiL8jEJEJy1gYKgGxIXoLVeZHRsQvWdctFKsFRxcdG95Sl
+                FIpYVMxLQpOUilC69C9FbNMhUvo00MVVM0WxNMD3yfqQmZ7SoJIlKD2I8sPjVS1BJqhGncf7yqicvWrB
+                eceOgHxXK7rVWPPJV44Ra8WAljvygbE9KTORzvjAJHasAPMiUI9bQ4HENmUK9bQgQopI89VbWZno/IqA
+                K1eZgB6tdl6yMjzLWRS5aOSBgiaCYUGUXN7zmte2KCGBvw8OeH1fb4fb2vt+Rr7v+/m/j+I//8QAORAA
+                AgEDAgQDBAcIAwEAAAAAAQIDAAQREiETMUFRBRBxFCJhgSMwMjRCcpEgQFJigJKhohUzVNH/2gAIAQEA
+                Bj8A/pmW1tIxNMThuy0NWM43x+zPLDIUlchEYVeTXd5LJFEgUBu7fvuTyr2Lw/JZjguKyfemYZd/2rGy
+                XoDK1RuRhp3Mh/c3lmkVI0GWZjgAUyWds8/85Ola9zw6D5lq9/w+D5E0YQphucZ0NRikt3z0PQimRQUc
+                dG6+Zd2CqBkk17NaghCcbc2rW2DOw949qM93OsaDudyewFFbSyeT4udNbeHQUOP4cMdSj0Lm1fK5wynm
+                pHQ+VyE3zKsKAVb268oo1QfKjPdzLGg78yewFYtbF3A6u2Kyvh8FDj+HLj+R6M1qxymzo3NfI2YtDMwQ
+                EkNyLVEOAXumQM8SnZCejGrWzSzt0jlf3tmJCip9LSKkeoaY9iNPVtjuc0rysCysyEjrpOMj1+ot/DIi
+                QCOLLUXiF9CJZJd0RuSrWFs4QPyCrniWkasI2KuqgEGvDOGTnj0VbZxurdjWDlJENdpF2ZaMkrAAUI1B
+                CZwqDrQlkGZmH9tPLIQERSzH4ClijJ0u5SFeiJSKbZZ5Me9JIM5NY9gt/wCwU9/b26Qyo6/Y2BBrxJPw
+                aUNXl0x2ihZ/0FWzvvoczPTM2wAyTSxQ5KcThQJSCa3E82Pfd6x/x0GPyCpr21thDLEQcrV0nNDbUSeW
+                Ku5IgWea4KxgfotI93F7TdEZdn3ANCSG0ijccmVQDRkIdGYYYoxXUB3xSxxqFRRgAfUZvpYFfoCAz1pj
+                SdgOyYFAOJ0H5K8RubO5VyIimOoL7UZzygiJ+beWpcCVR7prUuVdDgg0Gf0VRyFCaYZlI2H8PkYkOHuX
+                4fy61cXd9Pw30aI9ia+//wCjV9//ANGqK1sbjiEyhn2IwBV5ckf9soQeiUYQcNPIEq/vmHaJan0HDz/R
+                LU944ysCAL+Z/Ph9Z5lWvELnsqx1fz5wREQvq21LO4ytuhf5nYfVyTjBmc6Ih/MamkmnYIDqmmNYInl+
+                JcijhJk7EOa9njmZ4JkDL/8AGq4u25zy4HovkzuwCgZJppFTC8h3NJKUDY6GlkjbKkeVvbdIYv8AL1a3
+                lzPMkkq68LX3u6r73dV97uqisoCxRMnLcyTVraKdoYQx9XqzQjDSAyt6vVjZg7JGZW9WpZSMNPIz+drZ
+                A7QoXb1eoXIw05MtWtoDvLLqb0Sri6I3mlwPRPq7S16Rxl/m1RyjnLK5PnwoWDJAgiz3arG2/giGfU7m
+                md2AUDJJoRx5EQOFHVjSzXIy/NU7UbmAbc3WsNkxMfeHb4ildCCpGQRXiOejhf0WrBY8FRbRgEfl8pJX
+                YBEUsx+AqG0hdBHLPgDRySiakC78e7Ea+mcUkajCooUegq8B/BoUV4aq/wDnQ+Us8zBUjUsxPYUSoOq5
+                n/RKhhQAJHGqKPgowKaBeUCKlWFv1WEFvzNufq4vEbSIyqECSIu7CmggcqhOTHItYVIPkhplZ3gtcEu4
+                XhrirODhuY+OCWZSMqpzRZiAoFC2tgTHnAA5saEsuGm/wvlijPAuYifeUfhNCGUNwWP9pqTxOyiMySgG
+                RU5qaEEcjhF2EcqVgLB8krgYneNuaomlKN1clWu3HyQVfzqCWWFtIHVjsKSeWJgsKM+WUjLeR8RtIWlR
+                1HEVRlgwpbdHIjTkkqVsIPlHQgZJpEJ+yqaEpp5yr3ci4PZBTueSqSajaSGQCa7LsSpAC5zQH1nvwo3q
+                ua922iB+CgViixwAK9isgTH1bvRY4aTGWc1FdLNqjkYqmkElj2AqJ2lbDqXGFJIUHBJHQU1uoZtAOtwD
+                pU4yBUNxu6zY4QAJLkjIFKkhZWKoxBRttfLNXERly8Cq0iqCSA1QuULiUEp9ExJA602EiBEwh+xycjOK
+                4cEh1aSygqVBAOMimtjKdauY91IXUBnGaYwl2AHMoQD8zUw4xHDWQsShAxH9rBpJSZQrvpUcNsk4zsKh
+                RJGcyIrrpRjs21SKxUlVc5ZNiE3bBPPFPLhEVTHnMWkjibKau/pgBa442B9nIzUQacZkgMyfFF6iliMp
+                LNp3CkgF+QJplgLnTnLaCBlTg4J/cGsrLaIH6WXpQSMb/ibqangWQx8RCpYcwDzxQ9luyvDmEsWsawCV
+                0sKWWPxArMYTFK5TOQSTlauLoTIRJzymWHu6cA5q0tpbuNhbupjzH0VcYIzRkeYBxHCq6QQBwj2p7oXT
+                mWXiiXP2WWToB8K8ORZkJtYOGNaagaLm6+hM6zlNG/EVdPPtUMscpJWFkbPXUc5qR2uhwGuvaRGE316Q
+                vOpE4kbK22VTSTg9TmryMsTLOswEhydIl7CoIZXQrHIXxGpTOVx3qCWRuIYoFiTIxjSxOa4T3eYY0mEK
+                hNwZQRuakhWU6HEAcbnJizTxtduRK8bSsBhmKUsTXTfRwvFE3VAzahRMV4Vido2kULkkoMbGpmEqMHL7
+                hMNu2dzn68qwyCMEVpijVB2UY/pP/8QAJREAAwACAQMDBQEAAAAAAAAAAQIDABEEBRIwIzEyEyEiUWBA
+                /9oACAECAQE/AP5RaK5IU71561nFe5zofvJ1nVQyMGH7GEhQSToDDd+W5nE6mPk+IizUKo89JpVGRhsH
+                C1ekcn77MGw8m3VLfSjtYj5HIxSCBEGgP8BIAJJ0BnMevVKiEB6an8mzh0p0u549h6bHYbFIYAg7B85O
+                ssac1jKZ1MfJshCcECIus5fEny59rjRHsc4kH48+xqdwHt56zaml7tKflr3OIioAqjQH83//xAAhEQEA
+                AQMDBQEAAAAAAAAAAAABAAIRQRIwMRAhIkBgcf/aAAgBAwEBPwD5QqHjfUOYN+itbppbGWAUgG/zA0/k
+                fLtiAHo3vL29HU1tjjLACVU6pSJm+/UNWbGYAAHzf//Z
+</property>
+        </structure>
+    </list-property>
+</report>

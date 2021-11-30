@@ -12,10 +12,10 @@
          <string name="code" title="Code" required="true"/>
          <string name="hsbn" title="HSBN" />
          <many-to-one name="category" ref="com.axelor.gst.db.ProductCategory" title="Category"/>
-         <decimal name="saleprice" title="Sale price"/>
-         <decimal name="costprice" title="Cost price"/>
+         <decimal name="salePrice" title="Sale price"/>
+         <decimal name="costPrice" title="Cost price"/>
          <many-to-one name="image" title="Image" ref="com.axelor.meta.db.MetaFile"/>
-         <decimal name="gstrate" title="GST rate"/>
+         <decimal name="gstRate" title="GST rate"/>
          
        </entity>
      

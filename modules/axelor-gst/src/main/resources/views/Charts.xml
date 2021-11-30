@@ -146,7 +146,8 @@
        
            <action-view name="action.invoices-validated-notpaid-dashboard" title="Invoice older than one month,Validated And not Paid" model="com.axelor.gst.db.Invoice">
                <view type="grid" name="invoice-grid"/>
-               <domain> month(self.date) &lt; month(now())-1 AND self.status = 'validated'</domain> 
+               <domain> month(self.date) &lt; month(now())-1 AND self.status = :_status</domain> 
+               <context name="_status" expr="eval:__repo__(Invoice).STATUS_VALIDATED"/>
             </action-view>   
         
         

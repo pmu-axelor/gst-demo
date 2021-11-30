@@ -17,7 +17,6 @@ public class AddressController {
 		response.setValue("partyContact", invoice.getPartyContact());
 
 		response.setValue("invoiceAddress", invoice.getInvoiceAddress());
-
 	}
 
 	public void setShippingAddress(ActionRequest request, ActionResponse response) {

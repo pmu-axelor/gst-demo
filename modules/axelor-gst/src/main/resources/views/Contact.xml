@@ -6,20 +6,20 @@
      
  <grid model="com.axelor.gst.db.Contact" title="Contacts" name="contact-grid">
   <field name="name"/>
-   <field name="primaryemail"/>
-   <field name="secondaryemail"/>
-   <field name="primaryphone"/>
-   <field name="secondaryphone"/>
+   <field name="primaryEmail"/>
+   <field name="secondaryEmail"/>
+   <field name="primaryPhone"/>
+   <field name="secondaryPhone"/>
  </grid>    
        
    <form model="com.axelor.gst.db.Contact" title="Contact" name="contact-form">
       <panel name="contactPanel">
           <field name="name" colSpan="12"/>
           <field name="type" colSpan="2"/>
-          <field name="primaryemail" colSpan="5"/>
-          <field name="secondaryemail" colSpan="5"/>
-          <field name="primaryphone" colSpan="5"/>
-          <field name="secondaryphone" colSpan="5"/>
+          <field name="primaryEmail" colSpan="5"/>
+          <field name="secondaryEmail" colSpan="5"/>
+          <field name="primaryPhone" colSpan="5"/>
+          <field name="secondaryPhone" colSpan="5"/>
        </panel>
     </form>    
        

@@ -17,12 +17,20 @@ public class InvoiceLineController {
 		InvoiceLine invoiceLine = context.asType(InvoiceLine.class);
 
 		InvoiceLineService invoiceLineService = Beans.get(InvoiceLineService.class);
-		invoiceLineService.computeInvoiceLinesItems(invoice, invoiceLine);
+		try {
 
-		response.setValue("igst", invoiceLine.getIgst());
-		response.setValue("sgst", invoiceLine.getSgst());
-		response.setValue("cgst", invoiceLine.getCgst());
-		response.setValue("grossAmount", invoiceLine.getGrossAmount());
+			invoiceLineService.computeInvoiceLinesItems(invoice, invoiceLine);
+
+			if (invoice.getParty() != null) {
+				response.setValue("igst", invoiceLine.getIgst());
+				response.setValue("sgst", invoiceLine.getSgst());
+				response.setValue("cgst", invoiceLine.getCgst());
+				response.setValue("grossAmount", invoiceLine.getGrossAmount());
+			}
+
+		} catch (Exception e) {
+			response.setError(e.getMessage());
+		}
 
 	}
 

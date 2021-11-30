@@ -5,6 +5,6 @@ import com.axelor.gst.db.Invoice;
 
 public interface ProductService {
 
-	public Invoice createInvoice(List<Integer> ids);
+	public Invoice createInvoice(List<Long> ids);
 
 }

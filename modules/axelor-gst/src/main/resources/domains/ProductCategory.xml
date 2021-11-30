@@ -10,7 +10,7 @@
          
          <string name="name" title="Name" required="true"/>
          <string name="code" title="Code" required="true"/>
-         <decimal name="gstrate" title="GST Rate"/>
+         <decimal name="gstRate" title="GST Rate"/>
          
       </entity>
      

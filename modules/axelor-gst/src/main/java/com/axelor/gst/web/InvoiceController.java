@@ -14,7 +14,7 @@ public class InvoiceController {
 		Invoice invoice = request.getContext().asType(Invoice.class);
 
 		try {
-			if ((invoice.getStatus().equals("validated")) && (invoice.getReference() == null)) {
+			if (("validated".equals(invoice.getStatus())) && (invoice.getReference() == null)) {
 
 				String sequence = Beans.get(InvoiceService.class).setSequence();
 				response.setValue("reference", sequence);

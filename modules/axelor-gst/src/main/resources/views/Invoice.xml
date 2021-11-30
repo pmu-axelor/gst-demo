@@ -21,15 +21,18 @@
     </grid>    
        
     <form model="com.axelor.gst.db.Invoice" title="Invoice" name="invoice-form" onNew="action-invoice-on-new-save" width="large" > 
-        <panel  name="mainInvoicePanel">
+      <toolbar>
+      <button name="btnPrint" title="Print" showTitle="false" showIf="id"  onClick="action-invoice-print-report" icon="fa-print" />
+     </toolbar>
+       <panel  name="mainInvoicePanel">
         <field name="status" showTitle="false" widget="NavSelect" colSpan="12" />
         <field name="reference" colSpan="12"/>
-        <field name="company"/>
-        <field name="date"/>
-        <field name="party" onChange="action-party-method-generate-invoice-address,action-party-method-generate-shipping-address"/>  
-        <field name="partyContact"/>
-        <field name="invoiceAddress"/>
-        <field name="shippingAddress" />
+        <field name="company" form-view="company-form" grid-view="company-grid"/>
+        <field name="date"/>                 
+        <field name="party"  form-view="party-form" grid-view="party-grid" onChange="action-party-method-generate-invoice-address,action-party-method-generate-shipping-address"/>   
+        <field name="partyContact" form-view="contact-form" grid-view="contact-grid"/>
+        <field name="invoiceAddress" form-view="address-form" grid-view="address-grid"/>
+        <field name="shippingAddress" form-view="address-form" grid-view="address-grid"/>
         <field name="useInvoiceAddressAsShipping" widget="boolean-switch" onChange="action-party-method-generate-shipping-address"/>  
         <field name="netAmount"/>
         <field name="netIgst"/>
@@ -69,8 +72,8 @@
    
         <action-record name="action-invoice-on-new-save" model="com.axelor.gst.db.Invoice">
             <field name="date" expr="eval: __datetime__"/> 
-            <field name="status" expr="draft"/> 
-            <field name="company" expr="eval: __repo__(Company).all().fetchOne()"/>  
+            <field name="status" expr="eval: __repo__(Invoice).STATUS_DRAFT"/> 
+            <field name="company" expr="eval: __repo__(Company).all().fetchOne()"/>
        </action-record>  
    
         <action-record name="action-invoice-cancelled-bttn" model="com.axelor.gst.db.Invoice">
@@ -89,7 +92,7 @@
         <call class="com.axelor.gst.web.AddressController" method="setInvoiceAddresses"/>
        </action-method>
      
-      <action-method name="action-party-method-generate-shipping-address" model="com.axelor.gst.db.Invoice">
+       <action-method name="action-party-method-generate-shipping-address" model="com.axelor.gst.db.Invoice">
            <call class="com.axelor.gst.web.AddressController" method="setShippingAddress"/>
        </action-method> 
      
@@ -99,6 +102,15 @@
          
          <action-method name="action-get-sequence-invoice-onsave" model="com.axelor.gst.db.Invoice">
              <call class="com.axelor.gst.web.InvoiceController" method="generateSequence"/>
-         </action-method>  
+         </action-method>
+           
+         
+         <action-report  name="action-invoice-print-report"
+            design="invoice.rptdesign" 
+            output="invoice-${date}-${time}"
+            format="pdf" >
+           <param name="invoiceId" expr="eval: id"/> 
+           <param name="attachmentPath" expr="eval:  com.axelor.app.AppSettings.get().get('file.upload.dir')"/>  
+         </action-report>
      
  </object-views>      

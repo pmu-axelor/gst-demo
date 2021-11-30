@@ -1,4 +1,4 @@
-package com.axelor.gst.gstmodule;
+package com.axelor.gst.module;
 
 import com.axelor.app.AxelorModule;
 import com.axelor.gst.service.AddressService;
@@ -12,7 +12,7 @@ import com.axelor.gst.service.PartyServiceImpl;
 import com.axelor.gst.service.ProductService;
 import com.axelor.gst.service.ProductServiceImpl;
 
-public class Modules extends AxelorModule {
+public class GstModule extends AxelorModule {
 
 	@Override
 	protected void configure() {

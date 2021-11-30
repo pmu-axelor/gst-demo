@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	@Transactional
-	public Invoice createInvoice(List<Integer> ids) {
+	public Invoice createInvoice(List<Long> ids) {
 
 		Company company = companyRepository.all().fetchOne();
 		Party party = partyRepository.all().fetchOne();
@@ -61,10 +61,15 @@ public class ProductServiceImpl implements ProductService {
 			invoiceLine.setProduct(product);
 			invoiceLine.setHsbn(product.getHsbn());
 			invoiceLine.setItem(product.getCode() + "-" + product.getName());
-			invoiceLine.setGstRate(product.getGstrate());
-			invoiceLine.setPrice(product.getSaleprice());
+			invoiceLine.setGstRate(product.getGstRate());
+			invoiceLine.setPrice(product.getSalePrice());
 			invoiceLine.setQty(1);
-			invoiceLineService.computeInvoiceLinesItems(invoice, invoiceLine);
+			try {
+				invoiceLineService.computeInvoiceLinesItems(invoice, invoiceLine);
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
 			invoice.addInvoiceitemListItem(invoiceLine);
 			invoiceService.computeInvoices(invoice);
 

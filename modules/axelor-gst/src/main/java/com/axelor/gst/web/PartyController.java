@@ -16,7 +16,7 @@ public class PartyController {
 
 			}
 		} catch (Exception e) {
-			response.setError("Set sequence for party");
+			response.setError(e.getMessage());
 		}
 
 	}

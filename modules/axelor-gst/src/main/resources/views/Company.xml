@@ -7,7 +7,7 @@
   <grid model="com.axelor.gst.db.Company" title="Companies" name="company-grid" >
      
     <field name="name"/> 
-    <field name="gstin"/>
+    <field name="gstIn"/>
     <field name="address"/>
     
   </grid>
@@ -25,20 +25,20 @@
                <![CDATA[
                  Name:{{record.name}}<br>
                  Contact Type:<span class="muted" ng-if="record.type">({{record.type}})</span>
-                 Email:{{record.primaryemail}} {{record.secondaryemail}}
+                 Email:{{record.primaryEmail}} {{record.secondaryEmail}}
               ]]>
             </viewer>
            <editor layout="table" x-show-titles="false">
                <field name="name" colSpan="12"/>
               <field name="type" colSpan="4"/>
-               <field name="primaryemail" colSpan="12"/>
-               <field name="secondaryemail" colSpan="12"/>
+               <field name="primaryEmail" colSpan="12"/>
+               <field name="secondaryEmail" colSpan="12"/>
            </editor>
          </field> 
          </panel>
          
-         <field name="gstin"/>
-         <field name="address"/>
+         <field name="gstIn"/>
+         <field name="address" form-view="address-form" grid-view="address-grid"/>
          <panel-related field="bankDetailsList" colSpan="12" grid-view="bank-account-grid" form-view="bank-account-form"/>
          
       </panel>

@@ -14,7 +14,15 @@
           <many-to-one name="city" ref="com.axelor.gst.db.City" title="City" required="true"/>
           <many-to-one name="state" ref="com.axelor.gst.db.State" title="State"/>
           <many-to-one name="country" ref="com.axelor.gst.db.Country" title="Country" required="true" />
-          <string name="pincode" title="Pin Code"/>
+          <string name="pinCode" title="Pin Code"/>
+     
+           <extra-code>
+               <![CDATA[
+                  public static final String ADDRESS_DEFAULT = "default";
+                  public static final String ADDRESS_INVOICE = "invoice";
+                  public static final String ADDRESS_SHIPPING = "shipping";
+               ]]>
+           </extra-code>
      
       </entity>  
           

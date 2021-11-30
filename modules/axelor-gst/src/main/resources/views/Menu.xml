@@ -5,14 +5,14 @@
        http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
      
      
-     <menuitem title="Menus" name="gst-rootgst-root" /> 
+     <menuitem title="Gst" name="gst-root" /> 
       
-      <menuitem title="Welcome" name="gst-root-gst-welcome" parent="gst-rootgst-root" action="action.gst.welcome"/>
+      <menuitem title="Welcome" name="gst-root-gst-welcome" parent="gst-root" action="action.gst.welcome"/>
         <action-view name="action.gst.welcome" title="Welcome">
-           <view type="dashboard" name="welcome-dashboards"/>
+           <view type="dashboard" name="welcome-dashboard"/>
         </action-view>
       
-      <menuitem title="Company" name="gst-root-gst-company" parent="gst-rootgst-root"/>
+      <menuitem title="Company" name="gst-root-gst-company" parent="gst-root"/>
       
       <menuitem title="Company" name="comapny-root-gst-company" parent="gst-root-gst-company" action="action.gst.company" />
         <action-view name="action.gst.company" title="Company" model="com.axelor.gst.db.Company">
@@ -28,7 +28,7 @@
        
        
        
-      <menuitem title="Product" name="gst-root-gst-product" parent="gst-rootgst-root"/> 
+      <menuitem title="Product" name="gst-root-gst-product" parent="gst-root"/> 
        
       <menuitem title="Product" name="gst-product-root-product" parent="gst-root-gst-product" action="action.gst.product"/>  
           <action-view name="action.gst.product" title="Products" model="com.axelor.gst.db.Product">
@@ -43,7 +43,7 @@
           <view type="form" name="product-category-form"/>
         </action-view> 
         
-       <menuitem title="Invoices" name="gst-root-invoice" parent="gst-rootgst-root"/>  
+       <menuitem title="Invoices" name="gst-root-invoice" parent="gst-root"/>  
         
          <menuitem title="Create" name="gst-invoice-root-create-invoice" parent="gst-root-invoice" action="action.gst.invoice.create.invoices"/>  
           <action-view name="action.gst.invoice.create.invoices" title="Create-Invoice" model="com.axelor.gst.db.Invoice">
@@ -89,7 +89,7 @@
            </action-view> 
            
           
-      <menuitem title="Party" name="gst-root-party" parent="gst-rootgst-root"/>    
+      <menuitem title="Party" name="gst-root-party" parent="gst-root"/>    
           
      <menuitem title="Party" name="gst-party-root-party" parent="gst-root-party" action="action.gst.party"/>  
           <action-view name="action.gst.party" title="Party" model="com.axelor.gst.db.Party">

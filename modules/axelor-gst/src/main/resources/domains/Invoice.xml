@@ -28,6 +28,8 @@
 
 		<extra-code><![CDATA[
 		    public static final String STATUS_DRAFT = "draft";
+		    public static final String STATUS_VALIDATED = "validated";
+		    public static final String STATUS_PAID = "paid";
 		]]></extra-code>
          
        

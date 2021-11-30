@@ -10,7 +10,7 @@
      <field name="type"/>
      <field name="isCustomer"/>
      <field name="isSupplier"/>
-     <field name="gstin"/>
+     <field name="gstIn"/>
      
   </grid> 
        
@@ -21,20 +21,20 @@
      <field name="type"/>
      <field name="isCustomer" widget="boolean-switch"/>
      <field name="isSupplier" widget="boolean-switch"/>
-     <field name="gstin" colSpan="12"/>
+     <field name="gstIn" colSpan="12"/>
       <field name="contactList">
          <viewer>
                <![CDATA[
                  <strong>Name:</strong>{{record.name}}<br>
                  <strong>Contact Type:</strong><span class="muted" ng-if="record.type">({{record.type}})</span><br>
-                 <strong>E:</strong>{{record.primaryemail}} {{record.secondaryemail}}
+                 <strong>E:</strong>{{record.primaryEmail}} {{record.secondaryEmail}}
               ]]>
             </viewer>
            <editor x-show-titles="false">
                <field name="name" colSpan="12"/>
               <field name="type" colSpan="4"/>
-               <field name="primaryemail" colSpan="12"/>
-               <field name="secondaryemail" colSpan="12"/>
+               <field name="primaryEmail" colSpan="12"/>
+               <field name="secondaryEmail" colSpan="12"/>
            </editor>
       </field>
         <field name="addressList">
@@ -45,7 +45,7 @@
                    {{record.city.name}}<br>
                    {{record.state.name}}<br>
                    {{record.country.name}}<br>
-                   {{record.pincode}}
+                   {{record.pinCode}}
                    
               ]]>
           </viewer>
@@ -55,7 +55,7 @@
        <field name="city"/>
         <field name="state"/>
         <field name="country"/>
-        <field name="pincode"/>
+        <field name="pinCode"/>
           </editor>
         </field>
       </panel>
@@ -65,14 +65,14 @@
            <field name="reference"/>
            <field name="name"/>
            <field name="type"/>
-             <field name="gstin"/>
+             <field name="gstIn"/>
               <template>
                  <![CDATA[
                         <div class="span8">
                         <h5>Reference:{{reference}}</h5>
                         <h5>Name: {{name}}</h5>
                         <h5>Party type: {{type}}</h5>
-                       <h5>GSTIN: {{gstin}}</h5>
+                       <h5>GSTIN: {{gstIn}}</h5>
                         </div>
                  ]]>
               </template>

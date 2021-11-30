@@ -8,15 +8,15 @@
                                                                                     
   <toolbar>
       <button onClick="action-product-method-to-generate-invoice" name="createInvoiceBtn" title="Create Invoice" icon="fas fa-file-invoice-dollar" />
-     <!--  <button name="printBtn" icon="fa-print" title="Print" onClick="act1"/> -->  <!-- not in use right now but needed -->
-  </toolbar>
+       <button name="printBtn" icon="fa-print" title="Print" onClick="action-product-print-report"/>  
+  </toolbar>  
      <field name="name"/>
      <field name="code"/>
      <field name="hsbn"/>
      <field name="category" form-view="product-category-form" grid-view="product-category-grid"/>
-     <field name="saleprice"/>
-     <field name="costprice"/>
-     <field name="gstrate"/>
+     <field name="salePrice"/>
+     <field name="costPrice"/>
+     <field name="gstRate"/>
  </grid>      
        
   <form model="com.axelor.gst.db.Product" title="Product" name="product-form">
@@ -26,9 +26,9 @@
      <field name="code"/>
      <field name="hsbn"/>
      <field name="category" onChange="action-product-update-category-on-change"/>
-     <field name="saleprice"/>
-     <field name="costprice"/>
-     <field name="gstrate"/>
+     <field name="salePrice"/>
+     <field name="costPrice"/>
+     <field name="gstRate"/>
      </panel>
  </form>
  
@@ -37,10 +37,10 @@
       <field name="image" widget="image" colSpan="8"/>
        <field name="name"/>
        <field name="category"/>
-       <field name="saleprice"/>
-       <field name="costprice"/>
-       <field name="gstrate"/>
-       <template>
+       <field name="salePrice"/>
+       <field name="costPrice"/>
+       <field name="gstRate"/>
+       <template>  
           <![CDATA[
                <div class="span4 card-image">
                  <img  ng-src="{{$image(null, 'image')}}">
@@ -55,12 +55,22 @@
          ]]>
        </template>
  </cards>
-      <action-attrs name="action-product-update-category-on-change" model="com.axelor.gst.db.ProductCategory">
-          <attribute name="value" for="gstrate" expr="eval: category.gstrate"/> 
-       </action-attrs>
-       
+      
        <action-method name="action-product-method-to-generate-invoice">
-          <call class="com.axelor.gst.web.ProductController" method="getInvoiceForm"/>
+          <call class="com.axelor.gst.web.ProductController" method="generateInvoice"/>
        </action-method>
-       
+    
+        <action-attrs name="action-product-update-category-on-change" model="com.axelor.gst.db.ProductCategory">
+       <attribute name="value" for="gstRate" expr="eval: category?.gstRate"/> 
+      </action-attrs>
+        
+      <action-report  name="action-product-print-report"
+         output="product-${date}-${time}" 
+         design="product.rptdesign"
+         format="pdf">
+          <param name="productId" expr="eval: org.apache.commons.lang.StringUtils.join(_ids,',')" if="_ids"/>  
+        <!--  <param name="productId" expr="eval: java.lang.Integer.parseInt(_ids.join(','))"/> -->
+         <param name="attachmentPath" expr="eval: com.axelor.app.AppSettings.get().get('file.upload.dir')"/>
+       </action-report>  
+        
  </object-views>     

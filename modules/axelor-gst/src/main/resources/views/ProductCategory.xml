@@ -7,14 +7,14 @@
   <grid model="com.axelor.gst.db.ProductCategory" title="Product Categories" name="product-category-grid">
      <field name="name"/>
      <field name="code"/>
-     <field name="gstrate"/>
+     <field name="gstRate"/>
   </grid> 
    
    <form model="com.axelor.gst.db.ProductCategory" title="Product Category" name="product-category-form">
       <panel name="productcategoryPanel">
            <field name="name"/>
            <field name="code"/>
-           <field name="gstrate"/>
+           <field name="gstRate"/>
       </panel>
    </form>
    

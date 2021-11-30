@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://axelor.com/xml/ns/object-views
        http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
        
-       <dashboard name="welcome-dashboards" title="Welcome!!">
+       <dashboard name="welcome-dashboard" title="Welcome!!">
           <dashlet action="chart:chart-for-unpaid-invoice"/>
            <dashlet action="chart:chart-for-paid-invoices"/> 
            <dashlet action="chart:chart-for-customer-per-state"/>

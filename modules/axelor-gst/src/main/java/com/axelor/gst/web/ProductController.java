@@ -12,14 +12,19 @@ import com.axelor.rpc.ActionResponse;
 public class ProductController {
 
 	@SuppressWarnings("unchecked")
-	public void getInvoiceForm(ActionRequest request, ActionResponse response) {
+	public void generateInvoice(ActionRequest request, ActionResponse response) {
 
-		List<Integer> ids = (List<Integer>) request.getContext().get("_ids");
-		Invoice invoice = Beans.get(ProductService.class).createInvoice(ids);
+		List<Long> ids = (List<Long>) request.getContext().get("_ids");
 
-		ActionViewBuilder actionViewBuilder = ActionView.define("Invoices").model(Invoice.class.getName())
-				.add("form", "invoice-form").context("_showRecord", invoice.getId());
-		response.setView(actionViewBuilder.map());
+		if (ids == null) {
+			response.setFlash("select product to generate invoice");
+		} else {
+			Invoice invoice = Beans.get(ProductService.class).createInvoice(ids);
 
+			ActionViewBuilder actionViewBuilder = ActionView.define("Invoices").model(Invoice.class.getName())
+					.add("form", "invoice-form").context("_showRecord", invoice.getId());
+			response.setView(actionViewBuilder.map());
+
+		}
 	}
 }
