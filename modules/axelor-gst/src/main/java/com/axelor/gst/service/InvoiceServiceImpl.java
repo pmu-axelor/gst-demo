@@ -8,13 +8,11 @@ import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.db.Sequence;
 import com.axelor.gst.db.repo.SequenceRepository;
-import com.axelor.meta.db.repo.MetaModelRepository;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
 public class InvoiceServiceImpl implements InvoiceService {
 
-	protected MetaModelRepository metaModelRepository;
 	protected SequenceRepository sequenceRepository;
 
 	@Inject

@@ -28,31 +28,6 @@ public class AddressServiceImpl implements AddressService {
 
 	}
 
-	/*
-	 * protected Address getPartyAddress(Invoice invoice, String addressType) {
-	 * List<Address> addresses = invoice.getParty().getAddressList(); for (Address
-	 * address : addresses) {
-	 * 
-	 * 
-	 * 
-	 * if(addressType.equals(AddressRepository.ADDRESS_DEFAULT)) { return address; }
-	 * 
-	 * else if(addressType.equals(AddressRepository.ADDRESS_INVOICE)) { return
-	 * address; }
-	 * 
-	 * else if(addressType.equals(AddressRepository.ADDRESS_SHIPPING)) { return
-	 * address; }
-	 * 
-	 * else { return null; }
-	 * 
-	 * 
-	 * }
-	 * 
-	 * return null;
-	 * 
-	 * }
-	 */
-
 	protected Address getInvoiceAddress(Invoice invoice) {
 		List<Address> addresses = invoice.getParty().getAddressList();
 
@@ -60,10 +35,11 @@ public class AddressServiceImpl implements AddressService {
 			String type = address.getType();
 
 			switch (type) {
-			case "default":
+
+			case AddressRepository.ADDRESS_DEFAULT:
 				return address;
 
-			case "invoice":
+			case AddressRepository.ADDRESS_INVOICE:
 				return address;
 
 			default:
@@ -82,10 +58,11 @@ public class AddressServiceImpl implements AddressService {
 			String type = address.getType();
 
 			switch (type) {
-			case "default":
+
+			case AddressRepository.ADDRESS_DEFAULT:
 				return address;
 
-			case "shipping":
+			case AddressRepository.ADDRESS_SHIPPING:
 				return address;
 
 			default:
@@ -105,7 +82,6 @@ public class AddressServiceImpl implements AddressService {
 			if ("primary".equals(c.getType())) {
 				return c;
 			}
-
 		}
 		return null;
 

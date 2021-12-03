@@ -22,7 +22,7 @@ public class InvoiceLineServiceImpl implements InvoiceLineService {
 		invoiceLine.setNetAmount(netAmount);
 		if (invoice.getParty() == null) {
 			throw new Exception("set party");
-		}  else {
+		} else {
 			if (invoiceAddress.getState().equals(companyAddress.getState())) {
 				BigDecimal sgstAndcgst = ((gstRate.divide(gstDivisior)).multiply(netAmount)).divide(divisior);
 				invoiceLine.setCgst(sgstAndcgst);

@@ -8,7 +8,7 @@
                                                                                     
   <toolbar>
       <button onClick="action-product-method-to-generate-invoice" name="createInvoiceBtn" title="Create Invoice" icon="fas fa-file-invoice-dollar" />
-       <button name="printBtn" icon="fa-print" title="Print" onClick="action-product-print-report"/>  
+       <button name="printBtn" icon="fa-print" title="Print" onClick="action-product-validate and generate-reports"/>  
   </toolbar>  
      <field name="name"/>
      <field name="code"/>
@@ -64,13 +64,22 @@
        <attribute name="value" for="gstRate" expr="eval: category?.gstRate"/> 
       </action-attrs>
         
+        <action-group name="action-product-validate and generate-reports">
+           <action name="action-product-validate-product-id"/>
+           <action name="action-product-print-report"  if="_ids != null" />
+        </action-group>
+        
+        <action-validate name="action-product-validate-product-id">
+            <info message="select product to generate reports" if="__ids__ == null"/>
+        </action-validate>
+        
       <action-report  name="action-product-print-report"
-         output="product-${date}-${time}" 
+         output="product-${date}-${time}"   
          design="product.rptdesign"
          format="pdf">
-          <param name="productId" expr="eval: org.apache.commons.lang.StringUtils.join(_ids,',')" if="_ids"/>  
-        <!--  <param name="productId" expr="eval: java.lang.Integer.parseInt(_ids.join(','))"/> -->
-         <param name="attachmentPath" expr="eval: com.axelor.app.AppSettings.get().get('file.upload.dir')"/>
+          <param name="productId" expr="eval: org.apache.commons.lang.StringUtils.join(_ids,',')" />  
+          <param name="attachmentPath" expr="eval: com.axelor.app.AppSettings.get().get('file.upload.dir')"/> 
+          <param name="localLanguage" expr="eval: __user__.language"/>
        </action-report>  
         
  </object-views>     

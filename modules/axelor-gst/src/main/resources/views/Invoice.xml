@@ -29,11 +29,11 @@
         <field name="reference" colSpan="12"/>
         <field name="company" form-view="company-form" grid-view="company-grid"/>
         <field name="date"/>                 
-        <field name="party"  form-view="party-form" grid-view="party-grid" onChange="action-party-method-generate-invoice-address,action-party-method-generate-shipping-address"/>   
+        <field name="party"  form-view="party-form" grid-view="party-grid" onChange="action-party-method-generate-invoice-address,action-party-method-generate-shipping-address,save"/>   
         <field name="partyContact" form-view="contact-form" grid-view="contact-grid"/>
         <field name="invoiceAddress" form-view="address-form" grid-view="address-grid"/>
         <field name="shippingAddress" form-view="address-form" grid-view="address-grid"/>
-        <field name="useInvoiceAddressAsShipping" widget="boolean-switch" onChange="action-party-method-generate-shipping-address"/>  
+        <field name="useInvoiceAddressAsShipping" widget="boolean-switch" onChange="action-party-method-generate-shipping-address,save"/>  
         <field name="netAmount"/>
         <field name="netIgst"/>
         <field name="netCsgt"/>   
@@ -111,6 +111,7 @@
             format="pdf" >
            <param name="invoiceId" expr="eval: id"/> 
            <param name="attachmentPath" expr="eval:  com.axelor.app.AppSettings.get().get('file.upload.dir')"/>  
+           <param name="localLanguage" expr="eval: __user__.language"/> 
          </action-report>
      
  </object-views>      

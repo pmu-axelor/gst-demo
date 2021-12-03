@@ -4,14 +4,11 @@ import com.axelor.common.StringUtils;
 import com.axelor.gst.db.Party;
 import com.axelor.gst.db.Sequence;
 import com.axelor.gst.db.repo.SequenceRepository;
-
-import com.axelor.meta.db.repo.MetaModelRepository;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
 public class PartyServiceImpl implements PartyService {
 
-	protected MetaModelRepository metaModelRepository;
 	protected SequenceRepository sequenceRepository;
 
 	@Inject
@@ -35,7 +32,6 @@ public class PartyServiceImpl implements PartyService {
 		String prefix = seq.getPrefix();
 		String suffix = seq.getSuffix();
 		Integer padding = seq.getPadding();
-		// String next = seq.getNextNumber();
 
 		if (seq.getNextNumber() == null) {
 			seq.setNextNumber("1");

@@ -67,7 +67,6 @@ public class ProductServiceImpl implements ProductService {
 			try {
 				invoiceLineService.computeInvoiceLinesItems(invoice, invoiceLine);
 			} catch (Exception e) {
-
 				e.printStackTrace();
 			}
 			invoice.addInvoiceitemListItem(invoiceLine);

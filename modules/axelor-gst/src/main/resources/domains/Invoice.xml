@@ -8,18 +8,18 @@
      
       <entity name="Invoice">
          
-         <string name="status" title="Status" selection="gst.invoice.gst.status.select" readonly="true"/>
+         <string name="status" title="Status" selection="gst.invoice.gst.status.select" readonly="true" />
          <many-to-one name="company" ref="com.axelor.gst.db.Company" required="true" title="Company"/>
          <string name="reference" title="Reference" readonly="true"/> 
-         <datetime name="date" column="date_val" title="Date"/> 
+         <datetime name="date" column="date_val" title="Date" /> 
          <integer name="priority" title="Priority"/>
-         <many-to-one name="party" ref="com.axelor.gst.db.Party" required="true" title="Party"/>
+         <many-to-one name="party" ref="com.axelor.gst.db.Party" required="true" title="Party" />
          <many-to-one name="partyContact" ref="com.axelor.gst.db.Contact" title="Party contact"/>
          <many-to-one name="invoiceAddress" ref="com.axelor.gst.db.Address" required="true" title="Invoice address"/>
          <many-to-one name="shippingAddress" ref="com.axelor.gst.db.Address" title="Shipping address"/>
          <boolean name="useInvoiceAddressAsShipping" title="Use invoice address as shipping" default="true"/>
          <decimal name="netAmount" title="Net Amount" readonly="true"/>
-          <decimal name="netIgst" title="Net IGST" readonly="true"/>
+          <decimal name="netIgst" title="Net IGST" readonly="true" />
          <decimal name="netCsgt" title="Net CSGT" readonly="true"/>
          <decimal name="netSgst" title="Net SGST" readonly="true"/>
          <decimal name="grossAmount" title="Gross Amount" readonly="true"/>

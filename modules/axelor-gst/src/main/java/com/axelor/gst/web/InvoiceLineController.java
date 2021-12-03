@@ -21,15 +21,15 @@ public class InvoiceLineController {
 
 			invoiceLineService.computeInvoiceLinesItems(invoice, invoiceLine);
 
-			if (invoice.getParty() != null) {
-				response.setValue("igst", invoiceLine.getIgst());
-				response.setValue("sgst", invoiceLine.getSgst());
-				response.setValue("cgst", invoiceLine.getCgst());
-				response.setValue("grossAmount", invoiceLine.getGrossAmount());
-			}
-
 		} catch (Exception e) {
 			response.setError(e.getMessage());
+		}
+
+		if (invoice.getInvoiceAddress() != null) {
+			response.setValue("igst", invoiceLine.getIgst());
+			response.setValue("sgst", invoiceLine.getSgst());
+			response.setValue("cgst", invoiceLine.getCgst());
+			response.setValue("grossAmount", invoiceLine.getGrossAmount());
 		}
 
 	}
