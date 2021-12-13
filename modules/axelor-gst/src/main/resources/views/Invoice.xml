@@ -46,6 +46,9 @@
           <button onClick="action-invoice-paid-bttn,save" name="paidBtn" title="Paid" showIf="status == 'validated'"/>
           <button onClick="action-invoice-cancelled-bttn,save" name="cancelledBtn" title="Cancelled" icon="fa-times-circle" css="btn-danger" />  
         </panel>
+        <panel sidebar="true">
+           <button onClick="action-import-invoiceLine-data-method" name="importInvoiceLineBtn" title="Import InvoiceLine Data"/>  
+        </panel>
    </form>
        
      <kanban columnBy="status" model="com.axelor.gst.db.Invoice" sequenceBy="priority" title="Invoices" name="kanban-invoice" draggable="true" limit="2">
@@ -113,5 +116,9 @@
            <param name="attachmentPath" expr="eval:  com.axelor.app.AppSettings.get().get('file.upload.dir')"/>  
            <param name="localLanguage" expr="eval: __user__.language"/> 
          </action-report>
-     
- </object-views>      
+         
+         <action-method name="action-import-invoiceLine-data-method">
+            <call class="com.axelor.gst.web.Validators" method="importInvoiceLineData"/> 
+         </action-method>
+         
+       </object-views>      

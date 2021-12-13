@@ -744,7 +744,10 @@ where LangTranslate.message_key = ? AND LangTranslate.language = ?
     <body>
         <label id="111"/>
         <label id="112"/>
-        <label id="113"/>
+        <label id="113">
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">medium</property>
+        </label>
         <table id="459">
             <property name="width">7.947916666666667in</property>
             <property name="dataSet">product</property>
@@ -787,13 +790,13 @@ where LangTranslate.message_key = ? AND LangTranslate.language = ?
                 </structure>
             </list-property>
             <column id="493">
-                <property name="width">2.1041666666666665in</property>
+                <property name="width">2.6145833333333335in</property>
             </column>
             <column id="494">
-                <property name="width">1.3541666666666667in</property>
+                <property name="width">1.875in</property>
             </column>
             <column id="495">
-                <property name="width">1.0416666666666667in</property>
+                <property name="width">0.010416666666666666in</property>
             </column>
             <column id="496">
                 <property name="width">0.8020833333333334in</property>
@@ -817,7 +820,7 @@ where LangTranslate.message_key = ? AND LangTranslate.language = ?
             </header>
             <detail>
                 <row id="473">
-                    <property name="height">2.09375in</property>
+                    <property name="height">1.9479166666666667in</property>
                     <cell id="474">
                         <image id="499">
                             <property name="height">2.460625cm</property>
@@ -826,14 +829,6 @@ where LangTranslate.message_key = ? AND LangTranslate.language = ?
                             <expression name="uri" type="javascript">params["attachmentPath"].value+'/'+row["file_path"]</expression>
                         </image>
                         <label id="518"/>
-                        <label id="516">
-                            <property name="fontSize">12pt</property>
-                            <property name="fontWeight">bold</property>
-                            <text-property name="text">Sale price</text-property>
-                        </label>
-                        <data id="517">
-                            <property name="resultSetColumn">sale_price</property>
-                        </data>
                     </cell>
                     <cell id="476">
                         <label id="519"/>
@@ -876,15 +871,23 @@ row._outer["name"]
                         <data id="479">
                             <property name="resultSetColumn">hsbn</property>
                         </data>
-                        <label id="540"/>
-                        <label id="522"/>
-                        <label id="470">
+                        <label id="568">
                             <property name="fontSize">12pt</property>
                             <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">Cost price</text-property>
                         </label>
-                        <data id="510">
+                        <data id="561">
                             <property name="resultSetColumn">cost_price</property>
+                        </data>
+                        <label id="569">
+                            <property name="fontSize">12pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Sale price</text-property>
+                        </label>
+                        <data id="559">
+                            <property name="resultSetColumn">sale_price</property>
                         </data>
                     </cell>
                     <cell id="478"/>
@@ -895,7 +898,7 @@ row._outer["name"]
             </detail>
             <footer>
                 <row id="486">
-                    <property name="height">0.4166666666666667in</property>
+                    <property name="height">0.7083333333333334in</property>
                     <cell id="487"/>
                     <cell id="488"/>
                     <cell id="489"/>

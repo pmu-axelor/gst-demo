@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csv-inputs xmlns="http://axelor.com/xml/ns/data-import"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/data-import http://axelor.com/xml/ns/data-import/data-import_5.4.xsd">
+
+    <input file="city.csv" type="com.axelor.gst.db.City"/>
+    <input file="country.csv" type="com.axelor.gst.db.Country"/>
+    <input file="state.csv" type="com.axelor.gst.db.State"/>
+  
+ <!--  <input file="city-update.csv" type="com.axelor.gst.db.City" search="self.name = :name" update="false" > 
+    <header>name,state,country</header>
+     <bind to="name" column="name"/>
+     <bind to="state" column="state"/>
+     <bind to="country" column="country"/>
+  </input>  -->
+ 
+   
+    <input file="address.csv" type="com.axelor.gst.db.Address" > 
+    
+       <bind to="city" search="self.name = :city">
+           <bind to="name" column="city"/>
+           <bind to="country" column="country"/> 
+       </bind>
+       
+       <bind to="state">
+           <bind to="name" column="state"/>
+          <bind to="country" column="country"/> 
+       </bind>
+       
+      <bind to="country">
+         <bind to="name" eval="country.toUpperCase()"/>
+      </bind>
+      
+     </input>
+     
+    <input file="contact.csv" type="com.axelor.gst.db.Contact"/>
+       
+     <input file="company.csv" type="com.axelor.gst.db.Company" > 
+         
+         <bind to="contactList" search="self.name =:contactList">
+            <bind to="name" column="contactList"/>
+        </bind>
+         
+     </input> 
+     
+     
+     <input file="party.csv" type="com.axelor.gst.db.Party"
+        call="com.axelor.gst.web.Validators:validatePartyAddress" >
+        
+        <bind to="contactList" search="self.name = :contactList">       
+              <bind to="name" column="contactList"/>
+       </bind>
+        
+        <bind to="addressList" search="self.line1 = :addressList">
+                <bind to="line1" column="addressList"/>
+        </bind> 
+     
+     </input>
+     
+    <!--  <adapter name="Number" type="com.axelor.data.adapter.NumberAdapter">
+           <option name="thousandSeparator" value="."/>
+          <option name="decimalSeparator" value=","/> 
+       </adapter>  -->
+       
+       <input file="category.csv" type="com.axelor.gst.db.ProductCategory" />
+       
+       <input file="product.csv" type="com.axelor.gst.db.Product">
+         <bind to="category" search="self.name = :category"  >
+             <bind to="name" column="category"/>
+            <!--  <bind to="gstRate" column="category" adapter="Number"/> -->
+         </bind>
+         
+       </input>
+       
+       
+       <input file="invoiceLine.csv" type="com.axelor.gst.db.InvoiceLine" >
+      
+          <bind to="product" search="self.name = :product">
+             <bind to="name" column="product"/>
+           </bind>
+          
+          <bind to="item" column="item"/>
+          <bind to="qty" column="qty"/>
+          <bind to="grossAmount" column="grossAmount"/>
+          
+        </input> 
+        
+</csv-inputs>

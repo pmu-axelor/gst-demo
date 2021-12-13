@@ -1,11 +1,12 @@
 package com.axelor.gst.repo;
 
 
+
 import com.axelor.gst.db.repo.SequenceRepository;
 
 public class SequenceGstRepository extends SequenceRepository {
-
-	/*
+	
+/*
 	 * @Override public Sequence save(Sequence sequence) {
 	 * 
 	 * int count = 0; String prefix = sequence.getPrefix(); String suffix =

@@ -21,5 +21,6 @@ public class GstModule extends AxelorModule {
 		bind(InvoiceLineService.class).to(InvoiceLineServiceImpl.class);
 		bind(InvoiceService.class).to(InvoiceServiceImpl.class);
 		bind(AddressService.class).to(AddressServiceImpl.class);
+		
 	}
 }
