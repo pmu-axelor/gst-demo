@@ -1,27 +1,16 @@
 package com.axelor.gst.web;
 
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import com.axelor.data.ImportException;
-import com.axelor.data.ImportTask;
 import com.axelor.data.Listener;
 import com.axelor.data.csv.CSVImporter;
 import com.axelor.db.EntityHelper;
@@ -35,12 +24,8 @@ import com.axelor.meta.db.MetaFile;
 import com.axelor.meta.db.repo.MetaFileRepository;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
-import com.google.common.base.Charsets;
-import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.xmlbeans.impl.common.IOUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +53,7 @@ public class Validators {
 		context.put("_invoice", invoice);
 	}
 
+	 @SuppressWarnings("unchecked")
 	public void importInvoiceLineData(ActionRequest request, ActionResponse response) throws URISyntaxException, IOException {
 
 	      String config = "/data-init/csv-get-invoiceLine-data-config.xml";
@@ -79,9 +65,8 @@ public class Validators {
 	      IOUtil.copyCompletely(inputStream, fout);
 	     
 	       LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>) request.getContext().get("_dataFile");
-	       //System.out.println(map);
-			MetaFile dataFile = Beans.get(MetaFileRepository.class).find(((Integer) map.get("id")).longValue());
-			//System.out.println(dataFile);
+	       MetaFile dataFile = Beans.get(MetaFileRepository.class).find(((Integer) map.get("id")).longValue());
+			
 
 	    //Path path =
 	      //  MetaFiles.getPath((String)((Map) request.getContext().get("_dataFile")).get("filePath"));
