@@ -3,7 +3,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://axelor.com/xml/ns/data-import http://axelor.com/xml/ns/data-import/data-import_5.4.xsd">
   
-     <input file="[gst-invoice]" type="com.axelor.gst.db.InvoiceLine" >
+     <input file="invoiceLine.csv" type="com.axelor.gst.db.InvoiceLine" >
       
           <bind to="product" search="self.name = :product">
              <bind to="name" column="product"/>

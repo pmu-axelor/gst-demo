@@ -47,6 +47,7 @@
           <button onClick="action-invoice-cancelled-bttn,save" name="cancelledBtn" title="Cancelled" icon="fa-times-circle" css="btn-danger" />  
         </panel>
         <panel sidebar="true">
+            <field name="$_dataFile" type="many-to-one" target="com.axelor.meta.db.MetaFile" title="Data file" widget="binary-link"/>
            <button onClick="action-import-invoiceLine-data-method" name="importInvoiceLineBtn" title="Import InvoiceLine Data"/>  
         </panel>
    </form>

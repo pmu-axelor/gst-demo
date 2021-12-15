@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import com.axelor.data.ImportException;
@@ -28,7 +29,10 @@ import com.axelor.db.Model;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.Party;
 import com.axelor.gst.service.PartyServiceAddressImpl;
+import com.axelor.inject.Beans;
 import com.axelor.meta.MetaFiles;
+import com.axelor.meta.db.MetaFile;
+import com.axelor.meta.db.repo.MetaFileRepository;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
 import com.google.common.base.Charsets;
@@ -66,16 +70,6 @@ public class Validators {
 
 	public void importInvoiceLineData(ActionRequest request, ActionResponse response) throws URISyntaxException, IOException {
 
-		/*
-		 URL res = getClass().getClassLoader().getResource("data-init/csv-multi-config.xml");
-		 System.out.println(res);
-		 File file = Paths.get(res.toURI()).toFile();
-         String absolutePath = file.getAbsolutePath();
-		 System.out.println(absolutePath);  */
-		 
-		
-		
-
 	      String config = "/data-init/csv-get-invoiceLine-data-config.xml";
 
 	    
@@ -84,31 +78,22 @@ public class Validators {
 	      FileOutputStream fout = new FileOutputStream(configFile);
 	      IOUtil.copyCompletely(inputStream, fout);
 	     
+	       LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>) request.getContext().get("_dataFile");
+	       //System.out.println(map);
+			MetaFile dataFile = Beans.get(MetaFileRepository.class).find(((Integer) map.get("id")).longValue());
+			//System.out.println(dataFile);
 
-	     Path path =
-	          MetaFiles.getPath((String) ((Map) request.getContext().get("dataFile")).get("filePath"));
-	     System.out.println(path);
+	    //Path path =
+	      //  MetaFiles.getPath((String)((Map) request.getContext().get("_dataFile")).get("filePath"));
+	   // System.out.println(path);
 	      File tempDir = Files.createTempDir();
 	      File importFile = new File(tempDir, "invoiceLine.csv");
-	      Files.copy(path.toFile(), importFile); 
-
-
-	  
-		/*
-		 * InputStream inputStream = getClass().getClassLoader().getResourceAsStream(
-		 * "/data-init/csv-multi/invoiceLine.csv"); System.out.println(inputStream);
-		 * 
-		 * BufferedReader reader = new BufferedReader(new
-		 * InputStreamReader(inputStream)); System.out.println(reader.toString());
-		 * 
-		 * String result = CharStreams.toString(new InputStreamReader( inputStream,
-		 * Charsets.UTF_8)); System.out.println(result);
-		 */
-		
+	      Files.copy(MetaFiles.getPath(dataFile).toFile(), importFile); 
+	   
 		  
 		final List<Model> records = new ArrayList<>();
 
-		CSVImporter importer = new CSVImporter(configFile.getAbsolutePath());
+		CSVImporter importer = new CSVImporter(configFile.getAbsolutePath(),tempDir.getAbsolutePath());
 		
 		importer.addListener(new Listener() {
 			@Override
@@ -128,12 +113,12 @@ public class Validators {
 			}
 		});
 
-		importer.run(new ImportTask() {
+		importer.run();/*(new ImportTask() {
 
 			@Override
 			public void configure() throws IOException {
-				input("[gst-invoice]", new File(
-						"/home/axelor/parvej/training/axelor-gst-app-demo/axelor-gst-app/modules/axelor-gst/src/main/resources/data-init/csv-multi/invoiceLine.csv"));
+				input("gst-invoice", new File(
+						tempDir.getAbsolutePath()));
 
 			}
 
@@ -148,12 +133,12 @@ public class Validators {
 				log.error("IOException error : " + e);
 				return true;
 			}
-		});
+		});*/
 
 		// System.out.println(records);
 		response.setValue("invoiceitemList", records);
 
-	}
+	}     
 	}
 	
       
